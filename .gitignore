@@ -15,3 +15,10 @@ venv/
 *.bin
 output
 version.py
+*.ipynb_checkpoints
+*.log
+tools_/*
+*.jpg
+*.png
+bayes_val/*
+save_path/*

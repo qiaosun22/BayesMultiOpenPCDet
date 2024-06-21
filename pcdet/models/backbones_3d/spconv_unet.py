@@ -3,7 +3,8 @@ from functools import partial
 import torch
 import torch.nn as nn
 
-from ...utils.spconv_utils import replace_feature, spconv
+from ...utils.spconv_utils import replace_feature#, spconv
+import spconv.pytorch as spconv
 from ...utils import common_utils
 from .spconv_backbone import post_act_block
 

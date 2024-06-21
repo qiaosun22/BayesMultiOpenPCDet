@@ -1,0 +1,1569 @@
+2021-06-27 04:16:28,544   INFO  **********************Start logging**********************
+2021-06-27 04:16:28,544   INFO  CUDA_VISIBLE_DEVICES=0,1,2,3
+2021-06-27 04:16:28,544   INFO  total_batch_size: 16
+2021-06-27 04:16:28,544   INFO  cfg_file         cfgs/kitti_models/pointpillar_bayes.yaml
+2021-06-27 04:16:28,545   INFO  batch_size       4
+2021-06-27 04:16:28,545   INFO  epochs           None
+2021-06-27 04:16:28,545   INFO  workers          8
+2021-06-27 04:16:28,545   INFO  extra_tag        default
+2021-06-27 04:16:28,545   INFO  ckpt             ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth
+2021-06-27 04:16:28,546   INFO  pretrained_model None
+2021-06-27 04:16:28,546   INFO  launcher         pytorch
+2021-06-27 04:16:28,546   INFO  tcp_port         18888
+2021-06-27 04:16:28,546   INFO  sync_bn          False
+2021-06-27 04:16:28,546   INFO  fix_random_seed  False
+2021-06-27 04:16:28,546   INFO  ckpt_save_interval 1
+2021-06-27 04:16:28,547   INFO  local_rank       0
+2021-06-27 04:16:28,547   INFO  max_ckpt_save_num 30
+2021-06-27 04:16:28,547   INFO  merge_all_iters_to_one_epoch False
+2021-06-27 04:16:28,547   INFO  set_cfgs         None
+2021-06-27 04:16:28,547   INFO  max_waiting_mins 0
+2021-06-27 04:16:28,548   INFO  start_epoch      0
+2021-06-27 04:16:28,548   INFO  save_to_file     False
+2021-06-27 04:16:28,548   INFO  cfg.ROOT_DIR: /openpcdet
+2021-06-27 04:16:28,548   INFO  cfg.LOCAL_RANK: 0
+2021-06-27 04:16:28,548   INFO  cfg.CLASS_NAMES: ['Car', 'Pedestrian', 'Cyclist']
+2021-06-27 04:16:28,549   INFO  
+cfg.DATA_CONFIG = edict()
+2021-06-27 04:16:28,549   INFO  cfg.DATA_CONFIG.DATASET: KittiDataset
+2021-06-27 04:16:28,549   INFO  cfg.DATA_CONFIG.DATA_PATH: ../data/kitti
+2021-06-27 04:16:28,549   INFO  cfg.DATA_CONFIG.POINT_CLOUD_RANGE: [0, -39.68, -3, 69.12, 39.68, 1]
+2021-06-27 04:16:28,549   INFO  
+cfg.DATA_CONFIG.DATA_SPLIT = edict()
+2021-06-27 04:16:28,550   INFO  cfg.DATA_CONFIG.DATA_SPLIT.train: train
+2021-06-27 04:16:28,550   INFO  cfg.DATA_CONFIG.DATA_SPLIT.test: val
+2021-06-27 04:16:28,550   INFO  
+cfg.DATA_CONFIG.INFO_PATH = edict()
+2021-06-27 04:16:28,550   INFO  cfg.DATA_CONFIG.INFO_PATH.train: ['kitti_infos_train.pkl']
+2021-06-27 04:16:28,550   INFO  cfg.DATA_CONFIG.INFO_PATH.test: ['kitti_infos_val.pkl']
+2021-06-27 04:16:28,550   INFO  cfg.DATA_CONFIG.GET_ITEM_LIST: ['points']
+2021-06-27 04:16:28,550   INFO  cfg.DATA_CONFIG.FOV_POINTS_ONLY: True
+2021-06-27 04:16:28,550   INFO  
+cfg.DATA_CONFIG.DATA_AUGMENTOR = edict()
+2021-06-27 04:16:28,550   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.DISABLE_AUG_LIST: ['placeholder']
+2021-06-27 04:16:28,551   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.AUG_CONFIG_LIST: [{'NAME': 'gt_sampling', 'USE_ROAD_PLANE': True, 'DB_INFO_PATH': ['kitti_dbinfos_train.pkl'], 'PREPARE': {'filter_by_min_points': ['Car:5', 'Pedestrian:5', 'Cyclist:5'], 'filter_by_difficulty': [-1]}, 'SAMPLE_GROUPS': ['Car:15', 'Pedestrian:15', 'Cyclist:15'], 'NUM_POINT_FEATURES': 4, 'DATABASE_WITH_FAKELIDAR': False, 'REMOVE_EXTRA_WIDTH': [0.0, 0.0, 0.0], 'LIMIT_WHOLE_SCENE': False}, {'NAME': 'random_world_flip', 'ALONG_AXIS_LIST': ['x']}, {'NAME': 'random_world_rotation', 'WORLD_ROT_ANGLE': [-0.78539816, 0.78539816]}, {'NAME': 'random_world_scaling', 'WORLD_SCALE_RANGE': [0.95, 1.05]}]
+2021-06-27 04:16:28,551   INFO  
+cfg.DATA_CONFIG.POINT_FEATURE_ENCODING = edict()
+2021-06-27 04:16:28,551   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.encoding_type: absolute_coordinates_encoding
+2021-06-27 04:16:28,551   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.used_feature_list: ['x', 'y', 'z', 'intensity']
+2021-06-27 04:16:28,551   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.src_feature_list: ['x', 'y', 'z', 'intensity']
+2021-06-27 04:16:28,551   INFO  cfg.DATA_CONFIG.DATA_PROCESSOR: [{'NAME': 'mask_points_and_boxes_outside_range', 'REMOVE_OUTSIDE_BOXES': True}, {'NAME': 'shuffle_points', 'SHUFFLE_ENABLED': {'train': True, 'test': False}}, {'NAME': 'transform_points_to_voxels', 'VOXEL_SIZE': [0.16, 0.16, 4], 'MAX_POINTS_PER_VOXEL': 32, 'MAX_NUMBER_OF_VOXELS': {'train': 16000, 'test': 40000}}]
+2021-06-27 04:16:28,551   INFO  cfg.DATA_CONFIG._BASE_CONFIG_: cfgs/dataset_configs/kitti_dataset.yaml
+2021-06-27 04:16:28,551   INFO  
+cfg.MODEL = edict()
+2021-06-27 04:16:28,551   INFO  cfg.MODEL.NAME: PointPillar
+2021-06-27 04:16:28,552   INFO  
+cfg.MODEL.VFE = edict()
+2021-06-27 04:16:28,552   INFO  cfg.MODEL.VFE.NAME: PillarVFE
+2021-06-27 04:16:28,552   INFO  cfg.MODEL.VFE.WITH_DISTANCE: False
+2021-06-27 04:16:28,552   INFO  cfg.MODEL.VFE.USE_ABSLOTE_XYZ: True
+2021-06-27 04:16:28,552   INFO  cfg.MODEL.VFE.USE_NORM: True
+2021-06-27 04:16:28,552   INFO  cfg.MODEL.VFE.USE_DO: True
+2021-06-27 04:16:28,552   INFO  cfg.MODEL.VFE.NUM_FILTERS: [64]
+2021-06-27 04:16:28,552   INFO  
+cfg.MODEL.MAP_TO_BEV = edict()
+2021-06-27 04:16:28,552   INFO  cfg.MODEL.MAP_TO_BEV.NAME: PointPillarScatter
+2021-06-27 04:16:28,552   INFO  cfg.MODEL.MAP_TO_BEV.NUM_BEV_FEATURES: 64
+2021-06-27 04:16:28,553   INFO  
+cfg.MODEL.BACKBONE_2D = edict()
+2021-06-27 04:16:28,553   INFO  cfg.MODEL.BACKBONE_2D.NAME: BaseBEVBackbone
+2021-06-27 04:16:28,553   INFO  cfg.MODEL.BACKBONE_2D.USE_NORM: True
+2021-06-27 04:16:28,553   INFO  cfg.MODEL.BACKBONE_2D.USE_DO: True
+2021-06-27 04:16:28,553   INFO  cfg.MODEL.BACKBONE_2D.LAYER_NUMS: [3, 5, 5]
+2021-06-27 04:16:28,553   INFO  cfg.MODEL.BACKBONE_2D.LAYER_STRIDES: [2, 2, 2]
+2021-06-27 04:16:28,553   INFO  cfg.MODEL.BACKBONE_2D.NUM_FILTERS: [64, 128, 256]
+2021-06-27 04:16:28,553   INFO  cfg.MODEL.BACKBONE_2D.UPSAMPLE_STRIDES: [1, 2, 4]
+2021-06-27 04:16:28,553   INFO  cfg.MODEL.BACKBONE_2D.NUM_UPSAMPLE_FILTERS: [128, 128, 128]
+2021-06-27 04:16:28,554   INFO  
+cfg.MODEL.DENSE_HEAD = edict()
+2021-06-27 04:16:28,554   INFO  cfg.MODEL.DENSE_HEAD.NAME: AnchorHeadSingle
+2021-06-27 04:16:28,554   INFO  cfg.MODEL.DENSE_HEAD.CLASS_AGNOSTIC: False
+2021-06-27 04:16:28,554   INFO  cfg.MODEL.DENSE_HEAD.USE_DIRECTION_CLASSIFIER: True
+2021-06-27 04:16:28,554   INFO  cfg.MODEL.DENSE_HEAD.DIR_OFFSET: 0.78539
+2021-06-27 04:16:28,554   INFO  cfg.MODEL.DENSE_HEAD.DIR_LIMIT_OFFSET: 0.0
+2021-06-27 04:16:28,554   INFO  cfg.MODEL.DENSE_HEAD.NUM_DIR_BINS: 2
+2021-06-27 04:16:28,554   INFO  cfg.MODEL.DENSE_HEAD.ANCHOR_GENERATOR_CONFIG: [{'class_name': 'Car', 'anchor_sizes': [[3.9, 1.6, 1.56]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [-1.78], 'align_center': False, 'feature_map_stride': 2, 'matched_threshold': 0.6, 'unmatched_threshold': 0.45}, {'class_name': 'Pedestrian', 'anchor_sizes': [[0.8, 0.6, 1.73]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [-0.6], 'align_center': False, 'feature_map_stride': 2, 'matched_threshold': 0.5, 'unmatched_threshold': 0.35}, {'class_name': 'Cyclist', 'anchor_sizes': [[1.76, 0.6, 1.73]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [-0.6], 'align_center': False, 'feature_map_stride': 2, 'matched_threshold': 0.5, 'unmatched_threshold': 0.35}]
+2021-06-27 04:16:28,554   INFO  
+cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG = edict()
+2021-06-27 04:16:28,555   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NAME: AxisAlignedTargetAssigner
+2021-06-27 04:16:28,555   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.POS_FRACTION: -1.0
+2021-06-27 04:16:28,555   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.SAMPLE_SIZE: 512
+2021-06-27 04:16:28,555   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NORM_BY_NUM_EXAMPLES: False
+2021-06-27 04:16:28,555   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.MATCH_HEIGHT: False
+2021-06-27 04:16:28,555   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.BOX_CODER: ResidualCoder
+2021-06-27 04:16:28,555   INFO  
+cfg.MODEL.DENSE_HEAD.LOSS_CONFIG = edict()
+2021-06-27 04:16:28,555   INFO  
+cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS = edict()
+2021-06-27 04:16:28,555   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.cls_weight: 1.0
+2021-06-27 04:16:28,555   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.loc_weight: 2.0
+2021-06-27 04:16:28,556   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.dir_weight: 0.2
+2021-06-27 04:16:28,556   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.code_weights: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+2021-06-27 04:16:28,556   INFO  
+cfg.MODEL.POST_PROCESSING = edict()
+2021-06-27 04:16:28,556   INFO  cfg.MODEL.POST_PROCESSING.RECALL_THRESH_LIST: [0.3, 0.5, 0.7]
+2021-06-27 04:16:28,556   INFO  cfg.MODEL.POST_PROCESSING.SCORE_THRESH: 0.1
+2021-06-27 04:16:28,556   INFO  cfg.MODEL.POST_PROCESSING.OUTPUT_RAW_SCORE: False
+2021-06-27 04:16:28,556   INFO  cfg.MODEL.POST_PROCESSING.EVAL_METRIC: kitti
+2021-06-27 04:16:28,556   INFO  
+cfg.MODEL.POST_PROCESSING.NMS_CONFIG = edict()
+2021-06-27 04:16:28,556   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.MULTI_CLASSES_NMS: False
+2021-06-27 04:16:28,557   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_TYPE: nms_gpu
+2021-06-27 04:16:28,557   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_THRESH: 0.01
+2021-06-27 04:16:28,557   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_PRE_MAXSIZE: 4096
+2021-06-27 04:16:28,557   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_POST_MAXSIZE: 500
+2021-06-27 04:16:28,557   INFO  
+cfg.OPTIMIZATION = edict()
+2021-06-27 04:16:28,557   INFO  cfg.OPTIMIZATION.BATCH_SIZE_PER_GPU: 4
+2021-06-27 04:16:28,557   INFO  cfg.OPTIMIZATION.NUM_EPOCHS: 80
+2021-06-27 04:16:28,557   INFO  cfg.OPTIMIZATION.OPTIMIZER: adam_onecycle
+2021-06-27 04:16:28,557   INFO  cfg.OPTIMIZATION.LR: 0.003
+2021-06-27 04:16:28,557   INFO  cfg.OPTIMIZATION.WEIGHT_DECAY: 0.01
+2021-06-27 04:16:28,558   INFO  cfg.OPTIMIZATION.MOMENTUM: 0.9
+2021-06-27 04:16:28,558   INFO  cfg.OPTIMIZATION.MOMS: [0.95, 0.85]
+2021-06-27 04:16:28,558   INFO  cfg.OPTIMIZATION.PCT_START: 0.4
+2021-06-27 04:16:28,558   INFO  cfg.OPTIMIZATION.DIV_FACTOR: 10
+2021-06-27 04:16:28,558   INFO  cfg.OPTIMIZATION.DECAY_STEP_LIST: [35, 45]
+2021-06-27 04:16:28,558   INFO  cfg.OPTIMIZATION.LR_DECAY: 0.1
+2021-06-27 04:16:28,558   INFO  cfg.OPTIMIZATION.LR_CLIP: 1e-07
+2021-06-27 04:16:28,558   INFO  cfg.OPTIMIZATION.LR_WARMUP: False
+2021-06-27 04:16:28,558   INFO  cfg.OPTIMIZATION.WARMUP_EPOCH: 1
+2021-06-27 04:16:28,559   INFO  cfg.OPTIMIZATION.GRAD_NORM_CLIP: 10
+2021-06-27 04:16:28,559   INFO  cfg.TAG: pointpillar_bayes
+2021-06-27 04:16:28,559   INFO  cfg.EXP_GROUP_PATH: kitti_models
+2021-06-27 04:16:28,863   INFO  Loading KITTI dataset
+2021-06-27 04:16:29,058   INFO  Total samples for KITTI dataset: 3769
+2021-06-27 04:16:29,117   INFO  **********************End training**********************
+2021-06-27 04:16:29,117   INFO  ----------------load ckpt------ayes_model-0.15-0.15.pth
+2021-06-27 04:16:29,117   INFO  ----------------Noise Experiment----------------
+2021-06-27 04:16:29,118   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 04:16:29,169   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 04:16:29,337   INFO  ==> Done (loaded 127/127)
+2021-06-27 04:17:52,492   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-27 04:17:52,493   INFO  recall_roi_0.3: 0.000000
+2021-06-27 04:17:52,493   INFO  recall_rcnn_0.3: 0.935262
+2021-06-27 04:17:52,493   INFO  recall_roi_0.5: 0.000000
+2021-06-27 04:17:52,493   INFO  recall_rcnn_0.5: 0.868360
+2021-06-27 04:17:52,493   INFO  recall_roi_0.7: 0.000000
+2021-06-27 04:17:52,493   INFO  recall_rcnn_0.7: 0.618573
+2021-06-27 04:17:52,496   INFO  Average predicted number of objects(3769 samples): 22.488
+2021-06-27 04:18:51,889   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 04:18:51,937   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 04:18:52,123   INFO  ==> Done (loaded 127/127)
+2021-06-27 04:20:14,974   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-27 04:20:14,975   INFO  recall_roi_0.3: 0.000000
+2021-06-27 04:20:14,975   INFO  recall_rcnn_0.3: 0.935262
+2021-06-27 04:20:14,976   INFO  recall_roi_0.5: 0.000000
+2021-06-27 04:20:14,976   INFO  recall_rcnn_0.5: 0.868360
+2021-06-27 04:20:14,976   INFO  recall_roi_0.7: 0.000000
+2021-06-27 04:20:14,976   INFO  recall_rcnn_0.7: 0.618573
+2021-06-27 04:20:14,979   INFO  Average predicted number of objects(3769 samples): 22.488
+2021-06-27 04:20:57,401   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 04:20:57,453   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 04:20:57,644   INFO  ==> Done (loaded 127/127)
+2021-06-27 04:22:20,408   INFO  Generate label finished(sec_per_example: 0.0219 second).
+2021-06-27 04:22:20,410   INFO  recall_roi_0.3: 0.000000
+2021-06-27 04:22:20,410   INFO  recall_rcnn_0.3: 0.935262
+2021-06-27 04:22:20,410   INFO  recall_roi_0.5: 0.000000
+2021-06-27 04:22:20,410   INFO  recall_rcnn_0.5: 0.868360
+2021-06-27 04:22:20,410   INFO  recall_roi_0.7: 0.000000
+2021-06-27 04:22:20,410   INFO  recall_rcnn_0.7: 0.618573
+2021-06-27 04:22:20,413   INFO  Average predicted number of objects(3769 samples): 22.488
+2021-06-27 04:23:02,950   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 04:23:02,984   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 04:23:03,165   INFO  ==> Done (loaded 127/127)
+2021-06-27 04:24:25,873   INFO  Generate label finished(sec_per_example: 0.0219 second).
+2021-06-27 04:24:25,875   INFO  recall_roi_0.3: 0.000000
+2021-06-27 04:24:25,875   INFO  recall_rcnn_0.3: 0.935262
+2021-06-27 04:24:25,875   INFO  recall_roi_0.5: 0.000000
+2021-06-27 04:24:25,875   INFO  recall_rcnn_0.5: 0.868360
+2021-06-27 04:24:25,875   INFO  recall_roi_0.7: 0.000000
+2021-06-27 04:24:25,875   INFO  recall_rcnn_0.7: 0.618573
+2021-06-27 04:24:25,878   INFO  Average predicted number of objects(3769 samples): 22.488
+2021-06-27 04:25:09,413   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 04:25:09,451   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 04:25:09,643   INFO  ==> Done (loaded 127/127)
+2021-06-27 04:26:32,273   INFO  Generate label finished(sec_per_example: 0.0219 second).
+2021-06-27 04:26:32,274   INFO  recall_roi_0.3: 0.000000
+2021-06-27 04:26:32,275   INFO  recall_rcnn_0.3: 0.935262
+2021-06-27 04:26:32,275   INFO  recall_roi_0.5: 0.000000
+2021-06-27 04:26:32,275   INFO  recall_rcnn_0.5: 0.868360
+2021-06-27 04:26:32,275   INFO  recall_roi_0.7: 0.000000
+2021-06-27 04:26:32,275   INFO  recall_rcnn_0.7: 0.618573
+2021-06-27 04:26:32,278   INFO  Average predicted number of objects(3769 samples): 22.488
+2021-06-27 04:27:14,862   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 04:27:14,897   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 04:27:15,083   INFO  ==> Done (loaded 127/127)
+2021-06-27 04:28:38,280   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-27 04:28:38,282   INFO  recall_roi_0.3: 0.000000
+2021-06-27 04:28:38,282   INFO  recall_rcnn_0.3: 0.935262
+2021-06-27 04:28:38,282   INFO  recall_roi_0.5: 0.000000
+2021-06-27 04:28:38,282   INFO  recall_rcnn_0.5: 0.868360
+2021-06-27 04:28:38,283   INFO  recall_roi_0.7: 0.000000
+2021-06-27 04:28:38,283   INFO  recall_rcnn_0.7: 0.618573
+2021-06-27 04:28:38,288   INFO  Average predicted number of objects(3769 samples): 22.488
+2021-06-27 04:29:23,366   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 04:29:23,432   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 04:29:23,602   INFO  ==> Done (loaded 127/127)
+2021-06-27 04:30:47,040   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-27 04:30:47,043   INFO  recall_roi_0.3: 0.000000
+2021-06-27 04:30:47,043   INFO  recall_rcnn_0.3: 0.935262
+2021-06-27 04:30:47,043   INFO  recall_roi_0.5: 0.000000
+2021-06-27 04:30:47,043   INFO  recall_rcnn_0.5: 0.868360
+2021-06-27 04:30:47,043   INFO  recall_roi_0.7: 0.000000
+2021-06-27 04:30:47,044   INFO  recall_rcnn_0.7: 0.618573
+2021-06-27 04:30:47,047   INFO  Average predicted number of objects(3769 samples): 22.488
+2021-06-27 04:31:29,510   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 04:31:29,545   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 04:31:29,732   INFO  ==> Done (loaded 127/127)
+2021-06-27 04:32:52,412   INFO  Generate label finished(sec_per_example: 0.0219 second).
+2021-06-27 04:32:52,413   INFO  recall_roi_0.3: 0.000000
+2021-06-27 04:32:52,413   INFO  recall_rcnn_0.3: 0.935262
+2021-06-27 04:32:52,413   INFO  recall_roi_0.5: 0.000000
+2021-06-27 04:32:52,413   INFO  recall_rcnn_0.5: 0.868360
+2021-06-27 04:32:52,414   INFO  recall_roi_0.7: 0.000000
+2021-06-27 04:32:52,414   INFO  recall_rcnn_0.7: 0.618573
+2021-06-27 04:32:52,417   INFO  Average predicted number of objects(3769 samples): 22.488
+2021-06-27 04:33:34,874   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 04:33:34,907   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 04:33:35,091   INFO  ==> Done (loaded 127/127)
+2021-06-27 04:34:57,913   INFO  Generate label finished(sec_per_example: 0.0219 second).
+2021-06-27 04:34:57,914   INFO  recall_roi_0.3: 0.000000
+2021-06-27 04:34:57,915   INFO  recall_rcnn_0.3: 0.935262
+2021-06-27 04:34:57,915   INFO  recall_roi_0.5: 0.000000
+2021-06-27 04:34:57,915   INFO  recall_rcnn_0.5: 0.868360
+2021-06-27 04:34:57,915   INFO  recall_roi_0.7: 0.000000
+2021-06-27 04:34:57,915   INFO  recall_rcnn_0.7: 0.618573
+2021-06-27 04:34:57,918   INFO  Average predicted number of objects(3769 samples): 22.488
+2021-06-27 04:35:40,565   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 04:35:40,609   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 04:35:40,799   INFO  ==> Done (loaded 127/127)
+2021-06-27 04:37:03,321   INFO  Generate label finished(sec_per_example: 0.0219 second).
+2021-06-27 04:37:03,323   INFO  recall_roi_0.3: 0.000000
+2021-06-27 04:37:03,323   INFO  recall_rcnn_0.3: 0.935262
+2021-06-27 04:37:03,323   INFO  recall_roi_0.5: 0.000000
+2021-06-27 04:37:03,323   INFO  recall_rcnn_0.5: 0.868360
+2021-06-27 04:37:03,323   INFO  recall_roi_0.7: 0.000000
+2021-06-27 04:37:03,323   INFO  recall_rcnn_0.7: 0.618573
+2021-06-27 04:37:03,326   INFO  Average predicted number of objects(3769 samples): 22.488
+2021-06-27 04:37:46,797   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 04:37:46,832   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 04:37:47,036   INFO  ==> Done (loaded 127/127)
+2021-06-27 04:39:09,247   INFO  Generate label finished(sec_per_example: 0.0218 second).
+2021-06-27 04:39:09,248   INFO  recall_roi_0.3: 0.000000
+2021-06-27 04:39:09,248   INFO  recall_rcnn_0.3: 0.934521
+2021-06-27 04:39:09,249   INFO  recall_roi_0.5: 0.000000
+2021-06-27 04:39:09,249   INFO  recall_rcnn_0.5: 0.863975
+2021-06-27 04:39:09,249   INFO  recall_roi_0.7: 0.000000
+2021-06-27 04:39:09,249   INFO  recall_rcnn_0.7: 0.611285
+2021-06-27 04:39:09,252   INFO  Average predicted number of objects(3769 samples): 22.655
+2021-06-27 04:39:52,030   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 04:39:52,065   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 04:39:52,266   INFO  ==> Done (loaded 127/127)
+2021-06-27 04:41:14,993   INFO  Generate label finished(sec_per_example: 0.0219 second).
+2021-06-27 04:41:14,994   INFO  recall_roi_0.3: 0.000000
+2021-06-27 04:41:14,995   INFO  recall_rcnn_0.3: 0.934977
+2021-06-27 04:41:14,995   INFO  recall_roi_0.5: 0.000000
+2021-06-27 04:41:14,995   INFO  recall_rcnn_0.5: 0.867221
+2021-06-27 04:41:14,995   INFO  recall_roi_0.7: 0.000000
+2021-06-27 04:41:14,995   INFO  recall_rcnn_0.7: 0.616580
+2021-06-27 04:41:14,998   INFO  Average predicted number of objects(3769 samples): 23.081
+2021-06-27 04:41:57,957   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 04:41:57,993   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 04:41:58,167   INFO  ==> Done (loaded 127/127)
+2021-06-27 04:43:20,969   INFO  Generate label finished(sec_per_example: 0.0219 second).
+2021-06-27 04:43:20,971   INFO  recall_roi_0.3: 0.000000
+2021-06-27 04:43:20,971   INFO  recall_rcnn_0.3: 0.933326
+2021-06-27 04:43:20,971   INFO  recall_roi_0.5: 0.000000
+2021-06-27 04:43:20,971   INFO  recall_rcnn_0.5: 0.864488
+2021-06-27 04:43:20,971   INFO  recall_roi_0.7: 0.000000
+2021-06-27 04:43:20,971   INFO  recall_rcnn_0.7: 0.607527
+2021-06-27 04:43:20,975   INFO  Average predicted number of objects(3769 samples): 21.419
+2021-06-27 04:44:02,543   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 04:44:02,577   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 04:44:02,771   INFO  ==> Done (loaded 127/127)
+2021-06-27 04:45:25,486   INFO  Generate label finished(sec_per_example: 0.0219 second).
+2021-06-27 04:45:25,488   INFO  recall_roi_0.3: 0.000000
+2021-06-27 04:45:25,488   INFO  recall_rcnn_0.3: 0.934066
+2021-06-27 04:45:25,488   INFO  recall_roi_0.5: 0.000000
+2021-06-27 04:45:25,488   INFO  recall_rcnn_0.5: 0.863292
+2021-06-27 04:45:25,488   INFO  recall_roi_0.7: 0.000000
+2021-06-27 04:45:25,489   INFO  recall_rcnn_0.7: 0.612765
+2021-06-27 04:45:25,492   INFO  Average predicted number of objects(3769 samples): 22.044
+2021-06-27 04:46:07,719   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 04:46:07,753   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 04:46:07,934   INFO  ==> Done (loaded 127/127)
+2021-06-27 04:47:30,700   INFO  Generate label finished(sec_per_example: 0.0219 second).
+2021-06-27 04:47:30,702   INFO  recall_roi_0.3: 0.000000
+2021-06-27 04:47:30,702   INFO  recall_rcnn_0.3: 0.933553
+2021-06-27 04:47:30,702   INFO  recall_roi_0.5: 0.000000
+2021-06-27 04:47:30,702   INFO  recall_rcnn_0.5: 0.866765
+2021-06-27 04:47:30,702   INFO  recall_roi_0.7: 0.000000
+2021-06-27 04:47:30,702   INFO  recall_rcnn_0.7: 0.609349
+2021-06-27 04:47:30,706   INFO  Average predicted number of objects(3769 samples): 23.778
+2021-06-27 04:48:14,506   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 04:48:14,551   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 04:48:14,741   INFO  ==> Done (loaded 127/127)
+2021-06-27 04:49:37,350   INFO  Generate label finished(sec_per_example: 0.0219 second).
+2021-06-27 04:49:37,352   INFO  recall_roi_0.3: 0.000000
+2021-06-27 04:49:37,352   INFO  recall_rcnn_0.3: 0.934294
+2021-06-27 04:49:37,352   INFO  recall_roi_0.5: 0.000000
+2021-06-27 04:49:37,352   INFO  recall_rcnn_0.5: 0.863748
+2021-06-27 04:49:37,352   INFO  recall_roi_0.7: 0.000000
+2021-06-27 04:49:37,352   INFO  recall_rcnn_0.7: 0.609349
+2021-06-27 04:49:37,355   INFO  Average predicted number of objects(3769 samples): 22.376
+2021-06-27 04:50:20,628   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 04:50:20,668   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 04:50:20,872   INFO  ==> Done (loaded 127/127)
+2021-06-27 04:51:43,911   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-27 04:51:43,912   INFO  recall_roi_0.3: 0.000000
+2021-06-27 04:51:43,912   INFO  recall_rcnn_0.3: 0.935319
+2021-06-27 04:51:43,912   INFO  recall_roi_0.5: 0.000000
+2021-06-27 04:51:43,912   INFO  recall_rcnn_0.5: 0.866822
+2021-06-27 04:51:43,912   INFO  recall_roi_0.7: 0.000000
+2021-06-27 04:51:43,913   INFO  recall_rcnn_0.7: 0.611854
+2021-06-27 04:51:43,916   INFO  Average predicted number of objects(3769 samples): 26.703
+2021-06-27 04:52:30,566   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 04:52:30,613   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 04:52:30,832   INFO  ==> Done (loaded 127/127)
+2021-06-27 04:53:53,479   INFO  Generate label finished(sec_per_example: 0.0219 second).
+2021-06-27 04:53:53,480   INFO  recall_roi_0.3: 0.000000
+2021-06-27 04:53:53,481   INFO  recall_rcnn_0.3: 0.934806
+2021-06-27 04:53:53,481   INFO  recall_roi_0.5: 0.000000
+2021-06-27 04:53:53,481   INFO  recall_rcnn_0.5: 0.867335
+2021-06-27 04:53:53,481   INFO  recall_roi_0.7: 0.000000
+2021-06-27 04:53:53,481   INFO  recall_rcnn_0.7: 0.618345
+2021-06-27 04:53:53,484   INFO  Average predicted number of objects(3769 samples): 23.192
+2021-06-27 04:54:36,596   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 04:54:36,632   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 04:54:36,816   INFO  ==> Done (loaded 127/127)
+2021-06-27 04:56:00,160   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-27 04:56:00,163   INFO  recall_roi_0.3: 0.000000
+2021-06-27 04:56:00,163   INFO  recall_rcnn_0.3: 0.936059
+2021-06-27 04:56:00,163   INFO  recall_roi_0.5: 0.000000
+2021-06-27 04:56:00,164   INFO  recall_rcnn_0.5: 0.866651
+2021-06-27 04:56:00,164   INFO  recall_roi_0.7: 0.000000
+2021-06-27 04:56:00,164   INFO  recall_rcnn_0.7: 0.610374
+2021-06-27 04:56:00,169   INFO  Average predicted number of objects(3769 samples): 28.422
+2021-06-27 04:56:48,638   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 04:56:48,734   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 04:56:48,925   INFO  ==> Done (loaded 127/127)
+2021-06-27 04:58:11,248   INFO  Generate label finished(sec_per_example: 0.0218 second).
+2021-06-27 04:58:11,251   INFO  recall_roi_0.3: 0.000000
+2021-06-27 04:58:11,251   INFO  recall_rcnn_0.3: 0.935319
+2021-06-27 04:58:11,251   INFO  recall_roi_0.5: 0.000000
+2021-06-27 04:58:11,251   INFO  recall_rcnn_0.5: 0.864545
+2021-06-27 04:58:11,251   INFO  recall_roi_0.7: 0.000000
+2021-06-27 04:58:11,252   INFO  recall_rcnn_0.7: 0.611456
+2021-06-27 04:58:11,255   INFO  Average predicted number of objects(3769 samples): 23.839
+2021-06-27 04:58:55,001   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 04:58:55,035   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 04:58:55,221   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:00:17,933   INFO  Generate label finished(sec_per_example: 0.0219 second).
+2021-06-27 05:00:17,935   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:00:17,935   INFO  recall_rcnn_0.3: 0.932927
+2021-06-27 05:00:17,935   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:00:17,935   INFO  recall_rcnn_0.5: 0.862438
+2021-06-27 05:00:17,935   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:00:17,935   INFO  recall_rcnn_0.7: 0.608381
+2021-06-27 05:00:17,938   INFO  Average predicted number of objects(3769 samples): 30.546
+2021-06-27 05:01:08,081   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:01:08,128   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:01:08,334   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:02:30,929   INFO  Generate label finished(sec_per_example: 0.0219 second).
+2021-06-27 05:02:30,937   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:02:30,937   INFO  recall_rcnn_0.3: 0.931959
+2021-06-27 05:02:30,937   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:02:30,937   INFO  recall_rcnn_0.5: 0.863349
+2021-06-27 05:02:30,937   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:02:30,937   INFO  recall_rcnn_0.7: 0.601093
+2021-06-27 05:02:30,941   INFO  Average predicted number of objects(3769 samples): 30.078
+2021-06-27 05:03:20,982   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:03:21,016   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:03:21,228   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:04:44,149   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-27 05:04:44,150   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:04:44,150   INFO  recall_rcnn_0.3: 0.927233
+2021-06-27 05:04:44,151   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:04:44,151   INFO  recall_rcnn_0.5: 0.853727
+2021-06-27 05:04:44,151   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:04:44,151   INFO  recall_rcnn_0.7: 0.588339
+2021-06-27 05:04:44,154   INFO  Average predicted number of objects(3769 samples): 25.350
+2021-06-27 05:05:29,861   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:05:29,898   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:05:30,093   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:06:52,448   INFO  Generate label finished(sec_per_example: 0.0218 second).
+2021-06-27 05:06:52,449   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:06:52,449   INFO  recall_rcnn_0.3: 0.920913
+2021-06-27 05:06:52,449   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:06:52,450   INFO  recall_rcnn_0.5: 0.819165
+2021-06-27 05:06:52,450   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:06:52,450   INFO  recall_rcnn_0.7: 0.580653
+2021-06-27 05:06:52,454   INFO  Average predicted number of objects(3769 samples): 24.741
+2021-06-27 05:07:36,986   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:07:37,033   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:07:37,227   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:09:00,062   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-27 05:09:00,063   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:09:00,063   INFO  recall_rcnn_0.3: 0.929853
+2021-06-27 05:09:00,064   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:09:00,064   INFO  recall_rcnn_0.5: 0.859022
+2021-06-27 05:09:00,064   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:09:00,064   INFO  recall_rcnn_0.7: 0.597108
+2021-06-27 05:09:00,067   INFO  Average predicted number of objects(3769 samples): 24.933
+2021-06-27 05:09:45,465   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:09:45,502   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:09:45,700   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:11:08,675   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-27 05:11:08,677   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:11:08,677   INFO  recall_rcnn_0.3: 0.932813
+2021-06-27 05:11:08,677   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:11:08,677   INFO  recall_rcnn_0.5: 0.865968
+2021-06-27 05:11:08,677   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:11:08,677   INFO  recall_rcnn_0.7: 0.594204
+2021-06-27 05:11:08,680   INFO  Average predicted number of objects(3769 samples): 28.284
+2021-06-27 05:11:56,852   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:11:56,889   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:11:57,086   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:13:19,944   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-27 05:13:19,946   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:13:19,946   INFO  recall_rcnn_0.3: 0.926379
+2021-06-27 05:13:19,946   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:13:19,946   INFO  recall_rcnn_0.5: 0.842624
+2021-06-27 05:13:19,946   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:13:19,946   INFO  recall_rcnn_0.7: 0.587371
+2021-06-27 05:13:19,949   INFO  Average predicted number of objects(3769 samples): 29.896
+2021-06-27 05:14:09,059   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:14:09,104   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:14:09,298   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:15:31,684   INFO  Generate label finished(sec_per_example: 0.0218 second).
+2021-06-27 05:15:31,686   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:15:31,686   INFO  recall_rcnn_0.3: 0.926436
+2021-06-27 05:15:31,686   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:15:31,686   INFO  recall_rcnn_0.5: 0.857655
+2021-06-27 05:15:31,686   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:15:31,686   INFO  recall_rcnn_0.7: 0.584183
+2021-06-27 05:15:31,689   INFO  Average predicted number of objects(3769 samples): 22.371
+2021-06-27 05:16:14,393   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:16:14,430   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:16:14,661   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:17:37,540   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-27 05:17:37,541   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:17:37,541   INFO  recall_rcnn_0.3: 0.932586
+2021-06-27 05:17:37,542   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:17:37,542   INFO  recall_rcnn_0.5: 0.861356
+2021-06-27 05:17:37,542   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:17:37,542   INFO  recall_rcnn_0.7: 0.577122
+2021-06-27 05:17:37,545   INFO  Average predicted number of objects(3769 samples): 24.542
+2021-06-27 05:18:22,671   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:18:22,706   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:18:22,892   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:19:45,298   INFO  Generate label finished(sec_per_example: 0.0218 second).
+2021-06-27 05:19:45,306   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:19:45,306   INFO  recall_rcnn_0.3: 0.921369
+2021-06-27 05:19:45,306   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:19:45,306   INFO  recall_rcnn_0.5: 0.854524
+2021-06-27 05:19:45,306   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:19:45,306   INFO  recall_rcnn_0.7: 0.596937
+2021-06-27 05:19:45,309   INFO  Average predicted number of objects(3769 samples): 23.318
+2021-06-27 05:20:28,539   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:20:28,583   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:20:28,775   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:21:51,465   INFO  Generate label finished(sec_per_example: 0.0219 second).
+2021-06-27 05:21:51,468   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:21:51,468   INFO  recall_rcnn_0.3: 0.917896
+2021-06-27 05:21:51,468   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:21:51,468   INFO  recall_rcnn_0.5: 0.815066
+2021-06-27 05:21:51,468   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:21:51,468   INFO  recall_rcnn_0.7: 0.548369
+2021-06-27 05:21:51,471   INFO  Average predicted number of objects(3769 samples): 25.203
+2021-06-27 05:22:35,774   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:22:35,822   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:22:36,016   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:23:59,284   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-27 05:23:59,286   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:23:59,286   INFO  recall_rcnn_0.3: 0.926778
+2021-06-27 05:23:59,286   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:23:59,286   INFO  recall_rcnn_0.5: 0.818083
+2021-06-27 05:23:59,286   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:23:59,287   INFO  recall_rcnn_0.7: 0.521437
+2021-06-27 05:23:59,290   INFO  Average predicted number of objects(3769 samples): 26.828
+2021-06-27 05:24:45,022   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:24:45,057   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:24:45,289   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:26:08,176   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-27 05:26:08,178   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:26:08,178   INFO  recall_rcnn_0.3: 0.932813
+2021-06-27 05:26:08,178   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:26:08,178   INFO  recall_rcnn_0.5: 0.859079
+2021-06-27 05:26:08,178   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:26:08,178   INFO  recall_rcnn_0.7: 0.561749
+2021-06-27 05:26:08,181   INFO  Average predicted number of objects(3769 samples): 31.767
+2021-06-27 05:26:59,161   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:26:59,195   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:26:59,394   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:28:21,922   INFO  Generate label finished(sec_per_example: 0.0219 second).
+2021-06-27 05:28:21,923   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:28:21,923   INFO  recall_rcnn_0.3: 0.927575
+2021-06-27 05:28:21,923   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:28:21,923   INFO  recall_rcnn_0.5: 0.821841
+2021-06-27 05:28:21,923   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:28:21,924   INFO  recall_rcnn_0.7: 0.538518
+2021-06-27 05:28:21,926   INFO  Average predicted number of objects(3769 samples): 24.210
+2021-06-27 05:29:05,704   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:29:05,740   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:29:05,910   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:30:29,063   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-27 05:30:29,064   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:30:29,064   INFO  recall_rcnn_0.3: 0.917839
+2021-06-27 05:30:29,064   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:30:29,064   INFO  recall_rcnn_0.5: 0.799180
+2021-06-27 05:30:29,064   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:30:29,065   INFO  recall_rcnn_0.7: 0.557308
+2021-06-27 05:30:29,067   INFO  Average predicted number of objects(3769 samples): 29.605
+2021-06-27 05:31:16,748   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:31:16,782   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:31:16,977   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:32:40,011   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-27 05:32:40,013   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:32:40,013   INFO  recall_rcnn_0.3: 0.923362
+2021-06-27 05:32:40,014   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:32:40,014   INFO  recall_rcnn_0.5: 0.807436
+2021-06-27 05:32:40,014   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:32:40,014   INFO  recall_rcnn_0.7: 0.491659
+2021-06-27 05:32:40,019   INFO  Average predicted number of objects(3769 samples): 36.958
+2021-06-27 05:33:35,110   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:33:35,146   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:33:35,347   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:34:58,368   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-27 05:34:58,369   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:34:58,369   INFO  recall_rcnn_0.3: 0.926664
+2021-06-27 05:34:58,369   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:34:58,369   INFO  recall_rcnn_0.5: 0.840118
+2021-06-27 05:34:58,369   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:34:58,369   INFO  recall_rcnn_0.7: 0.559244
+2021-06-27 05:34:58,372   INFO  Average predicted number of objects(3769 samples): 28.448
+2021-06-27 05:35:46,474   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:35:46,511   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:35:46,698   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:37:08,866   INFO  Generate label finished(sec_per_example: 0.0218 second).
+2021-06-27 05:37:08,868   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:37:08,868   INFO  recall_rcnn_0.3: 0.932586
+2021-06-27 05:37:08,868   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:37:08,868   INFO  recall_rcnn_0.5: 0.853556
+2021-06-27 05:37:08,868   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:37:08,868   INFO  recall_rcnn_0.7: 0.578147
+2021-06-27 05:37:08,872   INFO  Average predicted number of objects(3769 samples): 25.337
+2021-06-27 05:37:53,794   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:37:53,832   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:37:54,041   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:39:17,127   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-27 05:39:17,130   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:39:17,130   INFO  recall_rcnn_0.3: 0.930934
+2021-06-27 05:39:17,130   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:39:17,130   INFO  recall_rcnn_0.5: 0.849969
+2021-06-27 05:39:17,130   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:39:17,130   INFO  recall_rcnn_0.7: 0.538006
+2021-06-27 05:39:17,133   INFO  Average predicted number of objects(3769 samples): 30.302
+2021-06-27 05:40:06,116   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:40:06,163   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:40:06,355   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:41:30,282   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-27 05:41:30,291   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:41:30,291   INFO  recall_rcnn_0.3: 0.913056
+2021-06-27 05:41:30,291   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:41:30,291   INFO  recall_rcnn_0.5: 0.828389
+2021-06-27 05:41:30,291   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:41:30,291   INFO  recall_rcnn_0.7: 0.566019
+2021-06-27 05:41:30,296   INFO  Average predicted number of objects(3769 samples): 35.281
+2021-06-27 05:42:24,980   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:42:25,014   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:42:25,213   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:43:48,225   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-27 05:43:48,226   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:43:48,226   INFO  recall_rcnn_0.3: 0.918009
+2021-06-27 05:43:48,226   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:43:48,227   INFO  recall_rcnn_0.5: 0.818994
+2021-06-27 05:43:48,227   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:43:48,227   INFO  recall_rcnn_0.7: 0.525594
+2021-06-27 05:43:48,230   INFO  Average predicted number of objects(3769 samples): 43.123
+2021-06-27 05:44:48,650   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:44:48,696   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:44:48,892   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:46:12,129   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-27 05:46:12,130   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:46:12,130   INFO  recall_rcnn_0.3: 0.915789
+2021-06-27 05:46:12,130   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:46:12,130   INFO  recall_rcnn_0.5: 0.803450
+2021-06-27 05:46:12,130   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:46:12,130   INFO  recall_rcnn_0.7: 0.527700
+2021-06-27 05:46:12,133   INFO  Average predicted number of objects(3769 samples): 28.975
+2021-06-27 05:46:59,363   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:46:59,399   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:46:59,591   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:48:22,884   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-27 05:48:22,885   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:48:22,885   INFO  recall_rcnn_0.3: 0.925525
+2021-06-27 05:48:22,886   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:48:22,886   INFO  recall_rcnn_0.5: 0.844104
+2021-06-27 05:48:22,886   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:48:22,886   INFO  recall_rcnn_0.7: 0.553379
+2021-06-27 05:48:22,889   INFO  Average predicted number of objects(3769 samples): 25.676
+2021-06-27 05:49:08,232   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:49:08,266   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:49:08,481   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:50:31,238   INFO  Generate label finished(sec_per_example: 0.0219 second).
+2021-06-27 05:50:31,240   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:50:31,240   INFO  recall_rcnn_0.3: 0.892786
+2021-06-27 05:50:31,240   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:50:31,240   INFO  recall_rcnn_0.5: 0.784490
+2021-06-27 05:50:31,240   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:50:31,240   INFO  recall_rcnn_0.7: 0.465809
+2021-06-27 05:50:31,243   INFO  Average predicted number of objects(3769 samples): 30.361
+2021-06-27 05:51:19,158   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:51:19,195   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:51:19,380   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:52:42,244   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-27 05:52:42,246   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:52:42,246   INFO  recall_rcnn_0.3: 0.912088
+2021-06-27 05:52:42,246   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:52:42,246   INFO  recall_rcnn_0.5: 0.816375
+2021-06-27 05:52:42,246   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:52:42,246   INFO  recall_rcnn_0.7: 0.485851
+2021-06-27 05:52:42,250   INFO  Average predicted number of objects(3769 samples): 40.803
+2021-06-27 05:53:40,704   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:53:40,738   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:53:40,929   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:55:03,706   INFO  Generate label finished(sec_per_example: 0.0219 second).
+2021-06-27 05:55:03,708   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:55:03,708   INFO  recall_rcnn_0.3: 0.905711
+2021-06-27 05:55:03,708   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:55:03,708   INFO  recall_rcnn_0.5: 0.820589
+2021-06-27 05:55:03,708   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:55:03,708   INFO  recall_rcnn_0.7: 0.438934
+2021-06-27 05:55:03,712   INFO  Average predicted number of objects(3769 samples): 28.126
+2021-06-27 05:55:51,055   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:55:51,093   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:55:51,292   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:57:14,642   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-27 05:57:14,644   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:57:14,644   INFO  recall_rcnn_0.3: 0.899619
+2021-06-27 05:57:14,644   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:57:14,644   INFO  recall_rcnn_0.5: 0.794682
+2021-06-27 05:57:14,644   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:57:14,644   INFO  recall_rcnn_0.7: 0.523942
+2021-06-27 05:57:14,647   INFO  Average predicted number of objects(3769 samples): 37.624
+2021-06-27 05:58:09,946   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 05:58:09,982   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 05:58:10,164   INFO  ==> Done (loaded 127/127)
+2021-06-27 05:59:33,318   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-27 05:59:33,319   INFO  recall_roi_0.3: 0.000000
+2021-06-27 05:59:33,319   INFO  recall_rcnn_0.3: 0.888459
+2021-06-27 05:59:33,319   INFO  recall_roi_0.5: 0.000000
+2021-06-27 05:59:33,319   INFO  recall_rcnn_0.5: 0.783351
+2021-06-27 05:59:33,319   INFO  recall_roi_0.7: 0.000000
+2021-06-27 05:59:33,320   INFO  recall_rcnn_0.7: 0.540113
+2021-06-27 05:59:33,323   INFO  Average predicted number of objects(3769 samples): 37.182
+2021-06-27 06:00:27,160   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 06:00:27,210   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 06:00:27,401   INFO  ==> Done (loaded 127/127)
+2021-06-27 06:01:51,459   INFO  Generate label finished(sec_per_example: 0.0223 second).
+2021-06-27 06:01:51,461   INFO  recall_roi_0.3: 0.000000
+2021-06-27 06:01:51,461   INFO  recall_rcnn_0.3: 0.929853
+2021-06-27 06:01:51,461   INFO  recall_roi_0.5: 0.000000
+2021-06-27 06:01:51,461   INFO  recall_rcnn_0.5: 0.852474
+2021-06-27 06:01:51,461   INFO  recall_roi_0.7: 0.000000
+2021-06-27 06:01:51,461   INFO  recall_rcnn_0.7: 0.541536
+2021-06-27 06:01:51,465   INFO  Average predicted number of objects(3769 samples): 43.406
+2021-06-27 06:02:53,327   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 06:02:53,362   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 06:02:53,536   INFO  ==> Done (loaded 127/127)
+2021-06-27 06:04:16,644   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-27 06:04:16,645   INFO  recall_roi_0.3: 0.000000
+2021-06-27 06:04:16,645   INFO  recall_rcnn_0.3: 0.903319
+2021-06-27 06:04:16,645   INFO  recall_roi_0.5: 0.000000
+2021-06-27 06:04:16,645   INFO  recall_rcnn_0.5: 0.817059
+2021-06-27 06:04:16,645   INFO  recall_roi_0.7: 0.000000
+2021-06-27 06:04:16,646   INFO  recall_rcnn_0.7: 0.521380
+2021-06-27 06:04:16,649   INFO  Average predicted number of objects(3769 samples): 35.038
+2021-06-27 06:05:09,798   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 06:05:09,834   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 06:05:10,034   INFO  ==> Done (loaded 127/127)
+2021-06-27 06:06:33,960   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-27 06:06:33,962   INFO  recall_roi_0.3: 0.000000
+2021-06-27 06:06:33,962   INFO  recall_rcnn_0.3: 0.919490
+2021-06-27 06:06:33,962   INFO  recall_roi_0.5: 0.000000
+2021-06-27 06:06:33,962   INFO  recall_rcnn_0.5: 0.813472
+2021-06-27 06:06:33,962   INFO  recall_roi_0.7: 0.000000
+2021-06-27 06:06:33,962   INFO  recall_rcnn_0.7: 0.515686
+2021-06-27 06:06:33,965   INFO  Average predicted number of objects(3769 samples): 38.572
+2021-06-27 06:07:30,303   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 06:07:30,335   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 06:07:30,524   INFO  ==> Done (loaded 127/127)
+2021-06-27 06:08:54,174   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-27 06:08:54,176   INFO  recall_roi_0.3: 0.000000
+2021-06-27 06:08:54,176   INFO  recall_rcnn_0.3: 0.909924
+2021-06-27 06:08:54,176   INFO  recall_roi_0.5: 0.000000
+2021-06-27 06:08:54,176   INFO  recall_rcnn_0.5: 0.831919
+2021-06-27 06:08:54,177   INFO  recall_roi_0.7: 0.000000
+2021-06-27 06:08:54,177   INFO  recall_rcnn_0.7: 0.506007
+2021-06-27 06:08:54,182   INFO  Average predicted number of objects(3769 samples): 38.196
+2021-06-27 06:09:50,681   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 06:09:50,716   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 06:09:50,908   INFO  ==> Done (loaded 127/127)
+2021-06-27 06:11:13,690   INFO  Generate label finished(sec_per_example: 0.0219 second).
+2021-06-27 06:11:13,692   INFO  recall_roi_0.3: 0.000000
+2021-06-27 06:11:13,692   INFO  recall_rcnn_0.3: 0.908159
+2021-06-27 06:11:13,692   INFO  recall_roi_0.5: 0.000000
+2021-06-27 06:11:13,692   INFO  recall_rcnn_0.5: 0.802141
+2021-06-27 06:11:13,692   INFO  recall_roi_0.7: 0.000000
+2021-06-27 06:11:13,692   INFO  recall_rcnn_0.7: 0.506349
+2021-06-27 06:11:13,696   INFO  Average predicted number of objects(3769 samples): 31.469
+2021-06-27 06:12:03,420   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 06:12:03,478   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 06:12:03,680   INFO  ==> Done (loaded 127/127)
+2021-06-27 06:13:27,033   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-27 06:13:27,034   INFO  recall_roi_0.3: 0.000000
+2021-06-27 06:13:27,034   INFO  recall_rcnn_0.3: 0.898309
+2021-06-27 06:13:27,034   INFO  recall_roi_0.5: 0.000000
+2021-06-27 06:13:27,034   INFO  recall_rcnn_0.5: 0.781700
+2021-06-27 06:13:27,034   INFO  recall_roi_0.7: 0.000000
+2021-06-27 06:13:27,035   INFO  recall_rcnn_0.7: 0.509082
+2021-06-27 06:13:27,037   INFO  Average predicted number of objects(3769 samples): 41.745
+2021-06-27 06:14:24,643   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 06:14:24,685   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 06:14:24,880   INFO  ==> Done (loaded 127/127)
+2021-06-27 06:15:48,303   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-27 06:15:48,305   INFO  recall_roi_0.3: 0.000000
+2021-06-27 06:15:48,305   INFO  recall_rcnn_0.3: 0.880829
+2021-06-27 06:15:48,305   INFO  recall_roi_0.5: 0.000000
+2021-06-27 06:15:48,305   INFO  recall_rcnn_0.5: 0.760178
+2021-06-27 06:15:48,305   INFO  recall_roi_0.7: 0.000000
+2021-06-27 06:15:48,305   INFO  recall_rcnn_0.7: 0.457382
+2021-06-27 06:15:48,309   INFO  Average predicted number of objects(3769 samples): 33.948
+2021-06-27 06:16:39,667   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 06:16:39,709   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 06:16:39,909   INFO  ==> Done (loaded 127/127)
+2021-06-27 06:18:02,822   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-27 06:18:02,823   INFO  recall_roi_0.3: 0.000000
+2021-06-27 06:18:02,823   INFO  recall_rcnn_0.3: 0.901384
+2021-06-27 06:18:02,824   INFO  recall_roi_0.5: 0.000000
+2021-06-27 06:18:02,824   INFO  recall_rcnn_0.5: 0.782440
+2021-06-27 06:18:02,824   INFO  recall_roi_0.7: 0.000000
+2021-06-27 06:18:02,824   INFO  recall_rcnn_0.7: 0.458464
+2021-06-27 06:18:02,827   INFO  Average predicted number of objects(3769 samples): 39.001
+2021-06-27 06:18:58,729   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 06:18:58,764   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 06:18:58,954   INFO  ==> Done (loaded 127/127)
+2021-06-27 06:20:21,837   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-27 06:20:21,839   INFO  recall_roi_0.3: 0.000000
+2021-06-27 06:20:21,839   INFO  recall_rcnn_0.3: 0.828902
+2021-06-27 06:20:21,839   INFO  recall_roi_0.5: 0.000000
+2021-06-27 06:20:21,839   INFO  recall_rcnn_0.5: 0.719239
+2021-06-27 06:20:21,839   INFO  recall_roi_0.7: 0.000000
+2021-06-27 06:20:21,839   INFO  recall_rcnn_0.7: 0.410864
+2021-06-27 06:20:21,843   INFO  Average predicted number of objects(3769 samples): 38.601
+2021-06-27 06:21:16,715   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 06:21:16,752   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 06:21:16,946   INFO  ==> Done (loaded 127/127)
+2021-06-27 06:22:39,811   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-27 06:22:39,813   INFO  recall_roi_0.3: 0.000000
+2021-06-27 06:22:39,813   INFO  recall_rcnn_0.3: 0.901042
+2021-06-27 06:22:39,813   INFO  recall_roi_0.5: 0.000000
+2021-06-27 06:22:39,813   INFO  recall_rcnn_0.5: 0.809657
+2021-06-27 06:22:39,813   INFO  recall_roi_0.7: 0.000000
+2021-06-27 06:22:39,813   INFO  recall_rcnn_0.7: 0.499061
+2021-06-27 06:22:39,817   INFO  Average predicted number of objects(3769 samples): 27.362
+2021-06-27 06:23:25,811   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 06:23:25,852   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 06:23:26,045   INFO  ==> Done (loaded 127/127)
+2021-06-27 06:24:49,117   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-27 06:24:49,119   INFO  recall_roi_0.3: 0.000000
+2021-06-27 06:24:49,119   INFO  recall_rcnn_0.3: 0.907818
+2021-06-27 06:24:49,119   INFO  recall_roi_0.5: 0.000000
+2021-06-27 06:24:49,120   INFO  recall_rcnn_0.5: 0.817742
+2021-06-27 06:24:49,120   INFO  recall_roi_0.7: 0.000000
+2021-06-27 06:24:49,120   INFO  recall_rcnn_0.7: 0.494164
+2021-06-27 06:24:49,123   INFO  Average predicted number of objects(3769 samples): 58.656
+2021-06-27 06:26:03,795   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 06:26:03,834   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 06:26:04,035   INFO  ==> Done (loaded 127/127)
+2021-06-27 06:27:26,462   INFO  Generate label finished(sec_per_example: 0.0218 second).
+2021-06-27 06:27:26,463   INFO  recall_roi_0.3: 0.000000
+2021-06-27 06:27:26,463   INFO  recall_rcnn_0.3: 0.885042
+2021-06-27 06:27:26,463   INFO  recall_roi_0.5: 0.000000
+2021-06-27 06:27:26,464   INFO  recall_rcnn_0.5: 0.762797
+2021-06-27 06:27:26,464   INFO  recall_roi_0.7: 0.000000
+2021-06-27 06:27:26,464   INFO  recall_rcnn_0.7: 0.386096
+2021-06-27 06:27:26,467   INFO  Average predicted number of objects(3769 samples): 35.473
+2021-06-27 06:28:18,979   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 06:28:19,015   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 06:28:19,206   INFO  ==> Done (loaded 127/127)
+2021-06-27 06:29:42,141   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-27 06:29:42,143   INFO  recall_roi_0.3: 0.000000
+2021-06-27 06:29:42,144   INFO  recall_rcnn_0.3: 0.881228
+2021-06-27 06:29:42,144   INFO  recall_roi_0.5: 0.000000
+2021-06-27 06:29:42,144   INFO  recall_rcnn_0.5: 0.720606
+2021-06-27 06:29:42,144   INFO  recall_roi_0.7: 0.000000
+2021-06-27 06:29:42,144   INFO  recall_rcnn_0.7: 0.242157
+2021-06-27 06:29:42,147   INFO  Average predicted number of objects(3769 samples): 61.504
+2021-06-27 06:30:58,245   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 06:30:58,287   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 06:30:58,478   INFO  ==> Done (loaded 127/127)
+2021-06-27 06:32:27,906   INFO  Generate label finished(sec_per_example: 0.0237 second).
+2021-06-27 06:32:27,907   INFO  recall_roi_0.3: 0.000000
+2021-06-27 06:32:27,907   INFO  recall_rcnn_0.3: 0.851392
+2021-06-27 06:32:27,908   INFO  recall_roi_0.5: 0.000000
+2021-06-27 06:32:27,908   INFO  recall_rcnn_0.5: 0.739680
+2021-06-27 06:32:27,908   INFO  recall_roi_0.7: 0.000000
+2021-06-27 06:32:27,908   INFO  recall_rcnn_0.7: 0.341456
+2021-06-27 06:32:27,911   INFO  Average predicted number of objects(3769 samples): 83.155
+2021-06-27 06:34:01,057   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 06:34:01,094   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 06:34:01,286   INFO  ==> Done (loaded 127/127)
+2021-06-27 06:35:35,444   INFO  Generate label finished(sec_per_example: 0.0250 second).
+2021-06-27 06:35:35,445   INFO  recall_roi_0.3: 0.000000
+2021-06-27 06:35:35,446   INFO  recall_rcnn_0.3: 0.899505
+2021-06-27 06:35:35,446   INFO  recall_roi_0.5: 0.000000
+2021-06-27 06:35:35,446   INFO  recall_rcnn_0.5: 0.765587
+2021-06-27 06:35:35,446   INFO  recall_roi_0.7: 0.000000
+2021-06-27 06:35:35,446   INFO  recall_rcnn_0.7: 0.410579
+2021-06-27 06:35:35,449   INFO  Average predicted number of objects(3769 samples): 81.453
+2021-06-27 06:37:07,332   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 06:37:07,371   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 06:37:07,570   INFO  ==> Done (loaded 127/127)
+2021-06-27 06:38:33,294   INFO  Generate label finished(sec_per_example: 0.0227 second).
+2021-06-27 06:38:33,295   INFO  recall_roi_0.3: 0.000000
+2021-06-27 06:38:33,295   INFO  recall_rcnn_0.3: 0.896088
+2021-06-27 06:38:33,295   INFO  recall_roi_0.5: 0.000000
+2021-06-27 06:38:33,295   INFO  recall_rcnn_0.5: 0.752605
+2021-06-27 06:38:33,295   INFO  recall_roi_0.7: 0.000000
+2021-06-27 06:38:33,295   INFO  recall_rcnn_0.7: 0.394295
+2021-06-27 06:38:33,299   INFO  Average predicted number of objects(3769 samples): 75.744
+2021-06-27 06:40:01,528   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 06:40:01,563   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 06:40:01,766   INFO  ==> Done (loaded 127/127)
+2021-06-27 06:41:25,480   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-27 06:41:25,482   INFO  recall_roi_0.3: 0.000000
+2021-06-27 06:41:25,482   INFO  recall_rcnn_0.3: 0.894380
+2021-06-27 06:41:25,482   INFO  recall_roi_0.5: 0.000000
+2021-06-27 06:41:25,482   INFO  recall_rcnn_0.5: 0.775722
+2021-06-27 06:41:25,482   INFO  recall_roi_0.7: 0.000000
+2021-06-27 06:41:25,482   INFO  recall_rcnn_0.7: 0.429255
+2021-06-27 06:41:25,485   INFO  Average predicted number of objects(3769 samples): 35.132
+2021-06-27 06:42:17,657   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 06:42:17,696   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 06:42:17,904   INFO  ==> Done (loaded 127/127)
+2021-06-27 06:43:41,075   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-27 06:43:41,076   INFO  recall_roi_0.3: 0.000000
+2021-06-27 06:43:41,076   INFO  recall_rcnn_0.3: 0.888117
+2021-06-27 06:43:41,076   INFO  recall_roi_0.5: 0.000000
+2021-06-27 06:43:41,076   INFO  recall_rcnn_0.5: 0.781871
+2021-06-27 06:43:41,076   INFO  recall_roi_0.7: 0.000000
+2021-06-27 06:43:41,076   INFO  recall_rcnn_0.7: 0.379149
+2021-06-27 06:43:41,080   INFO  Average predicted number of objects(3769 samples): 43.639
+2021-06-27 06:44:40,365   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 06:44:40,405   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 06:44:40,597   INFO  ==> Done (loaded 127/127)
+2021-06-27 06:46:04,476   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-27 06:46:04,477   INFO  recall_roi_0.3: 0.000000
+2021-06-27 06:46:04,477   INFO  recall_rcnn_0.3: 0.877071
+2021-06-27 06:46:04,477   INFO  recall_roi_0.5: 0.000000
+2021-06-27 06:46:04,477   INFO  recall_rcnn_0.5: 0.723282
+2021-06-27 06:46:04,477   INFO  recall_roi_0.7: 0.000000
+2021-06-27 06:46:04,477   INFO  recall_rcnn_0.7: 0.104026
+2021-06-27 06:46:04,480   INFO  Average predicted number of objects(3769 samples): 42.914
+2021-06-27 06:47:01,846   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 06:47:01,889   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 06:47:02,081   INFO  ==> Done (loaded 127/127)
+2021-06-27 06:48:25,657   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-27 06:48:25,659   INFO  recall_roi_0.3: 0.000000
+2021-06-27 06:48:25,659   INFO  recall_rcnn_0.3: 0.852417
+2021-06-27 06:48:25,659   INFO  recall_roi_0.5: 0.000000
+2021-06-27 06:48:25,659   INFO  recall_rcnn_0.5: 0.716335
+2021-06-27 06:48:25,659   INFO  recall_roi_0.7: 0.000000
+2021-06-27 06:48:25,659   INFO  recall_rcnn_0.7: 0.303080
+2021-06-27 06:48:25,662   INFO  Average predicted number of objects(3769 samples): 53.038
+2021-06-27 06:49:31,937   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 06:49:31,979   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 06:49:32,177   INFO  ==> Done (loaded 127/127)
+2021-06-27 06:50:55,426   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-27 06:50:55,428   INFO  recall_roi_0.3: 0.000000
+2021-06-27 06:50:55,428   INFO  recall_rcnn_0.3: 0.896715
+2021-06-27 06:50:55,428   INFO  recall_roi_0.5: 0.000000
+2021-06-27 06:50:55,428   INFO  recall_rcnn_0.5: 0.780049
+2021-06-27 06:50:55,428   INFO  recall_roi_0.7: 0.000000
+2021-06-27 06:50:55,428   INFO  recall_rcnn_0.7: 0.338951
+2021-06-27 06:50:55,431   INFO  Average predicted number of objects(3769 samples): 60.590
+2021-06-27 06:52:10,180   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 06:52:10,215   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 06:52:10,405   INFO  ==> Done (loaded 127/127)
+2021-06-27 06:53:34,113   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-27 06:53:34,115   INFO  recall_roi_0.3: 0.000000
+2021-06-27 06:53:34,115   INFO  recall_rcnn_0.3: 0.880032
+2021-06-27 06:53:34,115   INFO  recall_roi_0.5: 0.000000
+2021-06-27 06:53:34,115   INFO  recall_rcnn_0.5: 0.771110
+2021-06-27 06:53:34,115   INFO  recall_roi_0.7: 0.000000
+2021-06-27 06:53:34,115   INFO  recall_rcnn_0.7: 0.420828
+2021-06-27 06:53:34,119   INFO  Average predicted number of objects(3769 samples): 79.168
+2021-06-27 06:55:06,441   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 06:55:06,476   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 06:55:06,672   INFO  ==> Done (loaded 127/127)
+2021-06-27 06:56:30,437   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-27 06:56:30,453   INFO  recall_roi_0.3: 0.000000
+2021-06-27 06:56:30,453   INFO  recall_rcnn_0.3: 0.829016
+2021-06-27 06:56:30,453   INFO  recall_roi_0.5: 0.000000
+2021-06-27 06:56:30,453   INFO  recall_rcnn_0.5: 0.649035
+2021-06-27 06:56:30,454   INFO  recall_roi_0.7: 0.000000
+2021-06-27 06:56:30,454   INFO  recall_rcnn_0.7: 0.178102
+2021-06-27 06:56:30,459   INFO  Average predicted number of objects(3769 samples): 61.363
+2021-06-27 06:57:44,711   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 06:57:44,753   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 06:57:44,944   INFO  ==> Done (loaded 127/127)
+2021-06-27 06:59:27,392   INFO  Generate label finished(sec_per_example: 0.0272 second).
+2021-06-27 06:59:27,394   INFO  recall_roi_0.3: 0.000000
+2021-06-27 06:59:27,394   INFO  recall_rcnn_0.3: 0.844503
+2021-06-27 06:59:27,394   INFO  recall_roi_0.5: 0.000000
+2021-06-27 06:59:27,394   INFO  recall_rcnn_0.5: 0.656437
+2021-06-27 06:59:27,394   INFO  recall_roi_0.7: 0.000000
+2021-06-27 06:59:27,394   INFO  recall_rcnn_0.7: 0.208336
+2021-06-27 06:59:27,397   INFO  Average predicted number of objects(3769 samples): 120.440
+2021-06-27 07:01:28,889   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 07:01:28,924   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 07:01:29,117   INFO  ==> Done (loaded 127/127)
+2021-06-27 07:03:09,379   INFO  Generate label finished(sec_per_example: 0.0266 second).
+2021-06-27 07:03:09,382   INFO  recall_roi_0.3: 0.000000
+2021-06-27 07:03:09,382   INFO  recall_rcnn_0.3: 0.798668
+2021-06-27 07:03:09,382   INFO  recall_roi_0.5: 0.000000
+2021-06-27 07:03:09,382   INFO  recall_rcnn_0.5: 0.601321
+2021-06-27 07:03:09,382   INFO  recall_roi_0.7: 0.000000
+2021-06-27 07:03:09,382   INFO  recall_rcnn_0.7: 0.116381
+2021-06-27 07:03:09,385   INFO  Average predicted number of objects(3769 samples): 162.699
+2021-06-27 07:05:48,220   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 07:05:48,255   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 07:05:48,436   INFO  ==> Done (loaded 127/127)
+2021-06-27 07:07:27,699   INFO  Generate label finished(sec_per_example: 0.0263 second).
+2021-06-27 07:07:27,701   INFO  recall_roi_0.3: 0.000000
+2021-06-27 07:07:27,702   INFO  recall_rcnn_0.3: 0.855776
+2021-06-27 07:07:27,702   INFO  recall_roi_0.5: 0.000000
+2021-06-27 07:07:27,702   INFO  recall_rcnn_0.5: 0.710300
+2021-06-27 07:07:27,702   INFO  recall_roi_0.7: 0.000000
+2021-06-27 07:07:27,702   INFO  recall_rcnn_0.7: 0.239936
+2021-06-27 07:07:27,705   INFO  Average predicted number of objects(3769 samples): 91.256
+2021-06-27 07:09:07,192   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 07:09:07,230   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 07:09:07,425   INFO  ==> Done (loaded 127/127)
+2021-06-27 07:10:30,618   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-27 07:10:30,620   INFO  recall_roi_0.3: 0.000000
+2021-06-27 07:10:30,620   INFO  recall_rcnn_0.3: 0.847976
+2021-06-27 07:10:30,620   INFO  recall_roi_0.5: 0.000000
+2021-06-27 07:10:30,620   INFO  recall_rcnn_0.5: 0.692763
+2021-06-27 07:10:30,620   INFO  recall_roi_0.7: 0.000000
+2021-06-27 07:10:30,620   INFO  recall_rcnn_0.7: 0.289529
+2021-06-27 07:10:30,623   INFO  Average predicted number of objects(3769 samples): 49.716
+2021-06-27 07:11:35,018   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 07:11:35,057   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 07:11:35,247   INFO  ==> Done (loaded 127/127)
+2021-06-27 07:13:00,316   INFO  Generate label finished(sec_per_example: 0.0225 second).
+2021-06-27 07:13:00,317   INFO  recall_roi_0.3: 0.000000
+2021-06-27 07:13:00,317   INFO  recall_rcnn_0.3: 0.820418
+2021-06-27 07:13:00,318   INFO  recall_roi_0.5: 0.000000
+2021-06-27 07:13:00,318   INFO  recall_rcnn_0.5: 0.703695
+2021-06-27 07:13:00,318   INFO  recall_roi_0.7: 0.000000
+2021-06-27 07:13:00,318   INFO  recall_rcnn_0.7: 0.202642
+2021-06-27 07:13:00,321   INFO  Average predicted number of objects(3769 samples): 53.562
+2021-06-27 07:14:07,856   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 07:14:07,898   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 07:14:08,132   INFO  ==> Done (loaded 127/127)
+2021-06-27 07:15:30,592   INFO  Generate label finished(sec_per_example: 0.0219 second).
+2021-06-27 07:15:30,593   INFO  recall_roi_0.3: 0.000000
+2021-06-27 07:15:30,593   INFO  recall_rcnn_0.3: 0.869498
+2021-06-27 07:15:30,593   INFO  recall_roi_0.5: 0.000000
+2021-06-27 07:15:30,594   INFO  recall_rcnn_0.5: 0.727211
+2021-06-27 07:15:30,594   INFO  recall_roi_0.7: 0.000000
+2021-06-27 07:15:30,594   INFO  recall_rcnn_0.7: 0.297216
+2021-06-27 07:15:30,597   INFO  Average predicted number of objects(3769 samples): 33.067
+2021-06-27 07:16:19,164   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 07:16:19,202   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 07:16:19,393   INFO  ==> Done (loaded 127/127)
+2021-06-27 07:17:43,015   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-27 07:17:43,017   INFO  recall_roi_0.3: 0.000000
+2021-06-27 07:17:43,017   INFO  recall_rcnn_0.3: 0.810909
+2021-06-27 07:17:43,017   INFO  recall_roi_0.5: 0.000000
+2021-06-27 07:17:43,017   INFO  recall_rcnn_0.5: 0.674201
+2021-06-27 07:17:43,017   INFO  recall_roi_0.7: 0.000000
+2021-06-27 07:17:43,017   INFO  recall_rcnn_0.7: 0.216136
+2021-06-27 07:17:43,020   INFO  Average predicted number of objects(3769 samples): 63.047
+2021-06-27 07:18:55,609   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 07:18:55,650   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 07:18:55,837   INFO  ==> Done (loaded 127/127)
+2021-06-27 07:20:40,265   INFO  Generate label finished(sec_per_example: 0.0277 second).
+2021-06-27 07:20:40,267   INFO  recall_roi_0.3: 0.000000
+2021-06-27 07:20:40,267   INFO  recall_rcnn_0.3: 0.752776
+2021-06-27 07:20:40,267   INFO  recall_roi_0.5: 0.000000
+2021-06-27 07:20:40,267   INFO  recall_rcnn_0.5: 0.388373
+2021-06-27 07:20:40,267   INFO  recall_roi_0.7: 0.000000
+2021-06-27 07:20:40,267   INFO  recall_rcnn_0.7: 0.016284
+2021-06-27 07:20:40,271   INFO  Average predicted number of objects(3769 samples): 232.697
+2021-06-27 07:24:14,899   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 07:24:14,936   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 07:24:15,135   INFO  ==> Done (loaded 127/127)
+2021-06-27 07:25:38,528   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-27 07:25:38,530   INFO  recall_roi_0.3: 0.000000
+2021-06-27 07:25:38,530   INFO  recall_rcnn_0.3: 0.854865
+2021-06-27 07:25:38,530   INFO  recall_roi_0.5: 0.000000
+2021-06-27 07:25:38,530   INFO  recall_rcnn_0.5: 0.690827
+2021-06-27 07:25:38,530   INFO  recall_roi_0.7: 0.000000
+2021-06-27 07:25:38,530   INFO  recall_rcnn_0.7: 0.251608
+2021-06-27 07:25:38,533   INFO  Average predicted number of objects(3769 samples): 80.746
+2021-06-27 07:27:09,061   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 07:27:09,101   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 07:27:09,297   INFO  ==> Done (loaded 127/127)
+2021-06-27 07:28:33,184   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-27 07:28:33,186   INFO  recall_roi_0.3: 0.000000
+2021-06-27 07:28:33,186   INFO  recall_rcnn_0.3: 0.814269
+2021-06-27 07:28:33,186   INFO  recall_roi_0.5: 0.000000
+2021-06-27 07:28:33,186   INFO  recall_rcnn_0.5: 0.642943
+2021-06-27 07:28:33,186   INFO  recall_roi_0.7: 0.000000
+2021-06-27 07:28:33,186   INFO  recall_rcnn_0.7: 0.227410
+2021-06-27 07:28:33,190   INFO  Average predicted number of objects(3769 samples): 74.938
+2021-06-27 07:29:58,011   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 07:29:58,052   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 07:29:58,245   INFO  ==> Done (loaded 127/127)
+2021-06-27 07:31:33,099   INFO  Generate label finished(sec_per_example: 0.0251 second).
+2021-06-27 07:31:33,101   INFO  recall_roi_0.3: 0.000000
+2021-06-27 07:31:33,101   INFO  recall_rcnn_0.3: 0.802255
+2021-06-27 07:31:33,101   INFO  recall_roi_0.5: 0.000000
+2021-06-27 07:31:33,101   INFO  recall_rcnn_0.5: 0.475545
+2021-06-27 07:31:33,101   INFO  recall_roi_0.7: 0.000000
+2021-06-27 07:31:33,101   INFO  recall_rcnn_0.7: 0.042874
+2021-06-27 07:31:33,104   INFO  Average predicted number of objects(3769 samples): 213.575
+2021-06-27 07:34:51,282   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 07:34:51,316   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 07:34:51,525   INFO  ==> Done (loaded 127/127)
+2021-06-27 07:36:14,852   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-27 07:36:14,854   INFO  recall_roi_0.3: 0.000000
+2021-06-27 07:36:14,854   INFO  recall_rcnn_0.3: 0.816603
+2021-06-27 07:36:14,854   INFO  recall_roi_0.5: 0.000000
+2021-06-27 07:36:14,854   INFO  recall_rcnn_0.5: 0.621648
+2021-06-27 07:36:14,854   INFO  recall_roi_0.7: 0.000000
+2021-06-27 07:36:14,854   INFO  recall_rcnn_0.7: 0.200023
+2021-06-27 07:36:14,858   INFO  Average predicted number of objects(3769 samples): 115.881
+2021-06-27 07:38:13,124   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 07:38:13,166   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 07:38:13,353   INFO  ==> Done (loaded 127/127)
+2021-06-27 07:39:47,370   INFO  Generate label finished(sec_per_example: 0.0249 second).
+2021-06-27 07:39:47,371   INFO  recall_roi_0.3: 0.000000
+2021-06-27 07:39:47,371   INFO  recall_rcnn_0.3: 0.743381
+2021-06-27 07:39:47,371   INFO  recall_roi_0.5: 0.000000
+2021-06-27 07:39:47,371   INFO  recall_rcnn_0.5: 0.521039
+2021-06-27 07:39:47,371   INFO  recall_roi_0.7: 0.000000
+2021-06-27 07:39:47,372   INFO  recall_rcnn_0.7: 0.085179
+2021-06-27 07:39:47,375   INFO  Average predicted number of objects(3769 samples): 148.917
+2021-06-27 07:42:12,034   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 07:42:12,073   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 07:42:12,264   INFO  ==> Done (loaded 127/127)
+2021-06-27 07:43:37,039   INFO  Generate label finished(sec_per_example: 0.0225 second).
+2021-06-27 07:43:37,040   INFO  recall_roi_0.3: 0.000000
+2021-06-27 07:43:37,040   INFO  recall_rcnn_0.3: 0.536241
+2021-06-27 07:43:37,040   INFO  recall_roi_0.5: 0.000000
+2021-06-27 07:43:37,040   INFO  recall_rcnn_0.5: 0.410750
+2021-06-27 07:43:37,040   INFO  recall_roi_0.7: 0.000000
+2021-06-27 07:43:37,040   INFO  recall_rcnn_0.7: 0.221318
+2021-06-27 07:43:37,044   INFO  Average predicted number of objects(3769 samples): 99.354
+2021-06-27 07:45:17,751   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 07:45:17,786   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 07:45:17,979   INFO  ==> Done (loaded 127/127)
+2021-06-27 07:46:59,685   INFO  Generate label finished(sec_per_example: 0.0270 second).
+2021-06-27 07:46:59,687   INFO  recall_roi_0.3: 0.000000
+2021-06-27 07:46:59,687   INFO  recall_rcnn_0.3: 0.834368
+2021-06-27 07:46:59,687   INFO  recall_roi_0.5: 0.000000
+2021-06-27 07:46:59,687   INFO  recall_rcnn_0.5: 0.672949
+2021-06-27 07:46:59,688   INFO  recall_roi_0.7: 0.000000
+2021-06-27 07:46:59,688   INFO  recall_rcnn_0.7: 0.203610
+2021-06-27 07:46:59,691   INFO  Average predicted number of objects(3769 samples): 153.693
+2021-06-27 07:49:33,904   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 07:49:33,942   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 07:49:34,138   INFO  ==> Done (loaded 127/127)
+2021-06-27 07:51:02,082   INFO  Generate label finished(sec_per_example: 0.0233 second).
+2021-06-27 07:51:02,083   INFO  recall_roi_0.3: 0.000000
+2021-06-27 07:51:02,084   INFO  recall_rcnn_0.3: 0.557365
+2021-06-27 07:51:02,084   INFO  recall_roi_0.5: 0.000000
+2021-06-27 07:51:02,084   INFO  recall_rcnn_0.5: 0.400843
+2021-06-27 07:51:02,084   INFO  recall_roi_0.7: 0.000000
+2021-06-27 07:51:02,084   INFO  recall_rcnn_0.7: 0.076525
+2021-06-27 07:51:02,088   INFO  Average predicted number of objects(3769 samples): 124.756
+2021-06-27 07:53:00,956   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 07:53:00,992   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 07:53:01,181   INFO  ==> Done (loaded 127/127)
+2021-06-27 07:54:25,175   INFO  Generate label finished(sec_per_example: 0.0223 second).
+2021-06-27 07:54:25,176   INFO  recall_roi_0.3: 0.000000
+2021-06-27 07:54:25,177   INFO  recall_rcnn_0.3: 0.775949
+2021-06-27 07:54:25,177   INFO  recall_roi_0.5: 0.000000
+2021-06-27 07:54:25,177   INFO  recall_rcnn_0.5: 0.480556
+2021-06-27 07:54:25,177   INFO  recall_roi_0.7: 0.000000
+2021-06-27 07:54:25,177   INFO  recall_rcnn_0.7: 0.076809
+2021-06-27 07:54:25,180   INFO  Average predicted number of objects(3769 samples): 147.219
+2021-06-27 07:56:46,667   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 07:56:46,702   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 07:56:46,893   INFO  ==> Done (loaded 127/127)
+2021-06-27 07:58:30,884   INFO  Generate label finished(sec_per_example: 0.0276 second).
+2021-06-27 07:58:30,885   INFO  recall_roi_0.3: 0.000000
+2021-06-27 07:58:30,885   INFO  recall_rcnn_0.3: 0.834254
+2021-06-27 07:58:30,885   INFO  recall_roi_0.5: 0.000000
+2021-06-27 07:58:30,885   INFO  recall_rcnn_0.5: 0.575927
+2021-06-27 07:58:30,886   INFO  recall_roi_0.7: 0.000000
+2021-06-27 07:58:30,886   INFO  recall_rcnn_0.7: 0.092296
+2021-06-27 07:58:30,889   INFO  Average predicted number of objects(3769 samples): 218.153
+2021-06-27 08:01:57,167   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 08:01:57,202   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 08:01:57,395   INFO  ==> Done (loaded 127/127)
+2021-06-27 08:03:20,681   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-27 08:03:20,682   INFO  recall_roi_0.3: 0.000000
+2021-06-27 08:03:20,682   INFO  recall_rcnn_0.3: 0.743039
+2021-06-27 08:03:20,682   INFO  recall_roi_0.5: 0.000000
+2021-06-27 08:03:20,682   INFO  recall_rcnn_0.5: 0.505836
+2021-06-27 08:03:20,682   INFO  recall_roi_0.7: 0.000000
+2021-06-27 08:03:20,682   INFO  recall_rcnn_0.7: 0.107840
+2021-06-27 08:03:20,685   INFO  Average predicted number of objects(3769 samples): 63.772
+2021-06-27 08:04:32,754   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 08:04:32,794   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 08:04:32,992   INFO  ==> Done (loaded 127/127)
+2021-06-27 08:05:56,295   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-27 08:05:56,296   INFO  recall_roi_0.3: 0.000000
+2021-06-27 08:05:56,296   INFO  recall_rcnn_0.3: 0.378580
+2021-06-27 08:05:56,296   INFO  recall_roi_0.5: 0.000000
+2021-06-27 08:05:56,296   INFO  recall_rcnn_0.5: 0.253431
+2021-06-27 08:05:56,297   INFO  recall_roi_0.7: 0.000000
+2021-06-27 08:05:56,297   INFO  recall_rcnn_0.7: 0.043785
+2021-06-27 08:05:56,300   INFO  Average predicted number of objects(3769 samples): 71.497
+2021-06-27 08:07:08,937   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 08:07:08,979   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 08:07:09,169   INFO  ==> Done (loaded 127/127)
+2021-06-27 08:08:33,463   INFO  Generate label finished(sec_per_example: 0.0223 second).
+2021-06-27 08:08:33,464   INFO  recall_roi_0.3: 0.000000
+2021-06-27 08:08:33,464   INFO  recall_rcnn_0.3: 0.489609
+2021-06-27 08:08:33,465   INFO  recall_roi_0.5: 0.000000
+2021-06-27 08:08:33,465   INFO  recall_rcnn_0.5: 0.322895
+2021-06-27 08:08:33,465   INFO  recall_roi_0.7: 0.000000
+2021-06-27 08:08:33,465   INFO  recall_rcnn_0.7: 0.054546
+2021-06-27 08:08:33,468   INFO  Average predicted number of objects(3769 samples): 46.002
+2021-06-27 08:09:27,319   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 08:09:27,355   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 08:09:27,543   INFO  ==> Done (loaded 127/127)
+2021-06-27 08:10:51,860   INFO  Generate label finished(sec_per_example: 0.0223 second).
+2021-06-27 08:10:51,860   INFO  recall_roi_0.3: 0.000000
+2021-06-27 08:10:51,860   INFO  recall_rcnn_0.3: 0.806070
+2021-06-27 08:10:51,861   INFO  recall_roi_0.5: 0.000000
+2021-06-27 08:10:51,861   INFO  recall_rcnn_0.5: 0.607470
+2021-06-27 08:10:51,861   INFO  recall_roi_0.7: 0.000000
+2021-06-27 08:10:51,861   INFO  recall_rcnn_0.7: 0.192792
+2021-06-27 08:10:51,864   INFO  Average predicted number of objects(3769 samples): 186.481
+2021-06-27 08:13:48,894   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 08:13:48,931   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 08:13:49,138   INFO  ==> Done (loaded 127/127)
+2021-06-27 08:15:16,423   INFO  Generate label finished(sec_per_example: 0.0231 second).
+2021-06-27 08:15:16,424   INFO  recall_roi_0.3: 0.000000
+2021-06-27 08:15:16,425   INFO  recall_rcnn_0.3: 0.715937
+2021-06-27 08:15:16,425   INFO  recall_roi_0.5: 0.000000
+2021-06-27 08:15:16,425   INFO  recall_rcnn_0.5: 0.427262
+2021-06-27 08:15:16,425   INFO  recall_roi_0.7: 0.000000
+2021-06-27 08:15:16,425   INFO  recall_rcnn_0.7: 0.041166
+2021-06-27 08:15:16,428   INFO  Average predicted number of objects(3769 samples): 284.084
+2021-06-27 08:19:31,475   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 08:19:31,510   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 08:19:31,701   INFO  ==> Done (loaded 127/127)
+2021-06-27 08:20:56,567   INFO  Generate label finished(sec_per_example: 0.0225 second).
+2021-06-27 08:20:56,568   INFO  recall_roi_0.3: 0.000000
+2021-06-27 08:20:56,568   INFO  recall_rcnn_0.3: 0.705517
+2021-06-27 08:20:56,568   INFO  recall_roi_0.5: 0.000000
+2021-06-27 08:20:56,568   INFO  recall_rcnn_0.5: 0.419917
+2021-06-27 08:20:56,568   INFO  recall_roi_0.7: 0.000000
+2021-06-27 08:20:56,568   INFO  recall_rcnn_0.7: 0.075158
+2021-06-27 08:20:56,571   INFO  Average predicted number of objects(3769 samples): 91.765
+2021-06-27 08:22:28,708   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 08:22:28,749   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 08:22:28,934   INFO  ==> Done (loaded 127/127)
+2021-06-27 08:23:53,374   INFO  Generate label finished(sec_per_example: 0.0224 second).
+2021-06-27 08:23:53,375   INFO  recall_roi_0.3: 0.000000
+2021-06-27 08:23:53,375   INFO  recall_rcnn_0.3: 0.472357
+2021-06-27 08:23:53,375   INFO  recall_roi_0.5: 0.000000
+2021-06-27 08:23:53,375   INFO  recall_rcnn_0.5: 0.289074
+2021-06-27 08:23:53,375   INFO  recall_roi_0.7: 0.000000
+2021-06-27 08:23:53,375   INFO  recall_rcnn_0.7: 0.046575
+2021-06-27 08:23:53,378   INFO  Average predicted number of objects(3769 samples): 147.756
+2021-06-27 08:26:10,619   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 08:26:10,658   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 08:26:10,848   INFO  ==> Done (loaded 127/127)
+2021-06-27 08:27:52,165   INFO  Generate label finished(sec_per_example: 0.0269 second).
+2021-06-27 08:27:52,166   INFO  recall_roi_0.3: 0.000000
+2021-06-27 08:27:52,166   INFO  recall_rcnn_0.3: 0.590275
+2021-06-27 08:27:52,166   INFO  recall_roi_0.5: 0.000000
+2021-06-27 08:27:52,166   INFO  recall_rcnn_0.5: 0.383818
+2021-06-27 08:27:52,166   INFO  recall_roi_0.7: 0.000000
+2021-06-27 08:27:52,166   INFO  recall_rcnn_0.7: 0.069464
+2021-06-27 08:27:52,170   INFO  Average predicted number of objects(3769 samples): 398.330
+2021-06-27 08:33:43,831   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 08:33:43,867   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 08:33:44,072   INFO  ==> Done (loaded 127/127)
+2021-06-27 08:35:07,573   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-27 08:35:07,575   INFO  recall_roi_0.3: 0.000000
+2021-06-27 08:35:07,575   INFO  recall_rcnn_0.3: 0.555486
+2021-06-27 08:35:07,575   INFO  recall_roi_0.5: 0.000000
+2021-06-27 08:35:07,575   INFO  recall_rcnn_0.5: 0.410693
+2021-06-27 08:35:07,575   INFO  recall_roi_0.7: 0.000000
+2021-06-27 08:35:07,575   INFO  recall_rcnn_0.7: 0.045038
+2021-06-27 08:35:07,578   INFO  Average predicted number of objects(3769 samples): 101.481
+2021-06-27 08:36:50,814   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 08:36:50,852   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 08:36:51,042   INFO  ==> Done (loaded 127/127)
+2021-06-27 08:38:14,674   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-27 08:38:14,674   INFO  recall_roi_0.3: 0.000000
+2021-06-27 08:38:14,675   INFO  recall_rcnn_0.3: 0.253886
+2021-06-27 08:38:14,675   INFO  recall_roi_0.5: 0.000000
+2021-06-27 08:38:14,675   INFO  recall_rcnn_0.5: 0.125776
+2021-06-27 08:38:14,675   INFO  recall_roi_0.7: 0.000000
+2021-06-27 08:38:14,675   INFO  recall_rcnn_0.7: 0.014064
+2021-06-27 08:38:14,678   INFO  Average predicted number of objects(3769 samples): 142.922
+2021-06-27 08:40:20,371   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 08:40:20,409   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 08:40:20,609   INFO  ==> Done (loaded 127/127)
+2021-06-27 08:41:44,189   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-27 08:41:44,191   INFO  recall_roi_0.3: 0.000000
+2021-06-27 08:41:44,191   INFO  recall_rcnn_0.3: 0.607015
+2021-06-27 08:41:44,191   INFO  recall_roi_0.5: 0.000000
+2021-06-27 08:41:44,191   INFO  recall_rcnn_0.5: 0.326311
+2021-06-27 08:41:44,192   INFO  recall_roi_0.7: 0.000000
+2021-06-27 08:41:44,192   INFO  recall_rcnn_0.7: 0.037807
+2021-06-27 08:41:44,197   INFO  Average predicted number of objects(3769 samples): 55.082
+2021-06-27 08:42:45,420   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 08:42:45,459   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 08:42:45,640   INFO  ==> Done (loaded 127/127)
+2021-06-27 08:44:09,822   INFO  Generate label finished(sec_per_example: 0.0223 second).
+2021-06-27 08:44:09,823   INFO  recall_roi_0.3: 0.000000
+2021-06-27 08:44:09,823   INFO  recall_rcnn_0.3: 0.147071
+2021-06-27 08:44:09,824   INFO  recall_roi_0.5: 0.000000
+2021-06-27 08:44:09,824   INFO  recall_rcnn_0.5: 0.061948
+2021-06-27 08:44:09,824   INFO  recall_roi_0.7: 0.000000
+2021-06-27 08:44:09,824   INFO  recall_rcnn_0.7: 0.004783
+2021-06-27 08:44:09,827   INFO  Average predicted number of objects(3769 samples): 105.150
+2021-06-27 08:45:42,091   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 08:45:42,129   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 08:45:42,316   INFO  ==> Done (loaded 127/127)
+2021-06-27 08:47:25,977   INFO  Generate label finished(sec_per_example: 0.0275 second).
+2021-06-27 08:47:25,978   INFO  recall_roi_0.3: 0.000000
+2021-06-27 08:47:25,978   INFO  recall_rcnn_0.3: 0.100040
+2021-06-27 08:47:25,978   INFO  recall_roi_0.5: 0.000000
+2021-06-27 08:47:25,979   INFO  recall_rcnn_0.5: 0.031885
+2021-06-27 08:47:25,979   INFO  recall_roi_0.7: 0.000000
+2021-06-27 08:47:25,979   INFO  recall_rcnn_0.7: 0.001139
+2021-06-27 08:47:25,981   INFO  Average predicted number of objects(3769 samples): 500.000
+2021-06-27 08:53:52,981   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 08:53:53,016   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 08:53:53,200   INFO  ==> Done (loaded 127/127)
+2021-06-27 08:55:17,415   INFO  Generate label finished(sec_per_example: 0.0223 second).
+2021-06-27 08:55:17,416   INFO  recall_roi_0.3: 0.000000
+2021-06-27 08:55:17,416   INFO  recall_rcnn_0.3: 0.228947
+2021-06-27 08:55:17,416   INFO  recall_roi_0.5: 0.000000
+2021-06-27 08:55:17,416   INFO  recall_rcnn_0.5: 0.103171
+2021-06-27 08:55:17,416   INFO  recall_roi_0.7: 0.000000
+2021-06-27 08:55:17,416   INFO  recall_rcnn_0.7: 0.008939
+2021-06-27 08:55:17,419   INFO  Average predicted number of objects(3769 samples): 126.912
+2021-06-27 08:57:04,452   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 08:57:04,491   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 08:57:04,673   INFO  ==> Done (loaded 127/127)
+2021-06-27 08:58:49,137   INFO  Generate label finished(sec_per_example: 0.0277 second).
+2021-06-27 08:58:49,138   INFO  recall_roi_0.3: 0.000000
+2021-06-27 08:58:49,138   INFO  recall_rcnn_0.3: 0.524170
+2021-06-27 08:58:49,138   INFO  recall_roi_0.5: 0.000000
+2021-06-27 08:58:49,138   INFO  recall_rcnn_0.5: 0.174515
+2021-06-27 08:58:49,138   INFO  recall_roi_0.7: 0.000000
+2021-06-27 08:58:49,138   INFO  recall_rcnn_0.7: 0.008199
+2021-06-27 08:58:49,141   INFO  Average predicted number of objects(3769 samples): 332.365
+2021-06-27 09:03:26,082   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 09:03:26,129   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 09:03:26,311   INFO  ==> Done (loaded 127/127)
+2021-06-27 09:04:50,471   INFO  Generate label finished(sec_per_example: 0.0223 second).
+2021-06-27 09:04:50,472   INFO  recall_roi_0.3: 0.000000
+2021-06-27 09:04:50,472   INFO  recall_rcnn_0.3: 0.121164
+2021-06-27 09:04:50,472   INFO  recall_roi_0.5: 0.000000
+2021-06-27 09:04:50,472   INFO  recall_rcnn_0.5: 0.036156
+2021-06-27 09:04:50,472   INFO  recall_roi_0.7: 0.000000
+2021-06-27 09:04:50,473   INFO  recall_rcnn_0.7: 0.002733
+2021-06-27 09:04:50,476   INFO  Average predicted number of objects(3769 samples): 134.467
+2021-06-27 09:06:46,558   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 09:06:46,595   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 09:06:46,777   INFO  ==> Done (loaded 127/127)
+2021-06-27 09:08:32,875   INFO  Generate label finished(sec_per_example: 0.0281 second).
+2021-06-27 09:08:32,876   INFO  recall_roi_0.3: 0.000000
+2021-06-27 09:08:32,876   INFO  recall_rcnn_0.3: 0.634687
+2021-06-27 09:08:32,876   INFO  recall_roi_0.5: 0.000000
+2021-06-27 09:08:32,876   INFO  recall_rcnn_0.5: 0.371406
+2021-06-27 09:08:32,876   INFO  recall_roi_0.7: 0.000000
+2021-06-27 09:08:32,876   INFO  recall_rcnn_0.7: 0.045209
+2021-06-27 09:08:32,880   INFO  Average predicted number of objects(3769 samples): 281.295
+2021-06-27 09:12:29,450   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 09:12:29,484   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 09:12:29,663   INFO  ==> Done (loaded 127/127)
+2021-06-27 09:13:54,673   INFO  Generate label finished(sec_per_example: 0.0225 second).
+2021-06-27 09:13:54,674   INFO  recall_roi_0.3: 0.000000
+2021-06-27 09:13:54,674   INFO  recall_rcnn_0.3: 0.231452
+2021-06-27 09:13:54,674   INFO  recall_roi_0.5: 0.000000
+2021-06-27 09:13:54,674   INFO  recall_rcnn_0.5: 0.056596
+2021-06-27 09:13:54,674   INFO  recall_roi_0.7: 0.000000
+2021-06-27 09:13:54,674   INFO  recall_rcnn_0.7: 0.003359
+2021-06-27 09:13:54,677   INFO  Average predicted number of objects(3769 samples): 205.072
+2021-06-27 09:16:43,416   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 09:16:43,454   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 09:16:43,636   INFO  ==> Done (loaded 127/127)
+2021-06-27 09:18:28,123   INFO  Generate label finished(sec_per_example: 0.0277 second).
+2021-06-27 09:18:28,123   INFO  recall_roi_0.3: 0.000000
+2021-06-27 09:18:28,123   INFO  recall_rcnn_0.3: 0.070204
+2021-06-27 09:18:28,124   INFO  recall_roi_0.5: 0.000000
+2021-06-27 09:18:28,124   INFO  recall_rcnn_0.5: 0.008427
+2021-06-27 09:18:28,124   INFO  recall_roi_0.7: 0.000000
+2021-06-27 09:18:28,124   INFO  recall_rcnn_0.7: 0.000228
+2021-06-27 09:18:28,127   INFO  Average predicted number of objects(3769 samples): 245.143
+2021-06-27 09:21:42,272   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 09:21:42,311   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 09:21:42,494   INFO  ==> Done (loaded 127/127)
+2021-06-27 09:23:18,286   INFO  Generate label finished(sec_per_example: 0.0254 second).
+2021-06-27 09:23:18,286   INFO  recall_roi_0.3: 0.000000
+2021-06-27 09:23:18,287   INFO  recall_rcnn_0.3: 0.533963
+2021-06-27 09:23:18,287   INFO  recall_roi_0.5: 0.000000
+2021-06-27 09:23:18,287   INFO  recall_rcnn_0.5: 0.169732
+2021-06-27 09:23:18,287   INFO  recall_roi_0.7: 0.000000
+2021-06-27 09:23:18,287   INFO  recall_rcnn_0.7: 0.013722
+2021-06-27 09:23:18,290   INFO  Average predicted number of objects(3769 samples): 253.637
+2021-06-27 09:26:52,697   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 09:26:52,737   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 09:26:52,919   INFO  ==> Done (loaded 127/127)
+2021-06-27 09:28:17,318   INFO  Generate label finished(sec_per_example: 0.0224 second).
+2021-06-27 09:28:17,319   INFO  recall_roi_0.3: 0.000000
+2021-06-27 09:28:17,319   INFO  recall_rcnn_0.3: 0.395320
+2021-06-27 09:28:17,319   INFO  recall_roi_0.5: 0.000000
+2021-06-27 09:28:17,320   INFO  recall_rcnn_0.5: 0.096681
+2021-06-27 09:28:17,320   INFO  recall_roi_0.7: 0.000000
+2021-06-27 09:28:17,320   INFO  recall_rcnn_0.7: 0.004840
+2021-06-27 09:28:17,324   INFO  Average predicted number of objects(3769 samples): 178.769
+2021-06-27 09:30:49,723   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 09:30:49,759   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 09:30:49,943   INFO  ==> Done (loaded 127/127)
+2021-06-27 09:32:35,072   INFO  Generate label finished(sec_per_example: 0.0279 second).
+2021-06-27 09:32:35,072   INFO  recall_roi_0.3: 0.000000
+2021-06-27 09:32:35,072   INFO  recall_rcnn_0.3: 0.277060
+2021-06-27 09:32:35,073   INFO  recall_roi_0.5: 0.000000
+2021-06-27 09:32:35,073   INFO  recall_rcnn_0.5: 0.095599
+2021-06-27 09:32:35,073   INFO  recall_roi_0.7: 0.000000
+2021-06-27 09:32:35,073   INFO  recall_rcnn_0.7: 0.006776
+2021-06-27 09:32:35,076   INFO  Average predicted number of objects(3769 samples): 196.391
+2021-06-27 09:35:14,891   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 09:35:14,930   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 09:35:15,115   INFO  ==> Done (loaded 127/127)
+2021-06-27 09:36:39,643   INFO  Generate label finished(sec_per_example: 0.0224 second).
+2021-06-27 09:36:39,644   INFO  recall_roi_0.3: 0.000000
+2021-06-27 09:36:39,644   INFO  recall_rcnn_0.3: 0.029209
+2021-06-27 09:36:39,644   INFO  recall_roi_0.5: 0.000000
+2021-06-27 09:36:39,644   INFO  recall_rcnn_0.5: 0.001310
+2021-06-27 09:36:39,645   INFO  recall_roi_0.7: 0.000000
+2021-06-27 09:36:39,645   INFO  recall_rcnn_0.7: 0.000000
+2021-06-27 09:36:39,648   INFO  Average predicted number of objects(3769 samples): 203.428
+2021-06-27 09:39:22,511   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 09:39:22,547   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 09:39:22,729   INFO  ==> Done (loaded 127/127)
+2021-06-27 09:40:46,522   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-27 09:40:46,524   INFO  recall_roi_0.3: 0.000000
+2021-06-27 09:40:46,524   INFO  recall_rcnn_0.3: 0.431703
+2021-06-27 09:40:46,524   INFO  recall_roi_0.5: 0.000000
+2021-06-27 09:40:46,524   INFO  recall_rcnn_0.5: 0.196891
+2021-06-27 09:40:46,524   INFO  recall_roi_0.7: 0.000000
+2021-06-27 09:40:46,524   INFO  recall_rcnn_0.7: 0.016170
+2021-06-27 09:40:46,528   INFO  Average predicted number of objects(3769 samples): 73.485
+2021-06-27 09:41:57,032   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 09:41:57,069   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 09:41:57,252   INFO  ==> Done (loaded 127/127)
+2021-06-27 09:43:20,938   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-27 09:43:20,939   INFO  recall_roi_0.3: 0.000000
+2021-06-27 09:43:20,940   INFO  recall_rcnn_0.3: 0.022434
+2021-06-27 09:43:20,940   INFO  recall_roi_0.5: 0.000000
+2021-06-27 09:43:20,940   INFO  recall_rcnn_0.5: 0.005011
+2021-06-27 09:43:20,940   INFO  recall_roi_0.7: 0.000000
+2021-06-27 09:43:20,940   INFO  recall_rcnn_0.7: 0.000228
+2021-06-27 09:43:20,944   INFO  Average predicted number of objects(3769 samples): 36.252
+2021-06-27 09:44:01,380   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 09:44:01,417   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 09:44:01,584   INFO  ==> Done (loaded 127/127)
+2021-06-27 09:45:24,968   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-27 09:45:24,969   INFO  recall_roi_0.3: 0.000000
+2021-06-27 09:45:24,969   INFO  recall_rcnn_0.3: 0.028070
+2021-06-27 09:45:24,969   INFO  recall_roi_0.5: 0.000000
+2021-06-27 09:45:24,969   INFO  recall_rcnn_0.5: 0.002619
+2021-06-27 09:45:24,969   INFO  recall_roi_0.7: 0.000000
+2021-06-27 09:45:24,969   INFO  recall_rcnn_0.7: 0.000000
+2021-06-27 09:45:24,972   INFO  Average predicted number of objects(3769 samples): 109.616
+2021-06-27 09:46:59,346   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 09:46:59,385   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 09:46:59,615   INFO  ==> Done (loaded 127/127)
+2021-06-27 09:48:41,254   INFO  Generate label finished(sec_per_example: 0.0269 second).
+2021-06-27 09:48:41,256   INFO  recall_roi_0.3: 0.000000
+2021-06-27 09:48:41,256   INFO  recall_rcnn_0.3: 0.261402
+2021-06-27 09:48:41,256   INFO  recall_roi_0.5: 0.000000
+2021-06-27 09:48:41,256   INFO  recall_rcnn_0.5: 0.054546
+2021-06-27 09:48:41,257   INFO  recall_roi_0.7: 0.000000
+2021-06-27 09:48:41,257   INFO  recall_rcnn_0.7: 0.002448
+2021-06-27 09:48:41,262   INFO  Average predicted number of objects(3769 samples): 248.753
+2021-06-27 09:52:00,211   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 09:52:00,244   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 09:52:00,430   INFO  ==> Done (loaded 127/127)
+2021-06-27 09:53:24,034   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-27 09:53:24,034   INFO  recall_roi_0.3: 0.000000
+2021-06-27 09:53:24,034   INFO  recall_rcnn_0.3: 0.001480
+2021-06-27 09:53:24,035   INFO  recall_roi_0.5: 0.000000
+2021-06-27 09:53:24,035   INFO  recall_rcnn_0.5: 0.000114
+2021-06-27 09:53:24,035   INFO  recall_roi_0.7: 0.000000
+2021-06-27 09:53:24,035   INFO  recall_rcnn_0.7: 0.000000
+2021-06-27 09:53:24,037   INFO  Average predicted number of objects(3769 samples): 31.669
+2021-06-27 09:54:00,455   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 09:54:00,493   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 09:54:00,696   INFO  ==> Done (loaded 127/127)
+2021-06-27 09:55:23,183   INFO  Generate label finished(sec_per_example: 0.0219 second).
+2021-06-27 09:55:23,184   INFO  recall_roi_0.3: 0.000000
+2021-06-27 09:55:23,184   INFO  recall_rcnn_0.3: 0.000057
+2021-06-27 09:55:23,184   INFO  recall_roi_0.5: 0.000000
+2021-06-27 09:55:23,184   INFO  recall_rcnn_0.5: 0.000000
+2021-06-27 09:55:23,184   INFO  recall_roi_0.7: 0.000000
+2021-06-27 09:55:23,184   INFO  recall_rcnn_0.7: 0.000000
+2021-06-27 09:55:23,187   INFO  Average predicted number of objects(3769 samples): 22.278
+2021-06-27 09:55:52,348   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 09:55:52,381   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 09:55:52,548   INFO  ==> Done (loaded 127/127)
+2021-06-27 09:57:15,285   INFO  Generate label finished(sec_per_example: 0.0219 second).
+2021-06-27 09:57:15,286   INFO  recall_roi_0.3: 0.000000
+2021-06-27 09:57:15,286   INFO  recall_rcnn_0.3: 0.017594
+2021-06-27 09:57:15,286   INFO  recall_roi_0.5: 0.000000
+2021-06-27 09:57:15,286   INFO  recall_rcnn_0.5: 0.002619
+2021-06-27 09:57:15,286   INFO  recall_roi_0.7: 0.000000
+2021-06-27 09:57:15,286   INFO  recall_rcnn_0.7: 0.000171
+2021-06-27 09:57:15,289   INFO  Average predicted number of objects(3769 samples): 31.404
+2021-06-27 09:57:51,508   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 09:57:51,541   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 09:57:51,708   INFO  ==> Done (loaded 127/127)
+2021-06-27 09:59:15,100   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-27 09:59:15,101   INFO  recall_roi_0.3: 0.000000
+2021-06-27 09:59:15,101   INFO  recall_rcnn_0.3: 0.332631
+2021-06-27 09:59:15,101   INFO  recall_roi_0.5: 0.000000
+2021-06-27 09:59:15,101   INFO  recall_rcnn_0.5: 0.109093
+2021-06-27 09:59:15,101   INFO  recall_roi_0.7: 0.000000
+2021-06-27 09:59:15,102   INFO  recall_rcnn_0.7: 0.008996
+2021-06-27 09:59:15,105   INFO  Average predicted number of objects(3769 samples): 108.153
+2021-06-27 10:00:50,868   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 10:00:50,904   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 10:00:51,086   INFO  ==> Done (loaded 127/127)
+2021-06-27 10:02:13,910   INFO  Generate label finished(sec_per_example: 0.0219 second).
+2021-06-27 10:02:13,911   INFO  recall_roi_0.3: 0.000000
+2021-06-27 10:02:13,911   INFO  recall_rcnn_0.3: 0.002107
+2021-06-27 10:02:13,911   INFO  recall_roi_0.5: 0.000000
+2021-06-27 10:02:13,911   INFO  recall_rcnn_0.5: 0.000000
+2021-06-27 10:02:13,911   INFO  recall_roi_0.7: 0.000000
+2021-06-27 10:02:13,911   INFO  recall_rcnn_0.7: 0.000000
+2021-06-27 10:02:13,914   INFO  Average predicted number of objects(3769 samples): 57.311
+2021-06-27 10:03:09,203   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 10:03:09,241   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 10:03:09,434   INFO  ==> Done (loaded 127/127)
+2021-06-27 10:04:33,228   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-27 10:04:33,229   INFO  recall_roi_0.3: 0.000000
+2021-06-27 10:04:33,229   INFO  recall_rcnn_0.3: 0.044468
+2021-06-27 10:04:33,229   INFO  recall_roi_0.5: 0.000000
+2021-06-27 10:04:33,229   INFO  recall_rcnn_0.5: 0.005067
+2021-06-27 10:04:33,230   INFO  recall_roi_0.7: 0.000000
+2021-06-27 10:04:33,230   INFO  recall_rcnn_0.7: 0.000114
+2021-06-27 10:04:33,233   INFO  Average predicted number of objects(3769 samples): 169.329
+2021-06-27 10:06:51,109   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 10:06:51,144   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 10:06:51,326   INFO  ==> Done (loaded 127/127)
+2021-06-27 10:08:15,215   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-27 10:08:15,216   INFO  recall_roi_0.3: 0.000000
+2021-06-27 10:08:15,216   INFO  recall_rcnn_0.3: 0.006548
+2021-06-27 10:08:15,216   INFO  recall_roi_0.5: 0.000000
+2021-06-27 10:08:15,216   INFO  recall_rcnn_0.5: 0.000171
+2021-06-27 10:08:15,216   INFO  recall_roi_0.7: 0.000000
+2021-06-27 10:08:15,216   INFO  recall_rcnn_0.7: 0.000000
+2021-06-27 10:08:15,219   INFO  Average predicted number of objects(3769 samples): 103.094
+2021-06-27 10:09:43,677   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 10:09:43,714   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 10:09:43,894   INFO  ==> Done (loaded 127/127)
+2021-06-27 10:11:07,125   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-27 10:11:07,125   INFO  recall_roi_0.3: 0.000000
+2021-06-27 10:11:07,125   INFO  recall_rcnn_0.3: 0.027786
+2021-06-27 10:11:07,125   INFO  recall_roi_0.5: 0.000000
+2021-06-27 10:11:07,125   INFO  recall_rcnn_0.5: 0.003075
+2021-06-27 10:11:07,126   INFO  recall_roi_0.7: 0.000000
+2021-06-27 10:11:07,126   INFO  recall_rcnn_0.7: 0.000057
+2021-06-27 10:11:07,128   INFO  Average predicted number of objects(3769 samples): 87.270
+2021-06-27 10:12:24,092   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 10:12:24,125   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 10:12:24,306   INFO  ==> Done (loaded 127/127)
+2021-06-27 10:13:47,819   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-27 10:13:47,820   INFO  recall_roi_0.3: 0.000000
+2021-06-27 10:13:47,820   INFO  recall_rcnn_0.3: 0.001708
+2021-06-27 10:13:47,820   INFO  recall_roi_0.5: 0.000000
+2021-06-27 10:13:47,820   INFO  recall_rcnn_0.5: 0.000228
+2021-06-27 10:13:47,820   INFO  recall_roi_0.7: 0.000000
+2021-06-27 10:13:47,820   INFO  recall_rcnn_0.7: 0.000000
+2021-06-27 10:13:47,823   INFO  Average predicted number of objects(3769 samples): 32.882
+2021-06-27 10:14:24,594   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 10:14:24,630   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 10:14:24,813   INFO  ==> Done (loaded 127/127)
+2021-06-27 10:15:47,646   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-27 10:15:47,647   INFO  recall_roi_0.3: 0.000000
+2021-06-27 10:15:47,647   INFO  recall_rcnn_0.3: 0.000512
+2021-06-27 10:15:47,648   INFO  recall_roi_0.5: 0.000000
+2021-06-27 10:15:47,648   INFO  recall_rcnn_0.5: 0.000000
+2021-06-27 10:15:47,648   INFO  recall_roi_0.7: 0.000000
+2021-06-27 10:15:47,648   INFO  recall_rcnn_0.7: 0.000000
+2021-06-27 10:15:47,651   INFO  Average predicted number of objects(3769 samples): 47.824
+2021-06-27 10:16:35,012   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 10:16:35,048   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 10:16:35,217   INFO  ==> Done (loaded 127/127)
+2021-06-27 10:17:59,444   INFO  Generate label finished(sec_per_example: 0.0223 second).
+2021-06-27 10:17:59,445   INFO  recall_roi_0.3: 0.000000
+2021-06-27 10:17:59,445   INFO  recall_rcnn_0.3: 0.000911
+2021-06-27 10:17:59,445   INFO  recall_roi_0.5: 0.000000
+2021-06-27 10:17:59,445   INFO  recall_rcnn_0.5: 0.000171
+2021-06-27 10:17:59,445   INFO  recall_roi_0.7: 0.000000
+2021-06-27 10:17:59,445   INFO  recall_rcnn_0.7: 0.000000
+2021-06-27 10:17:59,449   INFO  Average predicted number of objects(3769 samples): 146.027
+2021-06-27 10:19:58,734   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 10:19:58,769   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 10:19:58,953   INFO  ==> Done (loaded 127/127)
+2021-06-27 10:21:31,962   INFO  Generate label finished(sec_per_example: 0.0247 second).
+2021-06-27 10:21:31,963   INFO  recall_roi_0.3: 0.000000
+2021-06-27 10:21:31,963   INFO  recall_rcnn_0.3: 0.000911
+2021-06-27 10:21:31,963   INFO  recall_roi_0.5: 0.000000
+2021-06-27 10:21:31,963   INFO  recall_rcnn_0.5: 0.000114
+2021-06-27 10:21:31,963   INFO  recall_roi_0.7: 0.000000
+2021-06-27 10:21:31,963   INFO  recall_rcnn_0.7: 0.000000
+2021-06-27 10:21:31,966   INFO  Average predicted number of objects(3769 samples): 179.611
+2021-06-27 10:23:53,228   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 10:23:53,262   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 10:23:53,442   INFO  ==> Done (loaded 127/127)
+2021-06-27 10:25:15,576   INFO  Generate label finished(sec_per_example: 0.0218 second).
+2021-06-27 10:25:15,577   INFO  recall_roi_0.3: 0.000000
+2021-06-27 10:25:15,577   INFO  recall_rcnn_0.3: 0.000000
+2021-06-27 10:25:15,577   INFO  recall_roi_0.5: 0.000000
+2021-06-27 10:25:15,577   INFO  recall_rcnn_0.5: 0.000000
+2021-06-27 10:25:15,577   INFO  recall_roi_0.7: 0.000000
+2021-06-27 10:25:15,577   INFO  recall_rcnn_0.7: 0.000000
+2021-06-27 10:25:15,580   INFO  Average predicted number of objects(3769 samples): 20.163
+2021-06-27 10:25:43,283   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0623-2211/bayes_model-0.15-0.15.pth to CPU
+2021-06-27 10:25:43,317   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-27 10:25:43,484   INFO  ==> Done (loaded 127/127)
+2021-06-27 10:27:06,734   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-27 10:27:06,735   INFO  recall_roi_0.3: 0.000000
+2021-06-27 10:27:06,735   INFO  recall_rcnn_0.3: 0.001708
+2021-06-27 10:27:06,735   INFO  recall_roi_0.5: 0.000000
+2021-06-27 10:27:06,735   INFO  recall_rcnn_0.5: 0.000342
+2021-06-27 10:27:06,735   INFO  recall_roi_0.7: 0.000000
+2021-06-27 10:27:06,735   INFO  recall_rcnn_0.7: 0.000000
+2021-06-27 10:27:06,738   INFO  Average predicted number of objects(3769 samples): 61.101
+2021-06-27 10:28:02,766   INFO  **********************End evaluation**********************

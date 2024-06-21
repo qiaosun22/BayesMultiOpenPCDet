@@ -1,0 +1,475 @@
+2021-06-21 04:44:11,667   INFO  **********************Start logging**********************
+2021-06-21 04:44:11,668   INFO  CUDA_VISIBLE_DEVICES=1,2
+2021-06-21 04:44:11,668   INFO  total_batch_size: 8
+2021-06-21 04:44:11,668   INFO  cfg_file         cfgs/kitti_models/pointpillar_bayes.yaml
+2021-06-21 04:44:11,668   INFO  batch_size       4
+2021-06-21 04:44:11,668   INFO  epochs           80
+2021-06-21 04:44:11,668   INFO  workers          8
+2021-06-21 04:44:11,668   INFO  extra_tag        default
+2021-06-21 04:44:11,668   INFO  ckpt             None
+2021-06-21 04:44:11,668   INFO  pretrained_model None
+2021-06-21 04:44:11,668   INFO  launcher         pytorch
+2021-06-21 04:44:11,668   INFO  tcp_port         18888
+2021-06-21 04:44:11,668   INFO  sync_bn          False
+2021-06-21 04:44:11,669   INFO  fix_random_seed  False
+2021-06-21 04:44:11,669   INFO  ckpt_save_interval 1
+2021-06-21 04:44:11,669   INFO  local_rank       0
+2021-06-21 04:44:11,669   INFO  max_ckpt_save_num 30
+2021-06-21 04:44:11,669   INFO  merge_all_iters_to_one_epoch False
+2021-06-21 04:44:11,669   INFO  set_cfgs         None
+2021-06-21 04:44:11,669   INFO  max_waiting_mins 0
+2021-06-21 04:44:11,669   INFO  start_epoch      0
+2021-06-21 04:44:11,669   INFO  save_to_file     False
+2021-06-21 04:44:11,669   INFO  cfg.ROOT_DIR: /openpcdet
+2021-06-21 04:44:11,669   INFO  cfg.LOCAL_RANK: 0
+2021-06-21 04:44:11,670   INFO  cfg.CLASS_NAMES: ['Car', 'Pedestrian', 'Cyclist']
+2021-06-21 04:44:11,670   INFO  
+cfg.DATA_CONFIG = edict()
+2021-06-21 04:44:11,670   INFO  cfg.DATA_CONFIG.DATASET: KittiDataset
+2021-06-21 04:44:11,670   INFO  cfg.DATA_CONFIG.DATA_PATH: ../data/kitti
+2021-06-21 04:44:11,670   INFO  cfg.DATA_CONFIG.POINT_CLOUD_RANGE: [0, -39.68, -3, 69.12, 39.68, 1]
+2021-06-21 04:44:11,670   INFO  
+cfg.DATA_CONFIG.DATA_SPLIT = edict()
+2021-06-21 04:44:11,670   INFO  cfg.DATA_CONFIG.DATA_SPLIT.train: train
+2021-06-21 04:44:11,670   INFO  cfg.DATA_CONFIG.DATA_SPLIT.test: val
+2021-06-21 04:44:11,670   INFO  
+cfg.DATA_CONFIG.INFO_PATH = edict()
+2021-06-21 04:44:11,670   INFO  cfg.DATA_CONFIG.INFO_PATH.train: ['kitti_infos_train.pkl']
+2021-06-21 04:44:11,670   INFO  cfg.DATA_CONFIG.INFO_PATH.test: ['kitti_infos_val.pkl']
+2021-06-21 04:44:11,671   INFO  cfg.DATA_CONFIG.GET_ITEM_LIST: ['points']
+2021-06-21 04:44:11,671   INFO  cfg.DATA_CONFIG.FOV_POINTS_ONLY: True
+2021-06-21 04:44:11,671   INFO  
+cfg.DATA_CONFIG.DATA_AUGMENTOR = edict()
+2021-06-21 04:44:11,671   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.DISABLE_AUG_LIST: ['placeholder']
+2021-06-21 04:44:11,671   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.AUG_CONFIG_LIST: [{'NAME': 'gt_sampling', 'USE_ROAD_PLANE': True, 'DB_INFO_PATH': ['kitti_dbinfos_train.pkl'], 'PREPARE': {'filter_by_min_points': ['Car:5', 'Pedestrian:5', 'Cyclist:5'], 'filter_by_difficulty': [-1]}, 'SAMPLE_GROUPS': ['Car:15', 'Pedestrian:15', 'Cyclist:15'], 'NUM_POINT_FEATURES': 4, 'DATABASE_WITH_FAKELIDAR': False, 'REMOVE_EXTRA_WIDTH': [0.0, 0.0, 0.0], 'LIMIT_WHOLE_SCENE': False}, {'NAME': 'random_world_flip', 'ALONG_AXIS_LIST': ['x']}, {'NAME': 'random_world_rotation', 'WORLD_ROT_ANGLE': [-0.78539816, 0.78539816]}, {'NAME': 'random_world_scaling', 'WORLD_SCALE_RANGE': [0.95, 1.05]}]
+2021-06-21 04:44:11,671   INFO  
+cfg.DATA_CONFIG.POINT_FEATURE_ENCODING = edict()
+2021-06-21 04:44:11,671   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.encoding_type: absolute_coordinates_encoding
+2021-06-21 04:44:11,671   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.used_feature_list: ['x', 'y', 'z', 'intensity']
+2021-06-21 04:44:11,671   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.src_feature_list: ['x', 'y', 'z', 'intensity']
+2021-06-21 04:44:11,671   INFO  cfg.DATA_CONFIG.DATA_PROCESSOR: [{'NAME': 'mask_points_and_boxes_outside_range', 'REMOVE_OUTSIDE_BOXES': True}, {'NAME': 'shuffle_points', 'SHUFFLE_ENABLED': {'train': True, 'test': False}}, {'NAME': 'transform_points_to_voxels', 'VOXEL_SIZE': [0.16, 0.16, 4], 'MAX_POINTS_PER_VOXEL': 32, 'MAX_NUMBER_OF_VOXELS': {'train': 16000, 'test': 40000}}]
+2021-06-21 04:44:11,671   INFO  cfg.DATA_CONFIG._BASE_CONFIG_: cfgs/dataset_configs/kitti_dataset.yaml
+2021-06-21 04:44:11,672   INFO  
+cfg.MODEL = edict()
+2021-06-21 04:44:11,672   INFO  cfg.MODEL.NAME: PointPillar
+2021-06-21 04:44:11,672   INFO  
+cfg.MODEL.VFE = edict()
+2021-06-21 04:44:11,672   INFO  cfg.MODEL.VFE.NAME: PillarVFE
+2021-06-21 04:44:11,672   INFO  cfg.MODEL.VFE.WITH_DISTANCE: False
+2021-06-21 04:44:11,672   INFO  cfg.MODEL.VFE.USE_ABSLOTE_XYZ: True
+2021-06-21 04:44:11,672   INFO  cfg.MODEL.VFE.USE_NORM: True
+2021-06-21 04:44:11,672   INFO  cfg.MODEL.VFE.USE_DO: True
+2021-06-21 04:44:11,672   INFO  cfg.MODEL.VFE.NUM_FILTERS: [64]
+2021-06-21 04:44:11,672   INFO  
+cfg.MODEL.MAP_TO_BEV = edict()
+2021-06-21 04:44:11,672   INFO  cfg.MODEL.MAP_TO_BEV.NAME: PointPillarScatter
+2021-06-21 04:44:11,672   INFO  cfg.MODEL.MAP_TO_BEV.NUM_BEV_FEATURES: 64
+2021-06-21 04:44:11,673   INFO  
+cfg.MODEL.BACKBONE_2D = edict()
+2021-06-21 04:44:11,673   INFO  cfg.MODEL.BACKBONE_2D.NAME: BaseBEVBackbone
+2021-06-21 04:44:11,673   INFO  cfg.MODEL.BACKBONE_2D.USE_NORM: True
+2021-06-21 04:44:11,673   INFO  cfg.MODEL.BACKBONE_2D.USE_DO: True
+2021-06-21 04:44:11,673   INFO  cfg.MODEL.BACKBONE_2D.LAYER_NUMS: [3, 5, 5]
+2021-06-21 04:44:11,673   INFO  cfg.MODEL.BACKBONE_2D.LAYER_STRIDES: [2, 2, 2]
+2021-06-21 04:44:11,673   INFO  cfg.MODEL.BACKBONE_2D.NUM_FILTERS: [64, 128, 256]
+2021-06-21 04:44:11,673   INFO  cfg.MODEL.BACKBONE_2D.UPSAMPLE_STRIDES: [1, 2, 4]
+2021-06-21 04:44:11,673   INFO  cfg.MODEL.BACKBONE_2D.NUM_UPSAMPLE_FILTERS: [128, 128, 128]
+2021-06-21 04:44:11,673   INFO  
+cfg.MODEL.DENSE_HEAD = edict()
+2021-06-21 04:44:11,673   INFO  cfg.MODEL.DENSE_HEAD.NAME: AnchorHeadSingle
+2021-06-21 04:44:11,673   INFO  cfg.MODEL.DENSE_HEAD.CLASS_AGNOSTIC: False
+2021-06-21 04:44:11,674   INFO  cfg.MODEL.DENSE_HEAD.USE_DIRECTION_CLASSIFIER: True
+2021-06-21 04:44:11,674   INFO  cfg.MODEL.DENSE_HEAD.DIR_OFFSET: 0.78539
+2021-06-21 04:44:11,674   INFO  cfg.MODEL.DENSE_HEAD.DIR_LIMIT_OFFSET: 0.0
+2021-06-21 04:44:11,674   INFO  cfg.MODEL.DENSE_HEAD.NUM_DIR_BINS: 2
+2021-06-21 04:44:11,674   INFO  cfg.MODEL.DENSE_HEAD.ANCHOR_GENERATOR_CONFIG: [{'class_name': 'Car', 'anchor_sizes': [[3.9, 1.6, 1.56]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [-1.78], 'align_center': False, 'feature_map_stride': 2, 'matched_threshold': 0.6, 'unmatched_threshold': 0.45}, {'class_name': 'Pedestrian', 'anchor_sizes': [[0.8, 0.6, 1.73]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [-0.6], 'align_center': False, 'feature_map_stride': 2, 'matched_threshold': 0.5, 'unmatched_threshold': 0.35}, {'class_name': 'Cyclist', 'anchor_sizes': [[1.76, 0.6, 1.73]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [-0.6], 'align_center': False, 'feature_map_stride': 2, 'matched_threshold': 0.5, 'unmatched_threshold': 0.35}]
+2021-06-21 04:44:11,674   INFO  
+cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG = edict()
+2021-06-21 04:44:11,674   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NAME: AxisAlignedTargetAssigner
+2021-06-21 04:44:11,674   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.POS_FRACTION: -1.0
+2021-06-21 04:44:11,674   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.SAMPLE_SIZE: 512
+2021-06-21 04:44:11,674   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NORM_BY_NUM_EXAMPLES: False
+2021-06-21 04:44:11,674   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.MATCH_HEIGHT: False
+2021-06-21 04:44:11,675   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.BOX_CODER: ResidualCoder
+2021-06-21 04:44:11,675   INFO  
+cfg.MODEL.DENSE_HEAD.LOSS_CONFIG = edict()
+2021-06-21 04:44:11,675   INFO  
+cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS = edict()
+2021-06-21 04:44:11,675   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.cls_weight: 1.0
+2021-06-21 04:44:11,675   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.loc_weight: 2.0
+2021-06-21 04:44:11,675   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.dir_weight: 0.2
+2021-06-21 04:44:11,675   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.code_weights: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+2021-06-21 04:44:11,675   INFO  
+cfg.MODEL.POST_PROCESSING = edict()
+2021-06-21 04:44:11,675   INFO  cfg.MODEL.POST_PROCESSING.RECALL_THRESH_LIST: [0.3, 0.5, 0.7]
+2021-06-21 04:44:11,675   INFO  cfg.MODEL.POST_PROCESSING.SCORE_THRESH: 0.1
+2021-06-21 04:44:11,675   INFO  cfg.MODEL.POST_PROCESSING.OUTPUT_RAW_SCORE: False
+2021-06-21 04:44:11,676   INFO  cfg.MODEL.POST_PROCESSING.EVAL_METRIC: kitti
+2021-06-21 04:44:11,676   INFO  
+cfg.MODEL.POST_PROCESSING.NMS_CONFIG = edict()
+2021-06-21 04:44:11,676   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.MULTI_CLASSES_NMS: False
+2021-06-21 04:44:11,676   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_TYPE: nms_gpu
+2021-06-21 04:44:11,676   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_THRESH: 0.01
+2021-06-21 04:44:11,676   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_PRE_MAXSIZE: 4096
+2021-06-21 04:44:11,676   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_POST_MAXSIZE: 500
+2021-06-21 04:44:11,676   INFO  
+cfg.OPTIMIZATION = edict()
+2021-06-21 04:44:11,676   INFO  cfg.OPTIMIZATION.BATCH_SIZE_PER_GPU: 4
+2021-06-21 04:44:11,676   INFO  cfg.OPTIMIZATION.NUM_EPOCHS: 80
+2021-06-21 04:44:11,676   INFO  cfg.OPTIMIZATION.OPTIMIZER: adam_onecycle
+2021-06-21 04:44:11,676   INFO  cfg.OPTIMIZATION.LR: 0.003
+2021-06-21 04:44:11,677   INFO  cfg.OPTIMIZATION.WEIGHT_DECAY: 0.01
+2021-06-21 04:44:11,677   INFO  cfg.OPTIMIZATION.MOMENTUM: 0.9
+2021-06-21 04:44:11,677   INFO  cfg.OPTIMIZATION.MOMS: [0.95, 0.85]
+2021-06-21 04:44:11,677   INFO  cfg.OPTIMIZATION.PCT_START: 0.4
+2021-06-21 04:44:11,677   INFO  cfg.OPTIMIZATION.DIV_FACTOR: 10
+2021-06-21 04:44:11,677   INFO  cfg.OPTIMIZATION.DECAY_STEP_LIST: [35, 45]
+2021-06-21 04:44:11,677   INFO  cfg.OPTIMIZATION.LR_DECAY: 0.1
+2021-06-21 04:44:11,677   INFO  cfg.OPTIMIZATION.LR_CLIP: 1e-07
+2021-06-21 04:44:11,677   INFO  cfg.OPTIMIZATION.LR_WARMUP: False
+2021-06-21 04:44:11,677   INFO  cfg.OPTIMIZATION.WARMUP_EPOCH: 1
+2021-06-21 04:44:11,677   INFO  cfg.OPTIMIZATION.GRAD_NORM_CLIP: 10
+2021-06-21 04:44:11,677   INFO  cfg.TAG: pointpillar_bayes
+2021-06-21 04:44:11,678   INFO  cfg.EXP_GROUP_PATH: kitti_models
+2021-06-21 04:44:11,931   INFO  ----------------Bayes Optimization----------------
+2021-06-21 04:44:12,257   INFO  Database filter by min points Car: 14357 => 13532
+2021-06-21 04:44:12,258   INFO  Database filter by min points Pedestrian: 2207 => 2168
+2021-06-21 04:44:12,258   INFO  Database filter by min points Cyclist: 734 => 705
+2021-06-21 04:44:12,324   INFO  Database filter by difficulty Car: 13532 => 10759
+2021-06-21 04:44:12,335   INFO  Database filter by difficulty Pedestrian: 2168 => 2075
+2021-06-21 04:44:12,338   INFO  Database filter by difficulty Cyclist: 705 => 581
+2021-06-21 04:44:12,353   INFO  Loading KITTI dataset
+2021-06-21 04:44:12,607   INFO  Total samples for KITTI dataset: 3712
+2021-06-21 04:44:12,731   INFO  DistributedDataParallel(
+  (module): PointPillar(
+    (vfe): PillarVFE(
+      (pfn_layers): ModuleList(
+        (0): PFNLayer(
+          (linear): Linear(in_features=10, out_features=64, bias=False)
+          (norm): BatchNorm1d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (do): Dropout(p=0.2, inplace=False)
+        )
+      )
+    )
+    (backbone_3d): None
+    (map_to_bev_module): PointPillarScatter()
+    (pfe): None
+    (backbone_2d): BaseBEVBackbone(
+      (blocks): ModuleList(
+        (0): Sequential(
+          (0): ZeroPad2d(padding=(1, 1, 1, 1), value=0.0)
+          (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(2, 2), bias=False)
+          (2): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (3): Dropout2d(p=0.2, inplace=False)
+          (4): ReLU()
+          (5): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (6): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (7): Dropout2d(p=0.2, inplace=False)
+          (8): ReLU()
+          (9): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (10): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (11): Dropout2d(p=0.2, inplace=False)
+          (12): ReLU()
+          (13): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (14): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (15): Dropout2d(p=0.2, inplace=False)
+          (16): ReLU()
+        )
+        (1): Sequential(
+          (0): ZeroPad2d(padding=(1, 1, 1, 1), value=0.0)
+          (1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), bias=False)
+          (2): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (3): Dropout2d(p=0.2, inplace=False)
+          (4): ReLU()
+          (5): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (6): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (7): Dropout2d(p=0.2, inplace=False)
+          (8): ReLU()
+          (9): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (10): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (11): Dropout2d(p=0.2, inplace=False)
+          (12): ReLU()
+          (13): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (14): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (15): Dropout2d(p=0.2, inplace=False)
+          (16): ReLU()
+          (17): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (18): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (19): Dropout2d(p=0.2, inplace=False)
+          (20): ReLU()
+          (21): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (22): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (23): Dropout2d(p=0.2, inplace=False)
+          (24): ReLU()
+        )
+        (2): Sequential(
+          (0): ZeroPad2d(padding=(1, 1, 1, 1), value=0.0)
+          (1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), bias=False)
+          (2): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (3): Dropout2d(p=0.2, inplace=False)
+          (4): ReLU()
+          (5): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (6): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (7): Dropout2d(p=0.2, inplace=False)
+          (8): ReLU()
+          (9): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (10): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (11): Dropout2d(p=0.2, inplace=False)
+          (12): ReLU()
+          (13): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (14): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (15): Dropout2d(p=0.2, inplace=False)
+          (16): ReLU()
+          (17): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (18): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (19): Dropout2d(p=0.2, inplace=False)
+          (20): ReLU()
+          (21): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (22): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (23): Dropout2d(p=0.2, inplace=False)
+          (24): ReLU()
+        )
+      )
+      (deblocks): ModuleList(
+        (0): Sequential(
+          (0): ConvTranspose2d(64, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): Dropout2d(p=0.2, inplace=False)
+          (3): ReLU()
+        )
+        (1): Sequential(
+          (0): ConvTranspose2d(128, 128, kernel_size=(2, 2), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): Dropout2d(p=0.2, inplace=False)
+          (3): ReLU()
+        )
+        (2): Sequential(
+          (0): ConvTranspose2d(256, 128, kernel_size=(4, 4), stride=(4, 4), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): Dropout2d(p=0.2, inplace=False)
+          (3): ReLU()
+        )
+      )
+    )
+    (dense_head): AnchorHeadSingle(
+      (cls_loss_func): SigmoidFocalClassificationLoss()
+      (reg_loss_func): WeightedSmoothL1Loss()
+      (dir_loss_func): WeightedCrossEntropyLoss()
+      (conv_cls): Conv2d(384, 18, kernel_size=(1, 1), stride=(1, 1))
+      (conv_box): Conv2d(384, 42, kernel_size=(1, 1), stride=(1, 1))
+      (conv_dir_cls): Conv2d(384, 12, kernel_size=(1, 1), stride=(1, 1))
+    )
+    (point_head): None
+    (roi_head): None
+  )
+)
+2021-06-21 04:44:12,734   INFO  **********************Start training kitti_models/pointpillar_bayes(default)**********************
+2021-06-21 04:44:12,734   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0620-2327/bayes_model-0.2-0.2.pth to CPU
+2021-06-21 04:44:13,466   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-21 04:44:13,740   INFO  ==> Done (loaded 127/127)
+2021-06-21 04:44:14,045   INFO  **********************End training**********************
+2021-06-21 04:44:14,048   INFO  Loading KITTI dataset
+2021-06-21 04:44:14,311   INFO  Total samples for KITTI dataset: 3769
+2021-06-21 04:44:14,313   INFO  ----------------Noise-0.15-evaluate----------------
+2021-06-21 04:44:14,313   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0621-0444/bayes_model-0.2-0.2.pth to CPU
+2021-06-21 04:44:14,334   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-21 04:44:14,601   INFO  ==> Done (loaded 127/127)
+2021-06-21 04:45:30,889   INFO  Generate label finished(sec_per_example: 0.0202 second).
+2021-06-21 04:45:30,890   INFO  recall_roi_0.3: 0.000000
+2021-06-21 04:45:30,890   INFO  recall_rcnn_0.3: 0.912927
+2021-06-21 04:45:30,891   INFO  recall_roi_0.5: 0.000000
+2021-06-21 04:45:30,891   INFO  recall_rcnn_0.5: 0.822494
+2021-06-21 04:45:30,891   INFO  recall_roi_0.7: 0.000000
+2021-06-21 04:45:30,891   INFO  recall_rcnn_0.7: 0.518109
+2021-06-21 04:45:30,894   INFO  Average predicted number of objects(3769 samples): 40.283
+2021-06-21 04:47:11,342   INFO  ----------------Noise Experiment----------------
+2021-06-21 04:47:11,415   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0621-0444/bayes_model-0.2-0.2.pth to CPU
+2021-06-21 04:47:11,476   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-21 04:47:11,723   INFO  ==> Done (loaded 127/127)
+2021-06-21 04:48:31,691   INFO  Generate label finished(sec_per_example: 0.0211 second).
+2021-06-21 04:48:31,691   INFO  recall_roi_0.3: 0.000000
+2021-06-21 04:48:31,691   INFO  recall_rcnn_0.3: 0.932973
+2021-06-21 04:48:31,692   INFO  recall_roi_0.5: 0.000000
+2021-06-21 04:48:31,692   INFO  recall_rcnn_0.5: 0.860194
+2021-06-21 04:48:31,692   INFO  recall_roi_0.7: 0.000000
+2021-06-21 04:48:31,692   INFO  recall_rcnn_0.7: 0.598462
+2021-06-21 04:48:31,700   INFO  Average predicted number of objects(3769 samples): 22.546
+2021-06-21 04:49:27,067   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0621-0444/bayes_model-0.2-0.2.pth to CPU
+2021-06-21 04:49:27,091   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-21 04:49:27,344   INFO  ==> Done (loaded 127/127)
+2021-06-21 04:50:51,611   INFO  Generate label finished(sec_per_example: 0.0223 second).
+2021-06-21 04:50:51,612   INFO  recall_roi_0.3: 0.000000
+2021-06-21 04:50:51,612   INFO  recall_rcnn_0.3: 0.932973
+2021-06-21 04:50:51,612   INFO  recall_roi_0.5: 0.000000
+2021-06-21 04:50:51,612   INFO  recall_rcnn_0.5: 0.860194
+2021-06-21 04:50:51,612   INFO  recall_roi_0.7: 0.000000
+2021-06-21 04:50:51,612   INFO  recall_rcnn_0.7: 0.598462
+2021-06-21 04:50:51,615   INFO  Average predicted number of objects(3769 samples): 22.546
+2021-06-21 04:51:46,034   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0621-0444/bayes_model-0.2-0.2.pth to CPU
+2021-06-21 04:51:46,059   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-21 04:51:46,282   INFO  ==> Done (loaded 127/127)
+2021-06-21 04:52:58,925   INFO  Generate label finished(sec_per_example: 0.0192 second).
+2021-06-21 04:52:58,926   INFO  recall_roi_0.3: 0.000000
+2021-06-21 04:52:58,926   INFO  recall_rcnn_0.3: 0.932973
+2021-06-21 04:52:58,926   INFO  recall_roi_0.5: 0.000000
+2021-06-21 04:52:58,926   INFO  recall_rcnn_0.5: 0.860194
+2021-06-21 04:52:58,926   INFO  recall_roi_0.7: 0.000000
+2021-06-21 04:52:58,927   INFO  recall_rcnn_0.7: 0.598462
+2021-06-21 04:52:58,930   INFO  Average predicted number of objects(3769 samples): 22.546
+2021-06-21 04:53:57,045   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0621-0444/bayes_model-0.2-0.2.pth to CPU
+2021-06-21 04:53:57,073   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-21 04:53:57,329   INFO  ==> Done (loaded 127/127)
+2021-06-21 04:55:16,417   INFO  Generate label finished(sec_per_example: 0.0209 second).
+2021-06-21 04:55:16,417   INFO  recall_roi_0.3: 0.000000
+2021-06-21 04:55:16,418   INFO  recall_rcnn_0.3: 0.932973
+2021-06-21 04:55:16,418   INFO  recall_roi_0.5: 0.000000
+2021-06-21 04:55:16,418   INFO  recall_rcnn_0.5: 0.860194
+2021-06-21 04:55:16,418   INFO  recall_roi_0.7: 0.000000
+2021-06-21 04:55:16,418   INFO  recall_rcnn_0.7: 0.598462
+2021-06-21 04:55:16,422   INFO  Average predicted number of objects(3769 samples): 22.546
+2021-06-21 04:56:14,751   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0621-0444/bayes_model-0.2-0.2.pth to CPU
+2021-06-21 04:56:14,777   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-21 04:56:15,057   INFO  ==> Done (loaded 127/127)
+2021-06-21 04:57:28,106   INFO  Generate label finished(sec_per_example: 0.0193 second).
+2021-06-21 04:57:28,106   INFO  recall_roi_0.3: 0.000000
+2021-06-21 04:57:28,106   INFO  recall_rcnn_0.3: 0.932973
+2021-06-21 04:57:28,106   INFO  recall_roi_0.5: 0.000000
+2021-06-21 04:57:28,106   INFO  recall_rcnn_0.5: 0.860194
+2021-06-21 04:57:28,107   INFO  recall_roi_0.7: 0.000000
+2021-06-21 04:57:28,107   INFO  recall_rcnn_0.7: 0.598462
+2021-06-21 04:57:28,113   INFO  Average predicted number of objects(3769 samples): 22.546
+2021-06-21 04:58:27,822   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0621-0444/bayes_model-0.2-0.2.pth to CPU
+2021-06-21 04:58:27,849   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-21 04:58:28,066   INFO  ==> Done (loaded 127/127)
+2021-06-21 04:59:54,420   INFO  Generate label finished(sec_per_example: 0.0229 second).
+2021-06-21 04:59:54,421   INFO  recall_roi_0.3: 0.000000
+2021-06-21 04:59:54,421   INFO  recall_rcnn_0.3: 0.924772
+2021-06-21 04:59:54,421   INFO  recall_roi_0.5: 0.000000
+2021-06-21 04:59:54,421   INFO  recall_rcnn_0.5: 0.825342
+2021-06-21 04:59:54,421   INFO  recall_roi_0.7: 0.000000
+2021-06-21 04:59:54,421   INFO  recall_rcnn_0.7: 0.564806
+2021-06-21 04:59:54,425   INFO  Average predicted number of objects(3769 samples): 23.053
+2021-06-21 05:00:55,768   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0621-0444/bayes_model-0.2-0.2.pth to CPU
+2021-06-21 05:00:55,797   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-21 05:00:56,086   INFO  ==> Done (loaded 127/127)
+2021-06-21 05:02:23,165   INFO  Generate label finished(sec_per_example: 0.0231 second).
+2021-06-21 05:02:23,166   INFO  recall_roi_0.3: 0.000000
+2021-06-21 05:02:23,166   INFO  recall_rcnn_0.3: 0.926936
+2021-06-21 05:02:23,166   INFO  recall_roi_0.5: 0.000000
+2021-06-21 05:02:23,166   INFO  recall_rcnn_0.5: 0.845046
+2021-06-21 05:02:23,166   INFO  recall_roi_0.7: 0.000000
+2021-06-21 05:02:23,166   INFO  recall_rcnn_0.7: 0.556834
+2021-06-21 05:02:23,170   INFO  Average predicted number of objects(3769 samples): 25.619
+2021-06-21 05:03:27,608   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0621-0444/bayes_model-0.2-0.2.pth to CPU
+2021-06-21 05:03:27,638   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-21 05:03:27,898   INFO  ==> Done (loaded 127/127)
+2021-06-21 05:04:55,383   INFO  Generate label finished(sec_per_example: 0.0232 second).
+2021-06-21 05:04:55,384   INFO  recall_roi_0.3: 0.000000
+2021-06-21 05:04:55,384   INFO  recall_rcnn_0.3: 0.932460
+2021-06-21 05:04:55,384   INFO  recall_roi_0.5: 0.000000
+2021-06-21 05:04:55,384   INFO  recall_rcnn_0.5: 0.849487
+2021-06-21 05:04:55,384   INFO  recall_roi_0.7: 0.000000
+2021-06-21 05:04:55,384   INFO  recall_rcnn_0.7: 0.581036
+2021-06-21 05:04:55,387   INFO  Average predicted number of objects(3769 samples): 23.678
+2021-06-21 05:06:01,335   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0621-0444/bayes_model-0.2-0.2.pth to CPU
+2021-06-21 05:06:01,365   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-21 05:06:01,637   INFO  ==> Done (loaded 127/127)
+2021-06-21 05:07:30,120   INFO  Generate label finished(sec_per_example: 0.0234 second).
+2021-06-21 05:07:30,121   INFO  recall_roi_0.3: 0.000000
+2021-06-21 05:07:30,121   INFO  recall_rcnn_0.3: 0.931150
+2021-06-21 05:07:30,121   INFO  recall_roi_0.5: 0.000000
+2021-06-21 05:07:30,121   INFO  recall_rcnn_0.5: 0.857574
+2021-06-21 05:07:30,121   INFO  recall_roi_0.7: 0.000000
+2021-06-21 05:07:30,121   INFO  recall_rcnn_0.7: 0.600626
+2021-06-21 05:07:30,125   INFO  Average predicted number of objects(3769 samples): 31.165
+2021-06-21 05:08:43,346   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0621-0444/bayes_model-0.2-0.2.pth to CPU
+2021-06-21 05:08:43,372   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-21 05:08:43,623   INFO  ==> Done (loaded 127/127)
+2021-06-21 05:10:11,243   INFO  Generate label finished(sec_per_example: 0.0232 second).
+2021-06-21 05:10:11,244   INFO  recall_roi_0.3: 0.000000
+2021-06-21 05:10:11,244   INFO  recall_rcnn_0.3: 0.927790
+2021-06-21 05:10:11,244   INFO  recall_roi_0.5: 0.000000
+2021-06-21 05:10:11,244   INFO  recall_rcnn_0.5: 0.832973
+2021-06-21 05:10:11,244   INFO  recall_roi_0.7: 0.000000
+2021-06-21 05:10:11,244   INFO  recall_rcnn_0.7: 0.585137
+2021-06-21 05:10:11,248   INFO  Average predicted number of objects(3769 samples): 21.912
+2021-06-21 05:11:12,601   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0621-0444/bayes_model-0.2-0.2.pth to CPU
+2021-06-21 05:11:12,623   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-21 05:11:12,833   INFO  ==> Done (loaded 127/127)
+2021-06-21 05:12:39,628   INFO  Generate label finished(sec_per_example: 0.0230 second).
+2021-06-21 05:12:39,629   INFO  recall_roi_0.3: 0.000000
+2021-06-21 05:12:39,629   INFO  recall_rcnn_0.3: 0.920103
+2021-06-21 05:12:39,629   INFO  recall_roi_0.5: 0.000000
+2021-06-21 05:12:39,629   INFO  recall_rcnn_0.5: 0.838497
+2021-06-21 05:12:39,629   INFO  recall_roi_0.7: 0.000000
+2021-06-21 05:12:39,629   INFO  recall_rcnn_0.7: 0.525968
+2021-06-21 05:12:39,633   INFO  Average predicted number of objects(3769 samples): 30.859
+2021-06-21 05:13:56,291   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0621-0444/bayes_model-0.2-0.2.pth to CPU
+2021-06-21 05:13:56,321   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-21 05:13:56,603   INFO  ==> Done (loaded 127/127)
+2021-06-21 05:15:24,648   INFO  Generate label finished(sec_per_example: 0.0233 second).
+2021-06-21 05:15:24,648   INFO  recall_roi_0.3: 0.000000
+2021-06-21 05:15:24,648   INFO  recall_rcnn_0.3: 0.923064
+2021-06-21 05:15:24,648   INFO  recall_roi_0.5: 0.000000
+2021-06-21 05:15:24,649   INFO  recall_rcnn_0.5: 0.797608
+2021-06-21 05:15:24,649   INFO  recall_roi_0.7: 0.000000
+2021-06-21 05:15:24,649   INFO  recall_rcnn_0.7: 0.476708
+2021-06-21 05:15:24,652   INFO  Average predicted number of objects(3769 samples): 36.704
+2021-06-21 05:16:47,340   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0621-0444/bayes_model-0.2-0.2.pth to CPU
+2021-06-21 05:16:47,370   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-21 05:16:47,694   INFO  ==> Done (loaded 127/127)
+2021-06-21 05:18:14,093   INFO  Generate label finished(sec_per_example: 0.0229 second).
+2021-06-21 05:18:14,094   INFO  recall_roi_0.3: 0.000000
+2021-06-21 05:18:14,094   INFO  recall_rcnn_0.3: 0.921412
+2021-06-21 05:18:14,095   INFO  recall_roi_0.5: 0.000000
+2021-06-21 05:18:14,095   INFO  recall_rcnn_0.5: 0.820273
+2021-06-21 05:18:14,095   INFO  recall_roi_0.7: 0.000000
+2021-06-21 05:18:14,095   INFO  recall_rcnn_0.7: 0.533827
+2021-06-21 05:18:14,099   INFO  Average predicted number of objects(3769 samples): 41.163
+2021-06-21 05:19:40,961   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0621-0444/bayes_model-0.2-0.2.pth to CPU
+2021-06-21 05:19:40,991   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-21 05:19:41,244   INFO  ==> Done (loaded 127/127)
+2021-06-21 05:21:08,726   INFO  Generate label finished(sec_per_example: 0.0232 second).
+2021-06-21 05:21:08,727   INFO  recall_roi_0.3: 0.000000
+2021-06-21 05:21:08,727   INFO  recall_rcnn_0.3: 0.929328
+2021-06-21 05:21:08,727   INFO  recall_roi_0.5: 0.000000
+2021-06-21 05:21:08,727   INFO  recall_rcnn_0.5: 0.851708
+2021-06-21 05:21:08,727   INFO  recall_roi_0.7: 0.000000
+2021-06-21 05:21:08,727   INFO  recall_rcnn_0.7: 0.549260
+2021-06-21 05:21:08,731   INFO  Average predicted number of objects(3769 samples): 39.465
+2021-06-21 05:22:32,373   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0621-0444/bayes_model-0.2-0.2.pth to CPU
+2021-06-21 05:22:32,401   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-21 05:22:32,670   INFO  ==> Done (loaded 127/127)
+2021-06-21 05:23:59,265   INFO  Generate label finished(sec_per_example: 0.0229 second).
+2021-06-21 05:23:59,266   INFO  recall_roi_0.3: 0.000000
+2021-06-21 05:23:59,266   INFO  recall_rcnn_0.3: 0.926708
+2021-06-21 05:23:59,266   INFO  recall_roi_0.5: 0.000000
+2021-06-21 05:23:59,266   INFO  recall_rcnn_0.5: 0.848975
+2021-06-21 05:23:59,266   INFO  recall_roi_0.7: 0.000000
+2021-06-21 05:23:59,267   INFO  recall_rcnn_0.7: 0.556777
+2021-06-21 05:23:59,270   INFO  Average predicted number of objects(3769 samples): 41.433
+2021-06-21 05:25:24,236   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0621-0444/bayes_model-0.2-0.2.pth to CPU
+2021-06-21 05:25:24,266   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-21 05:25:24,526   INFO  ==> Done (loaded 127/127)
+2021-06-21 05:26:52,637   INFO  Generate label finished(sec_per_example: 0.0233 second).
+2021-06-21 05:26:52,637   INFO  recall_roi_0.3: 0.000000
+2021-06-21 05:26:52,637   INFO  recall_rcnn_0.3: 0.904670
+2021-06-21 05:26:52,638   INFO  recall_roi_0.5: 0.000000
+2021-06-21 05:26:52,638   INFO  recall_rcnn_0.5: 0.808030
+2021-06-21 05:26:52,638   INFO  recall_roi_0.7: 0.000000
+2021-06-21 05:26:52,638   INFO  recall_rcnn_0.7: 0.451253
+2021-06-21 05:26:52,644   INFO  Average predicted number of objects(3769 samples): 54.038
+2021-06-21 05:28:37,351   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0621-0444/bayes_model-0.2-0.2.pth to CPU
+2021-06-21 05:28:37,379   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-21 05:28:37,682   INFO  ==> Done (loaded 127/127)
+2021-06-21 05:30:06,321   INFO  Generate label finished(sec_per_example: 0.0235 second).
+2021-06-21 05:30:06,323   INFO  recall_roi_0.3: 0.000000
+2021-06-21 05:30:06,323   INFO  recall_rcnn_0.3: 0.886048
+2021-06-21 05:30:06,323   INFO  recall_roi_0.5: 0.000000
+2021-06-21 05:30:06,323   INFO  recall_rcnn_0.5: 0.763554
+2021-06-21 05:30:06,323   INFO  recall_roi_0.7: 0.000000
+2021-06-21 05:30:06,323   INFO  recall_rcnn_0.7: 0.378132
+2021-06-21 05:30:06,327   INFO  Average predicted number of objects(3769 samples): 37.134
+2021-06-21 05:31:27,658   INFO  ==> Loading parameters from checkpoint ./bayes/pointpillar/0621-0444/bayes_model-0.2-0.2.pth to CPU
+2021-06-21 05:31:27,691   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-21 05:31:28,003   INFO  ==> Done (loaded 127/127)

@@ -1,0 +1,7 @@
+CUDA_VISIBLE_DEVICES=3,1 python -m torch.distributed.launch --nproc_per_node=2 baseline_train.py --cfg_file cfgs/kitti_models/pointpillar.yaml --launcher pytorch --ckpt ./checkpoint_epoch_80.pth
+
+python baseline_train.py --cfg_file cfgs/kitti_models/pointpillar.yaml --ckpt ./checkpoint_epoch_80.pth
+
+CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 bayes_train.py --cfg_file cfgs/kitti_models/pointpillar_bayes.yaml --launcher pytorch
+
+python demo.py --cfg_file1 cfgs/kitti_models/pointpillar.yaml --cfg_file2 cfgs/kitti_models/pointpillar_bayes.yaml --ckpt ./checkpoint_epoch_80.pth

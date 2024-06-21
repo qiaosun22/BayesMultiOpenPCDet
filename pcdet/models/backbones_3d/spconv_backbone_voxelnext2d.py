@@ -2,8 +2,8 @@ from functools import partial
 import torch
 import torch.nn as nn
 
-from ...utils.spconv_utils import replace_feature, spconv
-
+from ...utils.spconv_utils import replace_feature#, spconv
+import spconv.pytorch as spconv
 
 def post_act_block(in_channels, out_channels, kernel_size, indice_key=None, stride=1, padding=0,
                    conv_type='subm', norm_fn=None):

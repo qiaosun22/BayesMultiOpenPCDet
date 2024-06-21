@@ -2,14 +2,14 @@ import argparse
 import glob
 from pathlib import Path
 
-try:
-    import open3d
-    from visual_utils import open3d_vis_utils as V
-    OPEN3D_FLAG = True
-except:
-    import mayavi.mlab as mlab
-    from visual_utils import visualize_utils as V
-    OPEN3D_FLAG = False
+# try:
+# import open3d
+# from visual_utils import open3d_vis_utils as V
+# OPEN3D_FLAG = True
+# except:
+import mayavi.mlab as mlab
+from visual_utils import visualize_utils as V
+OPEN3D_FLAG = False
 
 import numpy as np
 import torch
@@ -66,7 +66,7 @@ def parse_config():
                         help='specify the config for demo')
     parser.add_argument('--data_path', type=str, default='demo_data',
                         help='specify the point cloud data file or directory')
-    parser.add_argument('--ckpt', type=str, default=None, help='specify the pretrained model')
+    parser.add_argument('--ckpt', type=str, default='./baseline_model.pth', help='specify the pretrained model')
     parser.add_argument('--ext', type=str, default='.bin', help='specify the extension of your point cloud data file')
 
     args = parser.parse_args()
@@ -87,7 +87,9 @@ def main():
     logger.info(f'Total number of samples: \t{len(demo_dataset)}')
 
     model = build_network(model_cfg=cfg.MODEL, num_class=len(cfg.CLASS_NAMES), dataset=demo_dataset)
-    model.load_params_from_file(filename=args.ckpt, logger=logger, to_cpu=True)
+    # model.load_params_from_file(filename=args.ckpt, logger=logger, to_cpu=True)
+    model.load_state_dict(torch.load(args.ckpt, map_location=torch.device('cuda:0')))###
+    
     model.cuda()
     model.eval()
     with torch.no_grad():

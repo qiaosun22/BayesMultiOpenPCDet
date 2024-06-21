@@ -11,3 +11,9 @@ torchvision
 SharedArray
 opencv-python
 pyquaternion
+spconv-cu113
+av2
+kornia
+bayesian-optimization
+pykalman
+openpyxl

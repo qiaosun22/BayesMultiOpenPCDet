@@ -1,0 +1,1073 @@
+2021-06-29 04:29:21,824   INFO  **********************Start logging**********************
+2021-06-29 04:29:21,824   INFO  CUDA_VISIBLE_DEVICES=0,1,2,3
+2021-06-29 04:29:21,824   INFO  total_batch_size: 16
+2021-06-29 04:29:21,824   INFO  cfg_file         cfgs/kitti_models/pointpillar.yaml
+2021-06-29 04:29:21,824   INFO  batch_size       4
+2021-06-29 04:29:21,824   INFO  epochs           None
+2021-06-29 04:29:21,824   INFO  workers          8
+2021-06-29 04:29:21,825   INFO  extra_tag        default
+2021-06-29 04:29:21,825   INFO  ckpt             ./checkpoint_epoch_80.pth
+2021-06-29 04:29:21,825   INFO  pretrained_model None
+2021-06-29 04:29:21,825   INFO  launcher         pytorch
+2021-06-29 04:29:21,825   INFO  tcp_port         18888
+2021-06-29 04:29:21,825   INFO  sync_bn          False
+2021-06-29 04:29:21,825   INFO  fix_random_seed  False
+2021-06-29 04:29:21,825   INFO  ckpt_save_interval 1
+2021-06-29 04:29:21,825   INFO  local_rank       0
+2021-06-29 04:29:21,825   INFO  max_ckpt_save_num 30
+2021-06-29 04:29:21,825   INFO  merge_all_iters_to_one_epoch False
+2021-06-29 04:29:21,826   INFO  set_cfgs         None
+2021-06-29 04:29:21,826   INFO  max_waiting_mins 0
+2021-06-29 04:29:21,826   INFO  start_epoch      0
+2021-06-29 04:29:21,826   INFO  save_to_file     False
+2021-06-29 04:29:21,826   INFO  cfg.ROOT_DIR: /openpcdet
+2021-06-29 04:29:21,826   INFO  cfg.LOCAL_RANK: 0
+2021-06-29 04:29:21,826   INFO  cfg.CLASS_NAMES: ['Car', 'Pedestrian', 'Cyclist']
+2021-06-29 04:29:21,826   INFO  
+cfg.DATA_CONFIG = edict()
+2021-06-29 04:29:21,826   INFO  cfg.DATA_CONFIG.DATASET: KittiDataset
+2021-06-29 04:29:21,826   INFO  cfg.DATA_CONFIG.DATA_PATH: ../data/kitti
+2021-06-29 04:29:21,826   INFO  cfg.DATA_CONFIG.POINT_CLOUD_RANGE: [0, -39.68, -3, 69.12, 39.68, 1]
+2021-06-29 04:29:21,827   INFO  
+cfg.DATA_CONFIG.DATA_SPLIT = edict()
+2021-06-29 04:29:21,827   INFO  cfg.DATA_CONFIG.DATA_SPLIT.train: train
+2021-06-29 04:29:21,827   INFO  cfg.DATA_CONFIG.DATA_SPLIT.test: val
+2021-06-29 04:29:21,827   INFO  
+cfg.DATA_CONFIG.INFO_PATH = edict()
+2021-06-29 04:29:21,827   INFO  cfg.DATA_CONFIG.INFO_PATH.train: ['kitti_infos_val.pkl']
+2021-06-29 04:29:21,827   INFO  cfg.DATA_CONFIG.INFO_PATH.test: ['kitti_infos_val.pkl']
+2021-06-29 04:29:21,827   INFO  cfg.DATA_CONFIG.GET_ITEM_LIST: ['points']
+2021-06-29 04:29:21,827   INFO  cfg.DATA_CONFIG.FOV_POINTS_ONLY: True
+2021-06-29 04:29:21,827   INFO  
+cfg.DATA_CONFIG.DATA_AUGMENTOR = edict()
+2021-06-29 04:29:21,827   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.DISABLE_AUG_LIST: ['placeholder']
+2021-06-29 04:29:21,827   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.AUG_CONFIG_LIST: [{'NAME': 'gt_sampling', 'USE_ROAD_PLANE': True, 'DB_INFO_PATH': ['kitti_dbinfos_train.pkl'], 'PREPARE': {'filter_by_min_points': ['Car:5', 'Pedestrian:5', 'Cyclist:5'], 'filter_by_difficulty': [-1]}, 'SAMPLE_GROUPS': ['Car:15', 'Pedestrian:15', 'Cyclist:15'], 'NUM_POINT_FEATURES': 4, 'DATABASE_WITH_FAKELIDAR': False, 'REMOVE_EXTRA_WIDTH': [0.0, 0.0, 0.0], 'LIMIT_WHOLE_SCENE': False}, {'NAME': 'random_world_flip', 'ALONG_AXIS_LIST': ['x']}, {'NAME': 'random_world_rotation', 'WORLD_ROT_ANGLE': [-0.78539816, 0.78539816]}, {'NAME': 'random_world_scaling', 'WORLD_SCALE_RANGE': [0.95, 1.05]}]
+2021-06-29 04:29:21,827   INFO  
+cfg.DATA_CONFIG.POINT_FEATURE_ENCODING = edict()
+2021-06-29 04:29:21,828   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.encoding_type: absolute_coordinates_encoding
+2021-06-29 04:29:21,828   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.used_feature_list: ['x', 'y', 'z', 'intensity']
+2021-06-29 04:29:21,828   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.src_feature_list: ['x', 'y', 'z', 'intensity']
+2021-06-29 04:29:21,828   INFO  cfg.DATA_CONFIG.DATA_PROCESSOR: [{'NAME': 'mask_points_and_boxes_outside_range', 'REMOVE_OUTSIDE_BOXES': True}, {'NAME': 'shuffle_points', 'SHUFFLE_ENABLED': {'train': True, 'test': False}}, {'NAME': 'transform_points_to_voxels', 'VOXEL_SIZE': [0.16, 0.16, 4], 'MAX_POINTS_PER_VOXEL': 32, 'MAX_NUMBER_OF_VOXELS': {'train': 16000, 'test': 40000}}]
+2021-06-29 04:29:21,828   INFO  cfg.DATA_CONFIG._BASE_CONFIG_: cfgs/dataset_configs/kitti_dataset.yaml
+2021-06-29 04:29:21,828   INFO  
+cfg.MODEL = edict()
+2021-06-29 04:29:21,828   INFO  cfg.MODEL.NAME: PointPillar
+2021-06-29 04:29:21,828   INFO  
+cfg.MODEL.VFE = edict()
+2021-06-29 04:29:21,828   INFO  cfg.MODEL.VFE.NAME: PillarVFE
+2021-06-29 04:29:21,828   INFO  cfg.MODEL.VFE.WITH_DISTANCE: False
+2021-06-29 04:29:21,828   INFO  cfg.MODEL.VFE.USE_ABSLOTE_XYZ: True
+2021-06-29 04:29:21,828   INFO  cfg.MODEL.VFE.USE_NORM: True
+2021-06-29 04:29:21,828   INFO  cfg.MODEL.VFE.USE_DO: False
+2021-06-29 04:29:21,829   INFO  cfg.MODEL.VFE.NUM_FILTERS: [64]
+2021-06-29 04:29:21,829   INFO  
+cfg.MODEL.MAP_TO_BEV = edict()
+2021-06-29 04:29:21,829   INFO  cfg.MODEL.MAP_TO_BEV.NAME: PointPillarScatter
+2021-06-29 04:29:21,829   INFO  cfg.MODEL.MAP_TO_BEV.NUM_BEV_FEATURES: 64
+2021-06-29 04:29:21,829   INFO  
+cfg.MODEL.BACKBONE_2D = edict()
+2021-06-29 04:29:21,829   INFO  cfg.MODEL.BACKBONE_2D.NAME: BaseBEVBackbone
+2021-06-29 04:29:21,829   INFO  cfg.MODEL.BACKBONE_2D.USE_NORM: True
+2021-06-29 04:29:21,829   INFO  cfg.MODEL.BACKBONE_2D.USE_DO: False
+2021-06-29 04:29:21,829   INFO  cfg.MODEL.BACKBONE_2D.LAYER_NUMS: [3, 5, 5]
+2021-06-29 04:29:21,829   INFO  cfg.MODEL.BACKBONE_2D.LAYER_STRIDES: [2, 2, 2]
+2021-06-29 04:29:21,829   INFO  cfg.MODEL.BACKBONE_2D.NUM_FILTERS: [64, 128, 256]
+2021-06-29 04:29:21,829   INFO  cfg.MODEL.BACKBONE_2D.UPSAMPLE_STRIDES: [1, 2, 4]
+2021-06-29 04:29:21,829   INFO  cfg.MODEL.BACKBONE_2D.NUM_UPSAMPLE_FILTERS: [128, 128, 128]
+2021-06-29 04:29:21,830   INFO  
+cfg.MODEL.DENSE_HEAD = edict()
+2021-06-29 04:29:21,830   INFO  cfg.MODEL.DENSE_HEAD.NAME: AnchorHeadSingle
+2021-06-29 04:29:21,830   INFO  cfg.MODEL.DENSE_HEAD.CLASS_AGNOSTIC: False
+2021-06-29 04:29:21,830   INFO  cfg.MODEL.DENSE_HEAD.USE_DIRECTION_CLASSIFIER: True
+2021-06-29 04:29:21,830   INFO  cfg.MODEL.DENSE_HEAD.DIR_OFFSET: 0.78539
+2021-06-29 04:29:21,830   INFO  cfg.MODEL.DENSE_HEAD.DIR_LIMIT_OFFSET: 0.0
+2021-06-29 04:29:21,830   INFO  cfg.MODEL.DENSE_HEAD.NUM_DIR_BINS: 2
+2021-06-29 04:29:21,830   INFO  cfg.MODEL.DENSE_HEAD.ANCHOR_GENERATOR_CONFIG: [{'class_name': 'Car', 'anchor_sizes': [[3.9, 1.6, 1.56]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [-1.78], 'align_center': False, 'feature_map_stride': 2, 'matched_threshold': 0.6, 'unmatched_threshold': 0.45}, {'class_name': 'Pedestrian', 'anchor_sizes': [[0.8, 0.6, 1.73]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [-0.6], 'align_center': False, 'feature_map_stride': 2, 'matched_threshold': 0.5, 'unmatched_threshold': 0.35}, {'class_name': 'Cyclist', 'anchor_sizes': [[1.76, 0.6, 1.73]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [-0.6], 'align_center': False, 'feature_map_stride': 2, 'matched_threshold': 0.5, 'unmatched_threshold': 0.35}]
+2021-06-29 04:29:21,830   INFO  
+cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG = edict()
+2021-06-29 04:29:21,830   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NAME: AxisAlignedTargetAssigner
+2021-06-29 04:29:21,830   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.POS_FRACTION: -1.0
+2021-06-29 04:29:21,830   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.SAMPLE_SIZE: 512
+2021-06-29 04:29:21,831   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NORM_BY_NUM_EXAMPLES: False
+2021-06-29 04:29:21,831   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.MATCH_HEIGHT: False
+2021-06-29 04:29:21,831   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.BOX_CODER: ResidualCoder
+2021-06-29 04:29:21,831   INFO  
+cfg.MODEL.DENSE_HEAD.LOSS_CONFIG = edict()
+2021-06-29 04:29:21,831   INFO  
+cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS = edict()
+2021-06-29 04:29:21,831   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.cls_weight: 1.0
+2021-06-29 04:29:21,831   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.loc_weight: 2.0
+2021-06-29 04:29:21,831   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.dir_weight: 0.2
+2021-06-29 04:29:21,831   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.code_weights: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+2021-06-29 04:29:21,831   INFO  
+cfg.MODEL.POST_PROCESSING = edict()
+2021-06-29 04:29:21,831   INFO  cfg.MODEL.POST_PROCESSING.RECALL_THRESH_LIST: [0.3, 0.5, 0.7]
+2021-06-29 04:29:21,831   INFO  cfg.MODEL.POST_PROCESSING.SCORE_THRESH: 0.1
+2021-06-29 04:29:21,832   INFO  cfg.MODEL.POST_PROCESSING.OUTPUT_RAW_SCORE: False
+2021-06-29 04:29:21,832   INFO  cfg.MODEL.POST_PROCESSING.EVAL_METRIC: kitti
+2021-06-29 04:29:21,832   INFO  
+cfg.MODEL.POST_PROCESSING.NMS_CONFIG = edict()
+2021-06-29 04:29:21,832   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.MULTI_CLASSES_NMS: False
+2021-06-29 04:29:21,832   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_TYPE: nms_gpu
+2021-06-29 04:29:21,832   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_THRESH: 0.01
+2021-06-29 04:29:21,832   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_PRE_MAXSIZE: 4096
+2021-06-29 04:29:21,832   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_POST_MAXSIZE: 500
+2021-06-29 04:29:21,832   INFO  
+cfg.OPTIMIZATION = edict()
+2021-06-29 04:29:21,832   INFO  cfg.OPTIMIZATION.BATCH_SIZE_PER_GPU: 4
+2021-06-29 04:29:21,832   INFO  cfg.OPTIMIZATION.NUM_EPOCHS: 80
+2021-06-29 04:29:21,832   INFO  cfg.OPTIMIZATION.OPTIMIZER: adam_onecycle
+2021-06-29 04:29:21,832   INFO  cfg.OPTIMIZATION.LR: 0.003
+2021-06-29 04:29:21,832   INFO  cfg.OPTIMIZATION.WEIGHT_DECAY: 0.01
+2021-06-29 04:29:21,833   INFO  cfg.OPTIMIZATION.MOMENTUM: 0.9
+2021-06-29 04:29:21,833   INFO  cfg.OPTIMIZATION.MOMS: [0.95, 0.85]
+2021-06-29 04:29:21,833   INFO  cfg.OPTIMIZATION.PCT_START: 0.4
+2021-06-29 04:29:21,833   INFO  cfg.OPTIMIZATION.DIV_FACTOR: 10
+2021-06-29 04:29:21,833   INFO  cfg.OPTIMIZATION.DECAY_STEP_LIST: [35, 45]
+2021-06-29 04:29:21,833   INFO  cfg.OPTIMIZATION.LR_DECAY: 0.1
+2021-06-29 04:29:21,833   INFO  cfg.OPTIMIZATION.LR_CLIP: 1e-07
+2021-06-29 04:29:21,833   INFO  cfg.OPTIMIZATION.LR_WARMUP: False
+2021-06-29 04:29:21,833   INFO  cfg.OPTIMIZATION.WARMUP_EPOCH: 1
+2021-06-29 04:29:21,833   INFO  cfg.OPTIMIZATION.GRAD_NORM_CLIP: 10
+2021-06-29 04:29:21,833   INFO  cfg.TAG: pointpillar
+2021-06-29 04:29:21,833   INFO  cfg.EXP_GROUP_PATH: kitti_models
+2021-06-29 04:29:21,993   INFO  Loading KITTI dataset
+2021-06-29 04:29:22,192   INFO  Total samples for KITTI dataset: 3769
+2021-06-29 04:29:22,246   INFO  **********************End training**********************
+2021-06-29 04:29:22,247   INFO  ----------------load ckpt------/checkpoint_epoch_80.pth
+2021-06-29 04:29:22,247   INFO  ----------------Noise Experiment----------------
+2021-06-29 04:29:22,247   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 04:29:22,301   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 04:29:22,444   INFO  ==> Done (loaded 127/127)
+2021-06-29 04:30:45,533   INFO  Generate label finished(sec_per_example: 0.0219 second).
+2021-06-29 04:30:45,534   INFO  recall_roi_0.3: 0.000000
+2021-06-29 04:30:45,534   INFO  recall_rcnn_0.3: 0.930877
+2021-06-29 04:30:45,534   INFO  recall_roi_0.5: 0.000000
+2021-06-29 04:30:45,534   INFO  recall_rcnn_0.5: 0.867164
+2021-06-29 04:30:45,534   INFO  recall_roi_0.7: 0.000000
+2021-06-29 04:30:45,534   INFO  recall_rcnn_0.7: 0.612993
+2021-06-29 04:30:45,539   INFO  Average predicted number of objects(3769 samples): 18.515
+2021-06-29 04:31:39,580   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 04:31:39,620   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 04:31:39,770   INFO  ==> Done (loaded 127/127)
+2021-06-29 04:33:03,289   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-29 04:33:03,290   INFO  recall_roi_0.3: 0.000000
+2021-06-29 04:33:03,290   INFO  recall_rcnn_0.3: 0.930877
+2021-06-29 04:33:03,290   INFO  recall_roi_0.5: 0.000000
+2021-06-29 04:33:03,290   INFO  recall_rcnn_0.5: 0.867164
+2021-06-29 04:33:03,290   INFO  recall_roi_0.7: 0.000000
+2021-06-29 04:33:03,290   INFO  recall_rcnn_0.7: 0.612993
+2021-06-29 04:33:03,293   INFO  Average predicted number of objects(3769 samples): 18.515
+2021-06-29 04:33:42,157   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 04:33:42,193   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 04:33:42,342   INFO  ==> Done (loaded 127/127)
+2021-06-29 04:35:06,476   INFO  Generate label finished(sec_per_example: 0.0223 second).
+2021-06-29 04:35:06,477   INFO  recall_roi_0.3: 0.000000
+2021-06-29 04:35:06,477   INFO  recall_rcnn_0.3: 0.930877
+2021-06-29 04:35:06,477   INFO  recall_roi_0.5: 0.000000
+2021-06-29 04:35:06,477   INFO  recall_rcnn_0.5: 0.867164
+2021-06-29 04:35:06,477   INFO  recall_roi_0.7: 0.000000
+2021-06-29 04:35:06,477   INFO  recall_rcnn_0.7: 0.612993
+2021-06-29 04:35:06,481   INFO  Average predicted number of objects(3769 samples): 18.515
+2021-06-29 04:35:45,381   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 04:35:45,425   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 04:35:45,619   INFO  ==> Done (loaded 127/127)
+2021-06-29 04:37:09,264   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-29 04:37:09,265   INFO  recall_roi_0.3: 0.000000
+2021-06-29 04:37:09,265   INFO  recall_rcnn_0.3: 0.930877
+2021-06-29 04:37:09,265   INFO  recall_roi_0.5: 0.000000
+2021-06-29 04:37:09,265   INFO  recall_rcnn_0.5: 0.867164
+2021-06-29 04:37:09,265   INFO  recall_roi_0.7: 0.000000
+2021-06-29 04:37:09,266   INFO  recall_rcnn_0.7: 0.612993
+2021-06-29 04:37:09,269   INFO  Average predicted number of objects(3769 samples): 18.515
+2021-06-29 04:37:47,849   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 04:37:47,888   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 04:37:48,037   INFO  ==> Done (loaded 127/127)
+2021-06-29 04:39:10,963   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-29 04:39:10,964   INFO  recall_roi_0.3: 0.000000
+2021-06-29 04:39:10,964   INFO  recall_rcnn_0.3: 0.930877
+2021-06-29 04:39:10,964   INFO  recall_roi_0.5: 0.000000
+2021-06-29 04:39:10,964   INFO  recall_rcnn_0.5: 0.867164
+2021-06-29 04:39:10,964   INFO  recall_roi_0.7: 0.000000
+2021-06-29 04:39:10,964   INFO  recall_rcnn_0.7: 0.612993
+2021-06-29 04:39:10,968   INFO  Average predicted number of objects(3769 samples): 18.515
+2021-06-29 04:39:50,114   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 04:39:50,174   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 04:39:50,341   INFO  ==> Done (loaded 127/127)
+2021-06-29 04:41:13,416   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-29 04:41:13,418   INFO  recall_roi_0.3: 0.000000
+2021-06-29 04:41:13,418   INFO  recall_rcnn_0.3: 0.930877
+2021-06-29 04:41:13,418   INFO  recall_roi_0.5: 0.000000
+2021-06-29 04:41:13,418   INFO  recall_rcnn_0.5: 0.867164
+2021-06-29 04:41:13,418   INFO  recall_roi_0.7: 0.000000
+2021-06-29 04:41:13,418   INFO  recall_rcnn_0.7: 0.612993
+2021-06-29 04:41:13,422   INFO  Average predicted number of objects(3769 samples): 18.515
+2021-06-29 04:41:52,298   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 04:41:52,335   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 04:41:52,482   INFO  ==> Done (loaded 127/127)
+2021-06-29 04:43:15,675   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-29 04:43:15,676   INFO  recall_roi_0.3: 0.000000
+2021-06-29 04:43:15,676   INFO  recall_rcnn_0.3: 0.930877
+2021-06-29 04:43:15,676   INFO  recall_roi_0.5: 0.000000
+2021-06-29 04:43:15,676   INFO  recall_rcnn_0.5: 0.867164
+2021-06-29 04:43:15,676   INFO  recall_roi_0.7: 0.000000
+2021-06-29 04:43:15,676   INFO  recall_rcnn_0.7: 0.612993
+2021-06-29 04:43:15,679   INFO  Average predicted number of objects(3769 samples): 18.515
+2021-06-29 04:43:56,061   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 04:43:56,103   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 04:43:56,264   INFO  ==> Done (loaded 127/127)
+2021-06-29 04:45:19,967   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-29 04:45:19,968   INFO  recall_roi_0.3: 0.000000
+2021-06-29 04:45:19,968   INFO  recall_rcnn_0.3: 0.930877
+2021-06-29 04:45:19,969   INFO  recall_roi_0.5: 0.000000
+2021-06-29 04:45:19,969   INFO  recall_rcnn_0.5: 0.867164
+2021-06-29 04:45:19,969   INFO  recall_roi_0.7: 0.000000
+2021-06-29 04:45:19,969   INFO  recall_rcnn_0.7: 0.612993
+2021-06-29 04:45:19,972   INFO  Average predicted number of objects(3769 samples): 18.515
+2021-06-29 04:45:58,551   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 04:45:58,603   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 04:45:58,786   INFO  ==> Done (loaded 127/127)
+2021-06-29 04:47:21,719   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-29 04:47:21,720   INFO  recall_roi_0.3: 0.000000
+2021-06-29 04:47:21,720   INFO  recall_rcnn_0.3: 0.930877
+2021-06-29 04:47:21,720   INFO  recall_roi_0.5: 0.000000
+2021-06-29 04:47:21,720   INFO  recall_rcnn_0.5: 0.867164
+2021-06-29 04:47:21,720   INFO  recall_roi_0.7: 0.000000
+2021-06-29 04:47:21,720   INFO  recall_rcnn_0.7: 0.612993
+2021-06-29 04:47:21,723   INFO  Average predicted number of objects(3769 samples): 18.515
+2021-06-29 04:48:00,196   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 04:48:00,232   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 04:48:00,381   INFO  ==> Done (loaded 127/127)
+2021-06-29 04:49:24,322   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-29 04:49:24,323   INFO  recall_roi_0.3: 0.000000
+2021-06-29 04:49:24,323   INFO  recall_rcnn_0.3: 0.930877
+2021-06-29 04:49:24,323   INFO  recall_roi_0.5: 0.000000
+2021-06-29 04:49:24,323   INFO  recall_rcnn_0.5: 0.867164
+2021-06-29 04:49:24,323   INFO  recall_roi_0.7: 0.000000
+2021-06-29 04:49:24,324   INFO  recall_rcnn_0.7: 0.612993
+2021-06-29 04:49:24,327   INFO  Average predicted number of objects(3769 samples): 18.515
+2021-06-29 04:50:03,264   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 04:50:03,302   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 04:50:03,448   INFO  ==> Done (loaded 127/127)
+2021-06-29 04:51:27,143   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-29 04:51:27,144   INFO  recall_roi_0.3: 0.000000
+2021-06-29 04:51:27,144   INFO  recall_rcnn_0.3: 0.924102
+2021-06-29 04:51:27,144   INFO  recall_roi_0.5: 0.000000
+2021-06-29 04:51:27,144   INFO  recall_rcnn_0.5: 0.854296
+2021-06-29 04:51:27,144   INFO  recall_roi_0.7: 0.000000
+2021-06-29 04:51:27,145   INFO  recall_rcnn_0.7: 0.589364
+2021-06-29 04:51:27,148   INFO  Average predicted number of objects(3769 samples): 22.090
+2021-06-29 04:52:08,733   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 04:52:08,775   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 04:52:08,929   INFO  ==> Done (loaded 127/127)
+2021-06-29 04:53:32,488   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-29 04:53:32,489   INFO  recall_roi_0.3: 0.000000
+2021-06-29 04:53:32,489   INFO  recall_rcnn_0.3: 0.928258
+2021-06-29 04:53:32,489   INFO  recall_roi_0.5: 0.000000
+2021-06-29 04:53:32,489   INFO  recall_rcnn_0.5: 0.854979
+2021-06-29 04:53:32,489   INFO  recall_roi_0.7: 0.000000
+2021-06-29 04:53:32,490   INFO  recall_rcnn_0.7: 0.591755
+2021-06-29 04:53:32,492   INFO  Average predicted number of objects(3769 samples): 24.712
+2021-06-29 04:54:16,223   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 04:54:16,259   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 04:54:16,407   INFO  ==> Done (loaded 127/127)
+2021-06-29 04:55:40,149   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-29 04:55:40,151   INFO  recall_roi_0.3: 0.000000
+2021-06-29 04:55:40,151   INFO  recall_rcnn_0.3: 0.920287
+2021-06-29 04:55:40,151   INFO  recall_roi_0.5: 0.000000
+2021-06-29 04:55:40,151   INFO  recall_rcnn_0.5: 0.852474
+2021-06-29 04:55:40,151   INFO  recall_roi_0.7: 0.000000
+2021-06-29 04:55:40,152   INFO  recall_rcnn_0.7: 0.572340
+2021-06-29 04:55:40,157   INFO  Average predicted number of objects(3769 samples): 18.071
+2021-06-29 04:56:18,411   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 04:56:18,450   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 04:56:18,613   INFO  ==> Done (loaded 127/127)
+2021-06-29 04:57:42,418   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-29 04:57:42,420   INFO  recall_roi_0.3: 0.000000
+2021-06-29 04:57:42,420   INFO  recall_rcnn_0.3: 0.919490
+2021-06-29 04:57:42,420   INFO  recall_roi_0.5: 0.000000
+2021-06-29 04:57:42,420   INFO  recall_rcnn_0.5: 0.853385
+2021-06-29 04:57:42,421   INFO  recall_roi_0.7: 0.000000
+2021-06-29 04:57:42,421   INFO  recall_rcnn_0.7: 0.587997
+2021-06-29 04:57:42,426   INFO  Average predicted number of objects(3769 samples): 18.800
+2021-06-29 04:58:21,249   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 04:58:21,301   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 04:58:21,468   INFO  ==> Done (loaded 127/127)
+2021-06-29 04:59:45,063   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-29 04:59:45,065   INFO  recall_roi_0.3: 0.000000
+2021-06-29 04:59:45,065   INFO  recall_rcnn_0.3: 0.928543
+2021-06-29 04:59:45,065   INFO  recall_roi_0.5: 0.000000
+2021-06-29 04:59:45,065   INFO  recall_rcnn_0.5: 0.859136
+2021-06-29 04:59:45,065   INFO  recall_roi_0.7: 0.000000
+2021-06-29 04:59:45,066   INFO  recall_rcnn_0.7: 0.595798
+2021-06-29 04:59:45,071   INFO  Average predicted number of objects(3769 samples): 27.312
+2021-06-29 05:00:31,392   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 05:00:31,428   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 05:00:31,574   INFO  ==> Done (loaded 127/127)
+2021-06-29 05:01:55,062   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-29 05:01:55,063   INFO  recall_roi_0.3: 0.000000
+2021-06-29 05:01:55,063   INFO  recall_rcnn_0.3: 0.925184
+2021-06-29 05:01:55,063   INFO  recall_roi_0.5: 0.000000
+2021-06-29 05:01:55,063   INFO  recall_rcnn_0.5: 0.860274
+2021-06-29 05:01:55,063   INFO  recall_roi_0.7: 0.000000
+2021-06-29 05:01:55,063   INFO  recall_rcnn_0.7: 0.597962
+2021-06-29 05:01:55,066   INFO  Average predicted number of objects(3769 samples): 23.612
+2021-06-29 05:02:37,746   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 05:02:37,782   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 05:02:37,934   INFO  ==> Done (loaded 127/127)
+2021-06-29 05:04:01,307   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-29 05:04:01,309   INFO  recall_roi_0.3: 0.000000
+2021-06-29 05:04:01,309   INFO  recall_rcnn_0.3: 0.929625
+2021-06-29 05:04:01,309   INFO  recall_roi_0.5: 0.000000
+2021-06-29 05:04:01,309   INFO  recall_rcnn_0.5: 0.856346
+2021-06-29 05:04:01,309   INFO  recall_roi_0.7: 0.000000
+2021-06-29 05:04:01,309   INFO  recall_rcnn_0.7: 0.598075
+2021-06-29 05:04:01,312   INFO  Average predicted number of objects(3769 samples): 26.525
+2021-06-29 05:04:47,154   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 05:04:47,193   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 05:04:47,342   INFO  ==> Done (loaded 127/127)
+2021-06-29 05:06:10,610   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-29 05:06:10,611   INFO  recall_roi_0.3: 0.000000
+2021-06-29 05:06:10,611   INFO  recall_rcnn_0.3: 0.914365
+2021-06-29 05:06:10,612   INFO  recall_roi_0.5: 0.000000
+2021-06-29 05:06:10,612   INFO  recall_rcnn_0.5: 0.842111
+2021-06-29 05:06:10,612   INFO  recall_roi_0.7: 0.000000
+2021-06-29 05:06:10,612   INFO  recall_rcnn_0.7: 0.563059
+2021-06-29 05:06:10,615   INFO  Average predicted number of objects(3769 samples): 18.086
+2021-06-29 05:06:48,419   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 05:06:48,455   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 05:06:48,603   INFO  ==> Done (loaded 127/127)
+2021-06-29 05:08:12,242   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-29 05:08:12,243   INFO  recall_roi_0.3: 0.000000
+2021-06-29 05:08:12,243   INFO  recall_rcnn_0.3: 0.930593
+2021-06-29 05:08:12,243   INFO  recall_roi_0.5: 0.000000
+2021-06-29 05:08:12,243   INFO  recall_rcnn_0.5: 0.855036
+2021-06-29 05:08:12,243   INFO  recall_roi_0.7: 0.000000
+2021-06-29 05:08:12,243   INFO  recall_rcnn_0.7: 0.591528
+2021-06-29 05:08:12,246   INFO  Average predicted number of objects(3769 samples): 28.813
+2021-06-29 05:08:59,982   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 05:09:00,018   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 05:09:00,165   INFO  ==> Done (loaded 127/127)
+2021-06-29 05:10:24,208   INFO  Generate label finished(sec_per_example: 0.0223 second).
+2021-06-29 05:10:24,209   INFO  recall_roi_0.3: 0.000000
+2021-06-29 05:10:24,209   INFO  recall_rcnn_0.3: 0.926778
+2021-06-29 05:10:24,210   INFO  recall_roi_0.5: 0.000000
+2021-06-29 05:10:24,210   INFO  recall_rcnn_0.5: 0.857428
+2021-06-29 05:10:24,210   INFO  recall_roi_0.7: 0.000000
+2021-06-29 05:10:24,210   INFO  recall_rcnn_0.7: 0.587941
+2021-06-29 05:10:24,216   INFO  Average predicted number of objects(3769 samples): 26.017
+2021-06-29 05:11:09,191   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 05:11:09,247   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 05:11:09,434   INFO  ==> Done (loaded 127/127)
+2021-06-29 05:12:33,470   INFO  Generate label finished(sec_per_example: 0.0223 second).
+2021-06-29 05:12:33,471   INFO  recall_roi_0.3: 0.000000
+2021-06-29 05:12:33,471   INFO  recall_rcnn_0.3: 0.910380
+2021-06-29 05:12:33,471   INFO  recall_roi_0.5: 0.000000
+2021-06-29 05:12:33,472   INFO  recall_rcnn_0.5: 0.828731
+2021-06-29 05:12:33,472   INFO  recall_roi_0.7: 0.000000
+2021-06-29 05:12:33,472   INFO  recall_rcnn_0.7: 0.524455
+2021-06-29 05:12:33,475   INFO  Average predicted number of objects(3769 samples): 38.516
+2021-06-29 05:13:29,560   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 05:13:29,597   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 05:13:29,763   INFO  ==> Done (loaded 127/127)
+2021-06-29 05:14:53,620   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-29 05:14:53,621   INFO  recall_roi_0.3: 0.000000
+2021-06-29 05:14:53,621   INFO  recall_rcnn_0.3: 0.927006
+2021-06-29 05:14:53,621   INFO  recall_roi_0.5: 0.000000
+2021-06-29 05:14:53,621   INFO  recall_rcnn_0.5: 0.852873
+2021-06-29 05:14:53,621   INFO  recall_roi_0.7: 0.000000
+2021-06-29 05:14:53,621   INFO  recall_rcnn_0.7: 0.547799
+2021-06-29 05:14:53,624   INFO  Average predicted number of objects(3769 samples): 30.735
+2021-06-29 05:15:43,078   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 05:15:43,117   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 05:15:43,268   INFO  ==> Done (loaded 127/127)
+2021-06-29 05:17:07,036   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-29 05:17:07,037   INFO  recall_roi_0.3: 0.000000
+2021-06-29 05:17:07,037   INFO  recall_rcnn_0.3: 0.904401
+2021-06-29 05:17:07,037   INFO  recall_roi_0.5: 0.000000
+2021-06-29 05:17:07,037   INFO  recall_rcnn_0.5: 0.830610
+2021-06-29 05:17:07,037   INFO  recall_roi_0.7: 0.000000
+2021-06-29 05:17:07,037   INFO  recall_rcnn_0.7: 0.548596
+2021-06-29 05:17:07,040   INFO  Average predicted number of objects(3769 samples): 15.421
+2021-06-29 05:17:42,422   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 05:17:42,460   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 05:17:42,607   INFO  ==> Done (loaded 127/127)
+2021-06-29 05:19:06,304   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-29 05:19:06,304   INFO  recall_roi_0.3: 0.000000
+2021-06-29 05:19:06,304   INFO  recall_rcnn_0.3: 0.913853
+2021-06-29 05:19:06,305   INFO  recall_roi_0.5: 0.000000
+2021-06-29 05:19:06,305   INFO  recall_rcnn_0.5: 0.824802
+2021-06-29 05:19:06,305   INFO  recall_roi_0.7: 0.000000
+2021-06-29 05:19:06,305   INFO  recall_rcnn_0.7: 0.531686
+2021-06-29 05:19:06,308   INFO  Average predicted number of objects(3769 samples): 37.522
+2021-06-29 05:20:01,556   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 05:20:01,611   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 05:20:01,777   INFO  ==> Done (loaded 127/127)
+2021-06-29 05:21:26,103   INFO  Generate label finished(sec_per_example: 0.0223 second).
+2021-06-29 05:21:26,104   INFO  recall_roi_0.3: 0.000000
+2021-06-29 05:21:26,104   INFO  recall_rcnn_0.3: 0.911006
+2021-06-29 05:21:26,104   INFO  recall_roi_0.5: 0.000000
+2021-06-29 05:21:26,104   INFO  recall_rcnn_0.5: 0.809543
+2021-06-29 05:21:26,104   INFO  recall_roi_0.7: 0.000000
+2021-06-29 05:21:26,104   INFO  recall_rcnn_0.7: 0.535330
+2021-06-29 05:21:26,108   INFO  Average predicted number of objects(3769 samples): 34.986
+2021-06-29 05:22:19,009   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 05:22:19,045   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 05:22:19,195   INFO  ==> Done (loaded 127/127)
+2021-06-29 05:23:42,961   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-29 05:23:42,961   INFO  recall_roi_0.3: 0.000000
+2021-06-29 05:23:42,962   INFO  recall_rcnn_0.3: 0.921483
+2021-06-29 05:23:42,962   INFO  recall_roi_0.5: 0.000000
+2021-06-29 05:23:42,962   INFO  recall_rcnn_0.5: 0.833514
+2021-06-29 05:23:42,962   INFO  recall_roi_0.7: 0.000000
+2021-06-29 05:23:42,962   INFO  recall_rcnn_0.7: 0.513010
+2021-06-29 05:23:42,965   INFO  Average predicted number of objects(3769 samples): 28.214
+2021-06-29 05:24:29,638   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 05:24:29,674   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 05:24:29,820   INFO  ==> Done (loaded 127/127)
+2021-06-29 05:25:54,365   INFO  Generate label finished(sec_per_example: 0.0224 second).
+2021-06-29 05:25:54,366   INFO  recall_roi_0.3: 0.000000
+2021-06-29 05:25:54,366   INFO  recall_rcnn_0.3: 0.922052
+2021-06-29 05:25:54,366   INFO  recall_roi_0.5: 0.000000
+2021-06-29 05:25:54,366   INFO  recall_rcnn_0.5: 0.828503
+2021-06-29 05:25:54,366   INFO  recall_roi_0.7: 0.000000
+2021-06-29 05:25:54,366   INFO  recall_rcnn_0.7: 0.511701
+2021-06-29 05:25:54,369   INFO  Average predicted number of objects(3769 samples): 52.645
+2021-06-29 05:27:02,904   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 05:27:02,941   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 05:27:03,102   INFO  ==> Done (loaded 127/127)
+2021-06-29 05:28:27,836   INFO  Generate label finished(sec_per_example: 0.0225 second).
+2021-06-29 05:28:27,837   INFO  recall_roi_0.3: 0.000000
+2021-06-29 05:28:27,837   INFO  recall_rcnn_0.3: 0.913739
+2021-06-29 05:28:27,837   INFO  recall_roi_0.5: 0.000000
+2021-06-29 05:28:27,837   INFO  recall_rcnn_0.5: 0.829414
+2021-06-29 05:28:27,837   INFO  recall_roi_0.7: 0.000000
+2021-06-29 05:28:27,837   INFO  recall_rcnn_0.7: 0.510904
+2021-06-29 05:28:27,841   INFO  Average predicted number of objects(3769 samples): 60.659
+2021-06-29 05:29:43,644   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 05:29:43,681   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 05:29:43,846   INFO  ==> Done (loaded 127/127)
+2021-06-29 05:31:07,495   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-29 05:31:07,496   INFO  recall_roi_0.3: 0.000000
+2021-06-29 05:31:07,496   INFO  recall_rcnn_0.3: 0.893128
+2021-06-29 05:31:07,496   INFO  recall_roi_0.5: 0.000000
+2021-06-29 05:31:07,496   INFO  recall_rcnn_0.5: 0.810340
+2021-06-29 05:31:07,496   INFO  recall_roi_0.7: 0.000000
+2021-06-29 05:31:07,496   INFO  recall_rcnn_0.7: 0.541650
+2021-06-29 05:31:07,499   INFO  Average predicted number of objects(3769 samples): 15.202
+2021-06-29 05:31:42,467   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 05:31:42,504   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 05:31:42,652   INFO  ==> Done (loaded 127/127)
+2021-06-29 05:33:06,486   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-29 05:33:06,487   INFO  recall_roi_0.3: 0.000000
+2021-06-29 05:33:06,487   INFO  recall_rcnn_0.3: 0.914138
+2021-06-29 05:33:06,487   INFO  recall_roi_0.5: 0.000000
+2021-06-29 05:33:06,487   INFO  recall_rcnn_0.5: 0.831350
+2021-06-29 05:33:06,487   INFO  recall_roi_0.7: 0.000000
+2021-06-29 05:33:06,487   INFO  recall_rcnn_0.7: 0.537892
+2021-06-29 05:33:06,490   INFO  Average predicted number of objects(3769 samples): 34.734
+2021-06-29 05:33:59,094   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 05:33:59,133   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 05:33:59,284   INFO  ==> Done (loaded 127/127)
+2021-06-29 05:35:22,728   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-29 05:35:22,728   INFO  recall_roi_0.3: 0.000000
+2021-06-29 05:35:22,728   INFO  recall_rcnn_0.3: 0.911234
+2021-06-29 05:35:22,728   INFO  recall_roi_0.5: 0.000000
+2021-06-29 05:35:22,729   INFO  recall_rcnn_0.5: 0.795992
+2021-06-29 05:35:22,729   INFO  recall_roi_0.7: 0.000000
+2021-06-29 05:35:22,729   INFO  recall_rcnn_0.7: 0.474805
+2021-06-29 05:35:22,732   INFO  Average predicted number of objects(3769 samples): 45.578
+2021-06-29 05:36:24,427   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 05:36:24,471   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 05:36:24,636   INFO  ==> Done (loaded 127/127)
+2021-06-29 05:37:48,237   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-29 05:37:48,238   INFO  recall_roi_0.3: 0.000000
+2021-06-29 05:37:48,238   INFO  recall_rcnn_0.3: 0.849912
+2021-06-29 05:37:48,238   INFO  recall_roi_0.5: 0.000000
+2021-06-29 05:37:48,238   INFO  recall_rcnn_0.5: 0.691226
+2021-06-29 05:37:48,238   INFO  recall_roi_0.7: 0.000000
+2021-06-29 05:37:48,238   INFO  recall_rcnn_0.7: 0.311621
+2021-06-29 05:37:48,242   INFO  Average predicted number of objects(3769 samples): 51.789
+2021-06-29 05:38:53,839   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 05:38:53,877   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 05:38:54,042   INFO  ==> Done (loaded 127/127)
+2021-06-29 05:40:19,257   INFO  Generate label finished(sec_per_example: 0.0226 second).
+2021-06-29 05:40:19,258   INFO  recall_roi_0.3: 0.000000
+2021-06-29 05:40:19,258   INFO  recall_rcnn_0.3: 0.894608
+2021-06-29 05:40:19,258   INFO  recall_roi_0.5: 0.000000
+2021-06-29 05:40:19,258   INFO  recall_rcnn_0.5: 0.759893
+2021-06-29 05:40:19,258   INFO  recall_roi_0.7: 0.000000
+2021-06-29 05:40:19,258   INFO  recall_rcnn_0.7: 0.379491
+2021-06-29 05:40:19,262   INFO  Average predicted number of objects(3769 samples): 92.034
+2021-06-29 05:42:01,224   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 05:42:01,266   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 05:42:01,463   INFO  ==> Done (loaded 127/127)
+2021-06-29 05:43:25,867   INFO  Generate label finished(sec_per_example: 0.0224 second).
+2021-06-29 05:43:25,869   INFO  recall_roi_0.3: 0.000000
+2021-06-29 05:43:25,869   INFO  recall_rcnn_0.3: 0.899220
+2021-06-29 05:43:25,869   INFO  recall_roi_0.5: 0.000000
+2021-06-29 05:43:25,869   INFO  recall_rcnn_0.5: 0.757729
+2021-06-29 05:43:25,870   INFO  recall_roi_0.7: 0.000000
+2021-06-29 05:43:25,870   INFO  recall_rcnn_0.7: 0.384786
+2021-06-29 05:43:25,875   INFO  Average predicted number of objects(3769 samples): 80.354
+2021-06-29 05:44:57,786   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 05:44:57,826   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 05:44:57,991   INFO  ==> Done (loaded 127/127)
+2021-06-29 05:46:21,705   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-29 05:46:21,707   INFO  recall_roi_0.3: 0.000000
+2021-06-29 05:46:21,707   INFO  recall_rcnn_0.3: 0.907590
+2021-06-29 05:46:21,707   INFO  recall_roi_0.5: 0.000000
+2021-06-29 05:46:21,707   INFO  recall_rcnn_0.5: 0.797529
+2021-06-29 05:46:21,708   INFO  recall_roi_0.7: 0.000000
+2021-06-29 05:46:21,708   INFO  recall_rcnn_0.7: 0.489324
+2021-06-29 05:46:21,713   INFO  Average predicted number of objects(3769 samples): 68.760
+2021-06-29 05:47:43,863   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 05:47:43,902   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 05:47:44,065   INFO  ==> Done (loaded 127/127)
+2021-06-29 05:49:07,453   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-29 05:49:07,454   INFO  recall_roi_0.3: 0.000000
+2021-06-29 05:49:07,455   INFO  recall_rcnn_0.3: 0.877811
+2021-06-29 05:49:07,455   INFO  recall_roi_0.5: 0.000000
+2021-06-29 05:49:07,455   INFO  recall_rcnn_0.5: 0.750840
+2021-06-29 05:49:07,455   INFO  recall_roi_0.7: 0.000000
+2021-06-29 05:49:07,456   INFO  recall_rcnn_0.7: 0.438365
+2021-06-29 05:49:07,461   INFO  Average predicted number of objects(3769 samples): 25.377
+2021-06-29 05:49:50,417   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 05:49:50,461   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 05:49:50,645   INFO  ==> Done (loaded 127/127)
+2021-06-29 05:51:14,800   INFO  Generate label finished(sec_per_example: 0.0223 second).
+2021-06-29 05:51:14,801   INFO  recall_roi_0.3: 0.000000
+2021-06-29 05:51:14,802   INFO  recall_rcnn_0.3: 0.843592
+2021-06-29 05:51:14,802   INFO  recall_roi_0.5: 0.000000
+2021-06-29 05:51:14,802   INFO  recall_rcnn_0.5: 0.708421
+2021-06-29 05:51:14,802   INFO  recall_roi_0.7: 0.000000
+2021-06-29 05:51:14,802   INFO  recall_rcnn_0.7: 0.246541
+2021-06-29 05:51:14,808   INFO  Average predicted number of objects(3769 samples): 65.841
+2021-06-29 05:52:36,686   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 05:52:36,734   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 05:52:36,938   INFO  ==> Done (loaded 127/127)
+2021-06-29 05:54:00,829   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-29 05:54:00,830   INFO  recall_roi_0.3: 0.000000
+2021-06-29 05:54:00,830   INFO  recall_rcnn_0.3: 0.849228
+2021-06-29 05:54:00,830   INFO  recall_roi_0.5: 0.000000
+2021-06-29 05:54:00,830   INFO  recall_rcnn_0.5: 0.699254
+2021-06-29 05:54:00,830   INFO  recall_roi_0.7: 0.000000
+2021-06-29 05:54:00,830   INFO  recall_rcnn_0.7: 0.220236
+2021-06-29 05:54:00,834   INFO  Average predicted number of objects(3769 samples): 59.603
+2021-06-29 05:55:11,263   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 05:55:11,302   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 05:55:11,471   INFO  ==> Done (loaded 127/127)
+2021-06-29 05:56:35,155   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-29 05:56:35,156   INFO  recall_roi_0.3: 0.000000
+2021-06-29 05:56:35,156   INFO  recall_rcnn_0.3: 0.885441
+2021-06-29 05:56:35,156   INFO  recall_roi_0.5: 0.000000
+2021-06-29 05:56:35,156   INFO  recall_rcnn_0.5: 0.753174
+2021-06-29 05:56:35,156   INFO  recall_roi_0.7: 0.000000
+2021-06-29 05:56:35,156   INFO  recall_rcnn_0.7: 0.279053
+2021-06-29 05:56:35,159   INFO  Average predicted number of objects(3769 samples): 39.149
+2021-06-29 05:57:30,515   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 05:57:30,554   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 05:57:30,717   INFO  ==> Done (loaded 127/127)
+2021-06-29 05:58:55,418   INFO  Generate label finished(sec_per_example: 0.0224 second).
+2021-06-29 05:58:55,418   INFO  recall_roi_0.3: 0.000000
+2021-06-29 05:58:55,418   INFO  recall_rcnn_0.3: 0.874053
+2021-06-29 05:58:55,418   INFO  recall_roi_0.5: 0.000000
+2021-06-29 05:58:55,419   INFO  recall_rcnn_0.5: 0.753914
+2021-06-29 05:58:55,419   INFO  recall_roi_0.7: 0.000000
+2021-06-29 05:58:55,419   INFO  recall_rcnn_0.7: 0.328702
+2021-06-29 05:58:55,422   INFO  Average predicted number of objects(3769 samples): 95.785
+2021-06-29 06:00:40,138   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 06:00:40,175   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 06:00:40,340   INFO  ==> Done (loaded 127/127)
+2021-06-29 06:02:03,568   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-29 06:02:03,570   INFO  recall_roi_0.3: 0.000000
+2021-06-29 06:02:03,570   INFO  recall_rcnn_0.3: 0.731196
+2021-06-29 06:02:03,570   INFO  recall_roi_0.5: 0.000000
+2021-06-29 06:02:03,570   INFO  recall_rcnn_0.5: 0.630587
+2021-06-29 06:02:03,570   INFO  recall_roi_0.7: 0.000000
+2021-06-29 06:02:03,571   INFO  recall_rcnn_0.7: 0.275522
+2021-06-29 06:02:03,575   INFO  Average predicted number of objects(3769 samples): 13.346
+2021-06-29 06:02:38,874   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 06:02:38,912   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 06:02:39,063   INFO  ==> Done (loaded 127/127)
+2021-06-29 06:04:02,834   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-29 06:04:02,835   INFO  recall_roi_0.3: 0.000000
+2021-06-29 06:04:02,835   INFO  recall_rcnn_0.3: 0.726186
+2021-06-29 06:04:02,835   INFO  recall_roi_0.5: 0.000000
+2021-06-29 06:04:02,835   INFO  recall_rcnn_0.5: 0.499687
+2021-06-29 06:04:02,835   INFO  recall_roi_0.7: 0.000000
+2021-06-29 06:04:02,835   INFO  recall_rcnn_0.7: 0.166259
+2021-06-29 06:04:02,839   INFO  Average predicted number of objects(3769 samples): 24.658
+2021-06-29 06:04:42,593   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 06:04:42,636   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 06:04:42,797   INFO  ==> Done (loaded 127/127)
+2021-06-29 06:06:05,868   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-29 06:06:05,869   INFO  recall_roi_0.3: 0.000000
+2021-06-29 06:06:05,869   INFO  recall_rcnn_0.3: 0.772078
+2021-06-29 06:06:05,869   INFO  recall_roi_0.5: 0.000000
+2021-06-29 06:06:05,869   INFO  recall_rcnn_0.5: 0.659967
+2021-06-29 06:06:05,869   INFO  recall_roi_0.7: 0.000000
+2021-06-29 06:06:05,869   INFO  recall_rcnn_0.7: 0.293230
+2021-06-29 06:06:05,872   INFO  Average predicted number of objects(3769 samples): 14.474
+2021-06-29 06:06:43,560   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 06:06:43,598   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 06:06:43,749   INFO  ==> Done (loaded 127/127)
+2021-06-29 06:08:07,126   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-29 06:08:07,126   INFO  recall_roi_0.3: 0.000000
+2021-06-29 06:08:07,126   INFO  recall_rcnn_0.3: 0.793429
+2021-06-29 06:08:07,126   INFO  recall_roi_0.5: 0.000000
+2021-06-29 06:08:07,126   INFO  recall_rcnn_0.5: 0.617719
+2021-06-29 06:08:07,126   INFO  recall_roi_0.7: 0.000000
+2021-06-29 06:08:07,126   INFO  recall_rcnn_0.7: 0.228549
+2021-06-29 06:08:07,130   INFO  Average predicted number of objects(3769 samples): 108.885
+2021-06-29 06:10:01,061   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 06:10:01,102   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 06:10:01,266   INFO  ==> Done (loaded 127/127)
+2021-06-29 06:11:24,651   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-29 06:11:24,652   INFO  recall_roi_0.3: 0.000000
+2021-06-29 06:11:24,652   INFO  recall_rcnn_0.3: 0.853271
+2021-06-29 06:11:24,652   INFO  recall_roi_0.5: 0.000000
+2021-06-29 06:11:24,652   INFO  recall_rcnn_0.5: 0.694528
+2021-06-29 06:11:24,652   INFO  recall_roi_0.7: 0.000000
+2021-06-29 06:11:24,653   INFO  recall_rcnn_0.7: 0.192678
+2021-06-29 06:11:24,657   INFO  Average predicted number of objects(3769 samples): 63.627
+2021-06-29 06:12:40,101   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 06:12:40,142   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 06:12:40,311   INFO  ==> Done (loaded 127/127)
+2021-06-29 06:14:04,421   INFO  Generate label finished(sec_per_example: 0.0223 second).
+2021-06-29 06:14:04,422   INFO  recall_roi_0.3: 0.000000
+2021-06-29 06:14:04,422   INFO  recall_rcnn_0.3: 0.598132
+2021-06-29 06:14:04,422   INFO  recall_roi_0.5: 0.000000
+2021-06-29 06:14:04,423   INFO  recall_rcnn_0.5: 0.404487
+2021-06-29 06:14:04,423   INFO  recall_roi_0.7: 0.000000
+2021-06-29 06:14:04,423   INFO  recall_rcnn_0.7: 0.125206
+2021-06-29 06:14:04,429   INFO  Average predicted number of objects(3769 samples): 71.218
+2021-06-29 06:15:20,188   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 06:15:20,245   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 06:15:20,431   INFO  ==> Done (loaded 127/127)
+2021-06-29 06:16:44,169   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-29 06:16:44,170   INFO  recall_roi_0.3: 0.000000
+2021-06-29 06:16:44,170   INFO  recall_rcnn_0.3: 0.842908
+2021-06-29 06:16:44,170   INFO  recall_roi_0.5: 0.000000
+2021-06-29 06:16:44,170   INFO  recall_rcnn_0.5: 0.666116
+2021-06-29 06:16:44,170   INFO  recall_roi_0.7: 0.000000
+2021-06-29 06:16:44,170   INFO  recall_rcnn_0.7: 0.169504
+2021-06-29 06:16:44,173   INFO  Average predicted number of objects(3769 samples): 66.529
+2021-06-29 06:18:07,884   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 06:18:07,932   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 06:18:08,135   INFO  ==> Done (loaded 127/127)
+2021-06-29 06:19:31,578   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-29 06:19:31,579   INFO  recall_roi_0.3: 0.000000
+2021-06-29 06:19:31,579   INFO  recall_rcnn_0.3: 0.850994
+2021-06-29 06:19:31,579   INFO  recall_roi_0.5: 0.000000
+2021-06-29 06:19:31,579   INFO  recall_rcnn_0.5: 0.700051
+2021-06-29 06:19:31,579   INFO  recall_roi_0.7: 0.000000
+2021-06-29 06:19:31,579   INFO  recall_rcnn_0.7: 0.279565
+2021-06-29 06:19:31,583   INFO  Average predicted number of objects(3769 samples): 46.006
+2021-06-29 06:20:32,493   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 06:20:32,533   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 06:20:32,697   INFO  ==> Done (loaded 127/127)
+2021-06-29 06:21:57,788   INFO  Generate label finished(sec_per_example: 0.0226 second).
+2021-06-29 06:21:57,789   INFO  recall_roi_0.3: 0.000000
+2021-06-29 06:21:57,789   INFO  recall_rcnn_0.3: 0.847008
+2021-06-29 06:21:57,789   INFO  recall_roi_0.5: 0.000000
+2021-06-29 06:21:57,789   INFO  recall_rcnn_0.5: 0.705802
+2021-06-29 06:21:57,789   INFO  recall_roi_0.7: 0.000000
+2021-06-29 06:21:57,789   INFO  recall_rcnn_0.7: 0.141206
+2021-06-29 06:21:57,792   INFO  Average predicted number of objects(3769 samples): 85.695
+2021-06-29 06:23:33,657   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 06:23:33,700   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 06:23:33,859   INFO  ==> Done (loaded 127/127)
+2021-06-29 06:24:57,471   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-29 06:24:57,473   INFO  recall_roi_0.3: 0.000000
+2021-06-29 06:24:57,473   INFO  recall_rcnn_0.3: 0.864260
+2021-06-29 06:24:57,473   INFO  recall_roi_0.5: 0.000000
+2021-06-29 06:24:57,473   INFO  recall_rcnn_0.5: 0.702386
+2021-06-29 06:24:57,473   INFO  recall_roi_0.7: 0.000000
+2021-06-29 06:24:57,473   INFO  recall_rcnn_0.7: 0.154700
+2021-06-29 06:24:57,478   INFO  Average predicted number of objects(3769 samples): 44.929
+2021-06-29 06:25:56,613   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 06:25:56,653   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 06:25:56,815   INFO  ==> Done (loaded 127/127)
+2021-06-29 06:27:41,998   INFO  Generate label finished(sec_per_example: 0.0279 second).
+2021-06-29 06:27:41,998   INFO  recall_roi_0.3: 0.000000
+2021-06-29 06:27:41,998   INFO  recall_rcnn_0.3: 0.771622
+2021-06-29 06:27:41,998   INFO  recall_roi_0.5: 0.000000
+2021-06-29 06:27:41,999   INFO  recall_rcnn_0.5: 0.508057
+2021-06-29 06:27:41,999   INFO  recall_roi_0.7: 0.000000
+2021-06-29 06:27:41,999   INFO  recall_rcnn_0.7: 0.073735
+2021-06-29 06:27:42,002   INFO  Average predicted number of objects(3769 samples): 216.392
+2021-06-29 06:31:07,137   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 06:31:07,176   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 06:31:07,342   INFO  ==> Done (loaded 127/127)
+2021-06-29 06:32:31,307   INFO  Generate label finished(sec_per_example: 0.0223 second).
+2021-06-29 06:32:31,308   INFO  recall_roi_0.3: 0.000000
+2021-06-29 06:32:31,308   INFO  recall_rcnn_0.3: 0.757615
+2021-06-29 06:32:31,308   INFO  recall_roi_0.5: 0.000000
+2021-06-29 06:32:31,308   INFO  recall_rcnn_0.5: 0.582987
+2021-06-29 06:32:31,308   INFO  recall_roi_0.7: 0.000000
+2021-06-29 06:32:31,308   INFO  recall_rcnn_0.7: 0.165348
+2021-06-29 06:32:31,312   INFO  Average predicted number of objects(3769 samples): 84.200
+2021-06-29 06:34:02,753   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 06:34:02,810   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 06:34:03,036   INFO  ==> Done (loaded 127/127)
+2021-06-29 06:35:26,384   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-29 06:35:26,385   INFO  recall_roi_0.3: 0.000000
+2021-06-29 06:35:26,385   INFO  recall_rcnn_0.3: 0.453795
+2021-06-29 06:35:26,385   INFO  recall_roi_0.5: 0.000000
+2021-06-29 06:35:26,385   INFO  recall_rcnn_0.5: 0.270113
+2021-06-29 06:35:26,385   INFO  recall_roi_0.7: 0.000000
+2021-06-29 06:35:26,385   INFO  recall_rcnn_0.7: 0.042760
+2021-06-29 06:35:26,389   INFO  Average predicted number of objects(3769 samples): 35.670
+2021-06-29 06:36:11,250   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 06:36:11,288   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 06:36:11,438   INFO  ==> Done (loaded 127/127)
+2021-06-29 06:37:34,965   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-29 06:37:34,965   INFO  recall_roi_0.3: 0.000000
+2021-06-29 06:37:34,966   INFO  recall_rcnn_0.3: 0.811820
+2021-06-29 06:37:34,966   INFO  recall_roi_0.5: 0.000000
+2021-06-29 06:37:34,966   INFO  recall_rcnn_0.5: 0.619086
+2021-06-29 06:37:34,966   INFO  recall_roi_0.7: 0.000000
+2021-06-29 06:37:34,966   INFO  recall_rcnn_0.7: 0.183055
+2021-06-29 06:37:34,969   INFO  Average predicted number of objects(3769 samples): 61.571
+2021-06-29 06:38:47,579   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 06:38:47,632   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 06:38:47,823   INFO  ==> Done (loaded 127/127)
+2021-06-29 06:40:24,849   INFO  Generate label finished(sec_per_example: 0.0257 second).
+2021-06-29 06:40:24,850   INFO  recall_roi_0.3: 0.000000
+2021-06-29 06:40:24,851   INFO  recall_rcnn_0.3: 0.756078
+2021-06-29 06:40:24,851   INFO  recall_roi_0.5: 0.000000
+2021-06-29 06:40:24,851   INFO  recall_rcnn_0.5: 0.525480
+2021-06-29 06:40:24,851   INFO  recall_roi_0.7: 0.000000
+2021-06-29 06:40:24,852   INFO  recall_rcnn_0.7: 0.128680
+2021-06-29 06:40:24,858   INFO  Average predicted number of objects(3769 samples): 111.643
+2021-06-29 06:42:18,681   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 06:42:18,726   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 06:42:18,890   INFO  ==> Done (loaded 127/127)
+2021-06-29 06:43:42,725   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-29 06:43:42,726   INFO  recall_roi_0.3: 0.000000
+2021-06-29 06:43:42,726   INFO  recall_rcnn_0.3: 0.620794
+2021-06-29 06:43:42,726   INFO  recall_roi_0.5: 0.000000
+2021-06-29 06:43:42,726   INFO  recall_rcnn_0.5: 0.431304
+2021-06-29 06:43:42,726   INFO  recall_roi_0.7: 0.000000
+2021-06-29 06:43:42,726   INFO  recall_rcnn_0.7: 0.069521
+2021-06-29 06:43:42,729   INFO  Average predicted number of objects(3769 samples): 93.304
+2021-06-29 06:45:19,462   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 06:45:19,507   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 06:45:19,674   INFO  ==> Done (loaded 127/127)
+2021-06-29 06:46:42,823   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-29 06:46:42,824   INFO  recall_roi_0.3: 0.000000
+2021-06-29 06:46:42,824   INFO  recall_rcnn_0.3: 0.696521
+2021-06-29 06:46:42,824   INFO  recall_roi_0.5: 0.000000
+2021-06-29 06:46:42,824   INFO  recall_rcnn_0.5: 0.529750
+2021-06-29 06:46:42,824   INFO  recall_roi_0.7: 0.000000
+2021-06-29 06:46:42,825   INFO  recall_rcnn_0.7: 0.176792
+2021-06-29 06:46:42,828   INFO  Average predicted number of objects(3769 samples): 45.896
+2021-06-29 06:47:40,878   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 06:47:40,931   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 06:47:41,108   INFO  ==> Done (loaded 127/127)
+2021-06-29 06:49:06,108   INFO  Generate label finished(sec_per_example: 0.0225 second).
+2021-06-29 06:49:06,109   INFO  recall_roi_0.3: 0.000000
+2021-06-29 06:49:06,109   INFO  recall_rcnn_0.3: 0.751181
+2021-06-29 06:49:06,109   INFO  recall_roi_0.5: 0.000000
+2021-06-29 06:49:06,109   INFO  recall_rcnn_0.5: 0.446735
+2021-06-29 06:49:06,110   INFO  recall_roi_0.7: 0.000000
+2021-06-29 06:49:06,110   INFO  recall_rcnn_0.7: 0.050048
+2021-06-29 06:49:06,113   INFO  Average predicted number of objects(3769 samples): 118.120
+2021-06-29 06:51:02,069   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 06:51:02,114   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 06:51:02,279   INFO  ==> Done (loaded 127/127)
+2021-06-29 06:52:26,454   INFO  Generate label finished(sec_per_example: 0.0223 second).
+2021-06-29 06:52:26,455   INFO  recall_roi_0.3: 0.000000
+2021-06-29 06:52:26,455   INFO  recall_rcnn_0.3: 0.782554
+2021-06-29 06:52:26,455   INFO  recall_roi_0.5: 0.000000
+2021-06-29 06:52:26,456   INFO  recall_rcnn_0.5: 0.546091
+2021-06-29 06:52:26,456   INFO  recall_roi_0.7: 0.000000
+2021-06-29 06:52:26,456   INFO  recall_rcnn_0.7: 0.091955
+2021-06-29 06:52:26,459   INFO  Average predicted number of objects(3769 samples): 78.153
+2021-06-29 06:53:50,903   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 06:53:50,944   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 06:53:51,109   INFO  ==> Done (loaded 127/127)
+2021-06-29 06:55:14,412   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-29 06:55:14,413   INFO  recall_roi_0.3: 0.000000
+2021-06-29 06:55:14,413   INFO  recall_rcnn_0.3: 0.832204
+2021-06-29 06:55:14,414   INFO  recall_roi_0.5: 0.000000
+2021-06-29 06:55:14,414   INFO  recall_rcnn_0.5: 0.632238
+2021-06-29 06:55:14,414   INFO  recall_roi_0.7: 0.000000
+2021-06-29 06:55:14,414   INFO  recall_rcnn_0.7: 0.207425
+2021-06-29 06:55:14,419   INFO  Average predicted number of objects(3769 samples): 35.080
+2021-06-29 06:56:04,974   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 06:56:05,030   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 06:56:05,218   INFO  ==> Done (loaded 127/127)
+2021-06-29 06:57:44,233   INFO  Generate label finished(sec_per_example: 0.0262 second).
+2021-06-29 06:57:44,233   INFO  recall_roi_0.3: 0.000000
+2021-06-29 06:57:44,233   INFO  recall_rcnn_0.3: 0.473552
+2021-06-29 06:57:44,234   INFO  recall_roi_0.5: 0.000000
+2021-06-29 06:57:44,234   INFO  recall_rcnn_0.5: 0.261800
+2021-06-29 06:57:44,234   INFO  recall_roi_0.7: 0.000000
+2021-06-29 06:57:44,234   INFO  recall_rcnn_0.7: 0.032853
+2021-06-29 06:57:44,237   INFO  Average predicted number of objects(3769 samples): 117.389
+2021-06-29 06:59:33,634   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 06:59:33,677   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 06:59:33,840   INFO  ==> Done (loaded 127/127)
+2021-06-29 07:01:02,532   INFO  Generate label finished(sec_per_example: 0.0235 second).
+2021-06-29 07:01:02,533   INFO  recall_roi_0.3: 0.000000
+2021-06-29 07:01:02,533   INFO  recall_rcnn_0.3: 0.528327
+2021-06-29 07:01:02,533   INFO  recall_roi_0.5: 0.000000
+2021-06-29 07:01:02,533   INFO  recall_rcnn_0.5: 0.314582
+2021-06-29 07:01:02,533   INFO  recall_roi_0.7: 0.000000
+2021-06-29 07:01:02,533   INFO  recall_rcnn_0.7: 0.026078
+2021-06-29 07:01:02,537   INFO  Average predicted number of objects(3769 samples): 170.629
+2021-06-29 07:03:40,310   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 07:03:40,353   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 07:03:40,560   INFO  ==> Done (loaded 127/127)
+2021-06-29 07:05:10,828   INFO  Generate label finished(sec_per_example: 0.0239 second).
+2021-06-29 07:05:10,829   INFO  recall_roi_0.3: 0.000000
+2021-06-29 07:05:10,829   INFO  recall_rcnn_0.3: 0.297899
+2021-06-29 07:05:10,829   INFO  recall_roi_0.5: 0.000000
+2021-06-29 07:05:10,829   INFO  recall_rcnn_0.5: 0.150999
+2021-06-29 07:05:10,829   INFO  recall_roi_0.7: 0.000000
+2021-06-29 07:05:10,829   INFO  recall_rcnn_0.7: 0.017195
+2021-06-29 07:05:10,834   INFO  Average predicted number of objects(3769 samples): 80.706
+2021-06-29 07:06:26,908   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 07:06:26,949   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 07:06:27,114   INFO  ==> Done (loaded 127/127)
+2021-06-29 07:07:51,339   INFO  Generate label finished(sec_per_example: 0.0223 second).
+2021-06-29 07:07:51,340   INFO  recall_roi_0.3: 0.000000
+2021-06-29 07:07:51,340   INFO  recall_rcnn_0.3: 0.686215
+2021-06-29 07:07:51,340   INFO  recall_roi_0.5: 0.000000
+2021-06-29 07:07:51,340   INFO  recall_rcnn_0.5: 0.436827
+2021-06-29 07:07:51,340   INFO  recall_roi_0.7: 0.000000
+2021-06-29 07:07:51,340   INFO  recall_rcnn_0.7: 0.082389
+2021-06-29 07:07:51,343   INFO  Average predicted number of objects(3769 samples): 89.636
+2021-06-29 07:09:23,505   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 07:09:23,558   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 07:09:23,761   INFO  ==> Done (loaded 127/127)
+2021-06-29 07:10:50,114   INFO  Generate label finished(sec_per_example: 0.0229 second).
+2021-06-29 07:10:50,115   INFO  recall_roi_0.3: 0.000000
+2021-06-29 07:10:50,115   INFO  recall_rcnn_0.3: 0.557080
+2021-06-29 07:10:50,115   INFO  recall_roi_0.5: 0.000000
+2021-06-29 07:10:50,115   INFO  recall_rcnn_0.5: 0.391846
+2021-06-29 07:10:50,115   INFO  recall_roi_0.7: 0.000000
+2021-06-29 07:10:50,115   INFO  recall_rcnn_0.7: 0.098730
+2021-06-29 07:10:50,119   INFO  Average predicted number of objects(3769 samples): 62.798
+2021-06-29 07:11:57,689   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 07:11:57,729   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 07:11:57,893   INFO  ==> Done (loaded 127/127)
+2021-06-29 07:13:32,040   INFO  Generate label finished(sec_per_example: 0.0250 second).
+2021-06-29 07:13:32,041   INFO  recall_roi_0.3: 0.000000
+2021-06-29 07:13:32,041   INFO  recall_rcnn_0.3: 0.618175
+2021-06-29 07:13:32,041   INFO  recall_roi_0.5: 0.000000
+2021-06-29 07:13:32,041   INFO  recall_rcnn_0.5: 0.370039
+2021-06-29 07:13:32,041   INFO  recall_roi_0.7: 0.000000
+2021-06-29 07:13:32,042   INFO  recall_rcnn_0.7: 0.032227
+2021-06-29 07:13:32,045   INFO  Average predicted number of objects(3769 samples): 168.892
+2021-06-29 07:16:00,496   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 07:16:00,539   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 07:16:00,745   INFO  ==> Done (loaded 127/127)
+2021-06-29 07:17:24,103   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-29 07:17:24,103   INFO  recall_roi_0.3: 0.000000
+2021-06-29 07:17:24,104   INFO  recall_rcnn_0.3: 0.334795
+2021-06-29 07:17:24,104   INFO  recall_roi_0.5: 0.000000
+2021-06-29 07:17:24,104   INFO  recall_rcnn_0.5: 0.079258
+2021-06-29 07:17:24,104   INFO  recall_roi_0.7: 0.000000
+2021-06-29 07:17:24,104   INFO  recall_rcnn_0.7: 0.000911
+2021-06-29 07:17:24,107   INFO  Average predicted number of objects(3769 samples): 35.663
+2021-06-29 07:18:06,543   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 07:18:06,582   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 07:18:06,736   INFO  ==> Done (loaded 127/127)
+2021-06-29 07:19:32,234   INFO  Generate label finished(sec_per_example: 0.0227 second).
+2021-06-29 07:19:32,235   INFO  recall_roi_0.3: 0.000000
+2021-06-29 07:19:32,235   INFO  recall_rcnn_0.3: 0.345784
+2021-06-29 07:19:32,235   INFO  recall_roi_0.5: 0.000000
+2021-06-29 07:19:32,236   INFO  recall_rcnn_0.5: 0.185504
+2021-06-29 07:19:32,236   INFO  recall_roi_0.7: 0.000000
+2021-06-29 07:19:32,236   INFO  recall_rcnn_0.7: 0.030974
+2021-06-29 07:19:32,242   INFO  Average predicted number of objects(3769 samples): 91.341
+2021-06-29 07:20:57,622   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 07:20:57,660   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 07:20:57,824   INFO  ==> Done (loaded 127/127)
+2021-06-29 07:22:21,119   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-29 07:22:21,119   INFO  recall_roi_0.3: 0.000000
+2021-06-29 07:22:21,120   INFO  recall_rcnn_0.3: 0.435176
+2021-06-29 07:22:21,120   INFO  recall_roi_0.5: 0.000000
+2021-06-29 07:22:21,120   INFO  recall_rcnn_0.5: 0.304219
+2021-06-29 07:22:21,120   INFO  recall_roi_0.7: 0.000000
+2021-06-29 07:22:21,120   INFO  recall_rcnn_0.7: 0.051984
+2021-06-29 07:22:21,124   INFO  Average predicted number of objects(3769 samples): 29.182
+2021-06-29 07:23:02,229   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 07:23:02,271   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 07:23:02,423   INFO  ==> Done (loaded 127/127)
+2021-06-29 07:24:36,051   INFO  Generate label finished(sec_per_example: 0.0248 second).
+2021-06-29 07:24:36,052   INFO  recall_roi_0.3: 0.000000
+2021-06-29 07:24:36,052   INFO  recall_rcnn_0.3: 0.650572
+2021-06-29 07:24:36,052   INFO  recall_roi_0.5: 0.000000
+2021-06-29 07:24:36,052   INFO  recall_rcnn_0.5: 0.311279
+2021-06-29 07:24:36,052   INFO  recall_roi_0.7: 0.000000
+2021-06-29 07:24:36,052   INFO  recall_rcnn_0.7: 0.027956
+2021-06-29 07:24:36,056   INFO  Average predicted number of objects(3769 samples): 208.408
+2021-06-29 07:27:40,118   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 07:27:40,156   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 07:27:40,320   INFO  ==> Done (loaded 127/127)
+2021-06-29 07:29:26,333   INFO  Generate label finished(sec_per_example: 0.0281 second).
+2021-06-29 07:29:26,334   INFO  recall_roi_0.3: 0.000000
+2021-06-29 07:29:26,334   INFO  recall_rcnn_0.3: 0.544098
+2021-06-29 07:29:26,334   INFO  recall_roi_0.5: 0.000000
+2021-06-29 07:29:26,334   INFO  recall_rcnn_0.5: 0.213745
+2021-06-29 07:29:26,335   INFO  recall_roi_0.7: 0.000000
+2021-06-29 07:29:26,335   INFO  recall_rcnn_0.7: 0.013267
+2021-06-29 07:29:26,338   INFO  Average predicted number of objects(3769 samples): 147.093
+2021-06-29 07:31:42,618   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 07:31:42,661   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 07:31:42,828   INFO  ==> Done (loaded 127/127)
+2021-06-29 07:33:05,063   INFO  Generate label finished(sec_per_example: 0.0218 second).
+2021-06-29 07:33:05,064   INFO  recall_roi_0.3: 0.000000
+2021-06-29 07:33:05,064   INFO  recall_rcnn_0.3: 0.030576
+2021-06-29 07:33:05,064   INFO  recall_roi_0.5: 0.000000
+2021-06-29 07:33:05,064   INFO  recall_rcnn_0.5: 0.003302
+2021-06-29 07:33:05,064   INFO  recall_roi_0.7: 0.000000
+2021-06-29 07:33:05,065   INFO  recall_rcnn_0.7: 0.000057
+2021-06-29 07:33:05,068   INFO  Average predicted number of objects(3769 samples): 10.102
+2021-06-29 07:33:27,125   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 07:33:27,168   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 07:33:27,318   INFO  ==> Done (loaded 127/127)
+2021-06-29 07:34:50,887   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-29 07:34:50,888   INFO  recall_roi_0.3: 0.000000
+2021-06-29 07:34:50,888   INFO  recall_rcnn_0.3: 0.040938
+2021-06-29 07:34:50,888   INFO  recall_roi_0.5: 0.000000
+2021-06-29 07:34:50,889   INFO  recall_rcnn_0.5: 0.016341
+2021-06-29 07:34:50,889   INFO  recall_roi_0.7: 0.000000
+2021-06-29 07:34:50,889   INFO  recall_rcnn_0.7: 0.001651
+2021-06-29 07:34:50,892   INFO  Average predicted number of objects(3769 samples): 47.255
+2021-06-29 07:35:40,377   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 07:35:40,419   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 07:35:40,574   INFO  ==> Done (loaded 127/127)
+2021-06-29 07:37:04,188   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-29 07:37:04,189   INFO  recall_roi_0.3: 0.000000
+2021-06-29 07:37:04,189   INFO  recall_rcnn_0.3: 0.449923
+2021-06-29 07:37:04,189   INFO  recall_roi_0.5: 0.000000
+2021-06-29 07:37:04,189   INFO  recall_rcnn_0.5: 0.166999
+2021-06-29 07:37:04,190   INFO  recall_roi_0.7: 0.000000
+2021-06-29 07:37:04,190   INFO  recall_rcnn_0.7: 0.008256
+2021-06-29 07:37:04,193   INFO  Average predicted number of objects(3769 samples): 78.772
+2021-06-29 07:38:22,102   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 07:38:22,143   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 07:38:22,308   INFO  ==> Done (loaded 127/127)
+2021-06-29 07:39:47,800   INFO  Generate label finished(sec_per_example: 0.0227 second).
+2021-06-29 07:39:47,802   INFO  recall_roi_0.3: 0.000000
+2021-06-29 07:39:47,802   INFO  recall_rcnn_0.3: 0.075329
+2021-06-29 07:39:47,802   INFO  recall_roi_0.5: 0.000000
+2021-06-29 07:39:47,802   INFO  recall_rcnn_0.5: 0.023401
+2021-06-29 07:39:47,802   INFO  recall_roi_0.7: 0.000000
+2021-06-29 07:39:47,803   INFO  recall_rcnn_0.7: 0.002278
+2021-06-29 07:39:47,808   INFO  Average predicted number of objects(3769 samples): 273.384
+2021-06-29 07:43:28,283   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 07:43:28,322   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 07:43:28,488   INFO  ==> Done (loaded 127/127)
+2021-06-29 07:44:56,158   INFO  Generate label finished(sec_per_example: 0.0232 second).
+2021-06-29 07:44:56,207   INFO  recall_roi_0.3: 0.000000
+2021-06-29 07:44:56,207   INFO  recall_rcnn_0.3: 0.532654
+2021-06-29 07:44:56,208   INFO  recall_roi_0.5: 0.000000
+2021-06-29 07:44:56,208   INFO  recall_rcnn_0.5: 0.242441
+2021-06-29 07:44:56,208   INFO  recall_roi_0.7: 0.000000
+2021-06-29 07:44:56,208   INFO  recall_rcnn_0.7: 0.022092
+2021-06-29 07:44:56,222   INFO  Average predicted number of objects(3769 samples): 104.869
+2021-06-29 07:46:35,207   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 07:46:35,250   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 07:46:35,419   INFO  ==> Done (loaded 127/127)
+2021-06-29 07:47:58,731   INFO  Generate label finished(sec_per_example: 0.0221 second).
+2021-06-29 07:47:58,733   INFO  recall_roi_0.3: 0.000000
+2021-06-29 07:47:58,733   INFO  recall_rcnn_0.3: 0.465809
+2021-06-29 07:47:58,733   INFO  recall_roi_0.5: 0.000000
+2021-06-29 07:47:58,733   INFO  recall_rcnn_0.5: 0.220577
+2021-06-29 07:47:58,734   INFO  recall_roi_0.7: 0.000000
+2021-06-29 07:47:58,734   INFO  recall_rcnn_0.7: 0.020555
+2021-06-29 07:47:58,739   INFO  Average predicted number of objects(3769 samples): 46.707
+2021-06-29 07:48:50,718   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 07:48:50,764   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 07:48:50,920   INFO  ==> Done (loaded 127/127)
+2021-06-29 07:50:34,584   INFO  Generate label finished(sec_per_example: 0.0275 second).
+2021-06-29 07:50:34,585   INFO  recall_roi_0.3: 0.000000
+2021-06-29 07:50:34,585   INFO  recall_rcnn_0.3: 0.589421
+2021-06-29 07:50:34,586   INFO  recall_roi_0.5: 0.000000
+2021-06-29 07:50:34,586   INFO  recall_rcnn_0.5: 0.335193
+2021-06-29 07:50:34,586   INFO  recall_roi_0.7: 0.000000
+2021-06-29 07:50:34,586   INFO  recall_rcnn_0.7: 0.042362
+2021-06-29 07:50:34,589   INFO  Average predicted number of objects(3769 samples): 183.107
+2021-06-29 07:53:21,480   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 07:53:21,524   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 07:53:21,689   INFO  ==> Done (loaded 127/127)
+2021-06-29 07:55:05,058   INFO  Generate label finished(sec_per_example: 0.0274 second).
+2021-06-29 07:55:05,059   INFO  recall_roi_0.3: 0.000000
+2021-06-29 07:55:05,059   INFO  recall_rcnn_0.3: 0.173319
+2021-06-29 07:55:05,059   INFO  recall_roi_0.5: 0.000000
+2021-06-29 07:55:05,059   INFO  recall_rcnn_0.5: 0.072710
+2021-06-29 07:55:05,059   INFO  recall_roi_0.7: 0.000000
+2021-06-29 07:55:05,059   INFO  recall_rcnn_0.7: 0.006548
+2021-06-29 07:55:05,063   INFO  Average predicted number of objects(3769 samples): 181.347
+2021-06-29 07:57:43,433   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 07:57:43,480   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 07:57:43,683   INFO  ==> Done (loaded 127/127)
+2021-06-29 07:59:07,563   INFO  Generate label finished(sec_per_example: 0.0222 second).
+2021-06-29 07:59:07,564   INFO  recall_roi_0.3: 0.000000
+2021-06-29 07:59:07,564   INFO  recall_rcnn_0.3: 0.072083
+2021-06-29 07:59:07,564   INFO  recall_roi_0.5: 0.000000
+2021-06-29 07:59:07,564   INFO  recall_rcnn_0.5: 0.007914
+2021-06-29 07:59:07,564   INFO  recall_roi_0.7: 0.000000
+2021-06-29 07:59:07,564   INFO  recall_rcnn_0.7: 0.000228
+2021-06-29 07:59:07,568   INFO  Average predicted number of objects(3769 samples): 116.087
+2021-06-29 08:00:49,216   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 08:00:49,257   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 08:00:49,420   INFO  ==> Done (loaded 127/127)
+2021-06-29 08:02:11,044   INFO  Generate label finished(sec_per_example: 0.0216 second).
+2021-06-29 08:02:11,044   INFO  recall_roi_0.3: 0.000000
+2021-06-29 08:02:11,045   INFO  recall_rcnn_0.3: 0.000000
+2021-06-29 08:02:11,045   INFO  recall_roi_0.5: 0.000000
+2021-06-29 08:02:11,045   INFO  recall_rcnn_0.5: 0.000000
+2021-06-29 08:02:11,045   INFO  recall_roi_0.7: 0.000000
+2021-06-29 08:02:11,045   INFO  recall_rcnn_0.7: 0.000000
+2021-06-29 08:02:11,048   INFO  Average predicted number of objects(3769 samples): 1.063
+2021-06-29 08:02:25,141   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 08:02:25,187   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 08:02:25,338   INFO  ==> Done (loaded 127/127)
+2021-06-29 08:03:48,307   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-29 08:03:48,309   INFO  recall_roi_0.3: 0.000000
+2021-06-29 08:03:48,309   INFO  recall_rcnn_0.3: 0.000968
+2021-06-29 08:03:48,309   INFO  recall_roi_0.5: 0.000000
+2021-06-29 08:03:48,309   INFO  recall_rcnn_0.5: 0.000057
+2021-06-29 08:03:48,310   INFO  recall_roi_0.7: 0.000000
+2021-06-29 08:03:48,310   INFO  recall_rcnn_0.7: 0.000000
+2021-06-29 08:03:48,315   INFO  Average predicted number of objects(3769 samples): 17.641
+2021-06-29 08:04:15,723   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 08:04:15,762   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 08:04:15,917   INFO  ==> Done (loaded 127/127)
+2021-06-29 08:05:38,999   INFO  Generate label finished(sec_per_example: 0.0220 second).
+2021-06-29 08:05:39,000   INFO  recall_roi_0.3: 0.000000
+2021-06-29 08:05:39,000   INFO  recall_rcnn_0.3: 0.102033
+2021-06-29 08:05:39,001   INFO  recall_roi_0.5: 0.000000
+2021-06-29 08:05:39,001   INFO  recall_rcnn_0.5: 0.020498
+2021-06-29 08:05:39,001   INFO  recall_roi_0.7: 0.000000
+2021-06-29 08:05:39,001   INFO  recall_rcnn_0.7: 0.001139
+2021-06-29 08:05:39,004   INFO  Average predicted number of objects(3769 samples): 54.742
+2021-06-29 08:06:34,438   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 08:06:34,481   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 08:06:34,665   INFO  ==> Done (loaded 127/127)
+2021-06-29 08:08:02,665   INFO  Generate label finished(sec_per_example: 0.0233 second).
+2021-06-29 08:08:02,667   INFO  recall_roi_0.3: 0.000000
+2021-06-29 08:08:02,667   INFO  recall_rcnn_0.3: 0.083129
+2021-06-29 08:08:02,667   INFO  recall_roi_0.5: 0.000000
+2021-06-29 08:08:02,667   INFO  recall_rcnn_0.5: 0.017822
+2021-06-29 08:08:02,668   INFO  recall_roi_0.7: 0.000000
+2021-06-29 08:08:02,668   INFO  recall_rcnn_0.7: 0.001253
+2021-06-29 08:08:02,674   INFO  Average predicted number of objects(3769 samples): 258.899
+2021-06-29 08:11:32,667   INFO  ==> Loading parameters from checkpoint ./checkpoint_epoch_80.pth to CPU
+2021-06-29 08:11:32,707   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+26a1612
+2021-06-29 08:11:32,874   INFO  ==> Done (loaded 127/127)
+2021-06-29 08:12:43,665   INFO  Generate label finished(sec_per_example: 0.0188 second).
+2021-06-29 08:12:43,666   INFO  recall_roi_0.3: 0.000000
+2021-06-29 08:12:43,666   INFO  recall_rcnn_0.3: 0.000000
+2021-06-29 08:12:43,666   INFO  recall_roi_0.5: 0.000000
+2021-06-29 08:12:43,666   INFO  recall_rcnn_0.5: 0.000000
+2021-06-29 08:12:43,666   INFO  recall_roi_0.7: 0.000000
+2021-06-29 08:12:43,666   INFO  recall_rcnn_0.7: 0.000000
+2021-06-29 08:12:43,669   INFO  Average predicted number of objects(3769 samples): 0.000
